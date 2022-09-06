@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\PKM\JenisPKMSeeder;
+use Database\Seeders\PKM\SkemaPKMSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            JenisPKMSeeder::class,
+            SkemaPKMSeeder::class
         ]);
     }
 }
