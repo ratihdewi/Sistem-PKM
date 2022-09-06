@@ -26,7 +26,7 @@
 
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Sistem PKM</b></a>
+                <p class="h1"><b>Sistem PKM</b></p>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Login to start your session</p>
@@ -34,13 +34,13 @@
                 <form action="/login" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control @error('username') is-invalid @enderror"
-                            placeholder="Username" name="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        <input type="text" class="form-control @error('username') is-invalid @enderror"
+                            placeholder="Username" name="username">
                         @error('username')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -48,11 +48,18 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror"
-                            placeholder="Password" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                            name="password">
+                        <div class="input-group-append" onmousedown="showPassword('#password', '#eye')"
+                            onmouseup="hidePassword('#password', '#eye')">
+                            <div class="input-group-text">
+                                <span id="eye" class="fas fa-eye"></span>
                             </div>
                         </div>
                         @error('password')
@@ -82,6 +89,18 @@
     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+
+    <script>
+        function showPassword(id, eye_id) {
+            $(id).attr('type', 'text');
+            $(eye_id).removeClass('fa-eye').addClass('fa-eye-slash');
+        }
+
+        function hidePassword(id, eye_id) {
+            $(id).attr('type', 'password');
+            $(eye_id).removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+    </script>
 </body>
 
 </html>
