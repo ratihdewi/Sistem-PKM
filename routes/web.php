@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthController::class, 'index'])->name('login.get')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout.post');
 
 Route::get('/index', function () {
-    echo 'Hello';
+    return view('page.index');
 });

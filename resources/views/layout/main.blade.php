@@ -22,13 +22,13 @@
 
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
-    <div class="wrapper">
-        @include('layout.navbar')
+    @include('layout.navbar')
+
+    <div id="wrapper">
+        @include('layout.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            @yield('container')
-        </div>
+        @yield('container')
         <!-- /.content-wrapper -->
 
     </div>
