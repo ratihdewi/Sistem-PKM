@@ -59,7 +59,7 @@ class CreateProposalController extends Controller
             'status' => 'success',
             'message' => 'Create proposal successfully',
             'data' => $proposal,
-        ], 200);
+        ], 201);
     }
 
     private function upload($name, UploadedFile $file, $folder)

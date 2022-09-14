@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Master\MasterSkemaPKMController;
 use App\Http\Controllers\Proposal\CreateProposalController;
 use App\Http\Controllers\Proposal\EditProposalController;
 use Illuminate\Http\Request;
@@ -24,3 +25,7 @@ Route::group(['prefix' => 'proposal'], function () {
     Route::post('submit', CreateProposalController::class);
     Route::post('edit/{id}', EditProposalController::class);
 });
+
+Route::resources([
+    'skema-pkm' => MasterSkemaPKMController::class
+]);
