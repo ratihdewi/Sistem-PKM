@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -29,7 +30,7 @@
         <div class="content-wrapper">
             <div class="login-div">
                 <div class="form-container">
-                    <form action="/login" method="post">
+                    {{-- <form action="/login" method="post">
                         @csrf
                         <div class="form">
                             <div class="user-name" style="margin-bottom: 10px;"> Username</div>
@@ -58,13 +59,6 @@
 
                                 <input id="password" class="input @error('password') is-invalid @enderror"
                                     type="password" placeholder="Password" name="password" required>
-                                {{-- <span class="password-hit">
-                                    <svg class="svg-icon" viewBox="0 0 20 20">
-                                        <path
-                                            d="M10,6.978c-1.666,0-3.022,1.356-3.022,3.022S8.334,13.022,10,13.022s3.022-1.356,3.022-3.022S11.666,6.978,10,6.978M10,12.267c-1.25,0-2.267-1.017-2.267-2.267c0-1.25,1.016-2.267,2.267-2.267c1.251,0,2.267,1.016,2.267,2.267C12.267,11.25,11.251,12.267,10,12.267 M18.391,9.733l-1.624-1.639C14.966,6.279,12.563,5.278,10,5.278S5.034,6.279,3.234,8.094L1.609,9.733c-0.146,0.147-0.146,0.386,0,0.533l1.625,1.639c1.8,1.815,4.203,2.816,6.766,2.816s4.966-1.001,6.767-2.816l1.624-1.639C18.536,10.119,18.536,9.881,18.391,9.733 M16.229,11.373c-1.656,1.672-3.868,2.594-6.229,2.594s-4.573-0.922-6.23-2.594L2.41,10l1.36-1.374C5.427,6.955,7.639,6.033,10,6.033s4.573,0.922,6.229,2.593L17.59,10L16.229,11.373z">
-                                        </path>
-                                    </svg>
-                                </span> --}}
                                 @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -81,7 +75,44 @@
                                 <button type="submit" class="signin-btn">SIGN IN</button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
+
+                    <form action="/login" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label class="control-label" for="username">
+                                Username
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-user"></i></div>
+                                </div>
+                                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password">
+                                Password
+                            </label>
+                            <div class="input-group" id="show_hide_password">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-key"></i></div>
+                                </div>
+                                <input type="password" class="form-control" id="inlineFormInputGroupUsername" placeholder="Password" required>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <label class="form-check-label" for="disabledFieldsetCheck">
+                                Forgot Password?
+                            </label>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Sign In</button>
+                        </div>
+                      </form>
                 </div>
             </div>
         </div>
