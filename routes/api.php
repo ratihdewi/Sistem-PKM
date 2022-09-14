@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Proposal\CreateProposalController;
+use App\Http\Controllers\Proposal\EditProposalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['prefix' => 'proposal'], function () {
+    Route::post('submit', CreateProposalController::class);
+    Route::post('edit/{id}', EditProposalController::class);
 });
