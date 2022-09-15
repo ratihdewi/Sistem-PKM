@@ -19,7 +19,7 @@
     <!-- Date Range Picker -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style_manual.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -28,7 +28,7 @@
         @include('layout.navbar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="margin-top: 200px">
             <div class="login-div">
                 <div class="form-container">
                     <form action="{{ route('login.post') }}" method="post">
