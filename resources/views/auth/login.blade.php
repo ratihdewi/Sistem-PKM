@@ -57,9 +57,8 @@
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror"
                                     id="inlineFormInputGroupUsername" placeholder="Password" name="password">
-                                <div class="input-group-append" onmousedown="showPassword('#password', '#eye')"
-                                    onmouseup="hidePassword('#password', '#eye')">
-                                    <div class="input-group-text"><i class="fa fa-eye-slash"></i>
+                                <div id="mouse-click" class="input-group-append">
+                                    <div class="input-group-text"><i class="eye-change fa fa-eye"></i>
                                     </div>
                                 </div>
                             </div>
@@ -89,6 +88,8 @@
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
 
+    <!-- Font Awesome -->
+    {{-- <script src="https://use.fontawesome.com/releases/vVERSION/js/all.js" data-auto-replace-svg="nest"></script> --}}
     <!-- DataTable -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-datatables-checkboxes@1.2.13/js/dataTables.checkboxes.min.js"></script>
@@ -98,13 +99,19 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
-        function showPassword() {
-            $('#password').attr('type', 'text');
-        }
+        $('#mouse-click').mousedown(function() {
+            var icon = $('.eye-change');
 
-        function hidePassword() {
+            $('#password').attr('type', 'text');
+            $('.eye-change').attr('data-icon', 'eye-slash');
+        })
+
+        $('#mouse-click').mouseup(function() {
+            var icon = $('.eye-change');
+
             $('#password').attr('type', 'password');
-        }
+            $('.eye-change').attr('data-icon', 'eye');
+        })
     </script>
 </body>
 
