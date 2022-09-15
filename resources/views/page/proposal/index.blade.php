@@ -1,64 +1,65 @@
 @extends('layout.main')
 
 @section('container')
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4" style="margin-top: 180px">
+                <div>
+                    <a href="/proposal/create">
+                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan Proposal
+                            <i class="fa fa-plus"></i></button>
+                    </a>
+                </div>
+                <div>
+                    <button type="button" class="btn mt-3" style="background-color: #5D7DCF; color: #fff">Sort By <i
+                            class="fa fa-caret-down"></i></button>
+                </div>
 
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid px-4" style="margin-top: 180px">
-            <div>
-                <a href="/proposal/create">
-                    <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan Proposal <i class="fa fa-plus"></i></button>
-                </a>
-            </div>
-            <div>
-                <button type="button" class="btn mt-3" style="background-color: #5D7DCF; color: #fff">Sort By <i class="fa fa-caret-down"></i></button>
-            </div>
-
-            <div class="card mb-4 mt-3">
-                <div class="card-body">
-                    <table id="datatablesSimple">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Tahun</th>
-                                <th>Skema</th>
-                                <th>Judul Pengajuan</th>
-                                <th>Peran</th>
-                                <th>Dana PT</th>
-                                <th>Dana Dikti</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Tahun</th>
-                                <th>Skema</th>
-                                <th>Judul Pengajuan</th>
-                                <th>Peran</th>
-                                <th>Dana PT</th>
-                                <th>Dana Dikti</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>
-                                    <i class="fa fa-pencil"></i>
-                                    <i class="ml-2 fa fa-trash"></i>
-                                </td>
-                            </tr>
-                            <tr>
+                <div class="card mb-4 mt-3">
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tahun</th>
+                                    <th>Skema</th>
+                                    <th>Judul Pengajuan</th>
+                                    <th>Peran</th>
+                                    <th>Dana PT</th>
+                                    <th>Dana Dikti</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            {{-- <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tahun</th>
+                                    <th>Skema</th>
+                                    <th>Judul Pengajuan</th>
+                                    <th>Peran</th>
+                                    <th>Dana PT</th>
+                                    <th>Dana Dikti</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot> --}}
+                            <tbody>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>
+                                        <i class="fa fa-pencil"></i>
+                                        <i class="ml-2 fa fa-trash"></i>
+                                    </td>
+                                </tr>
+                                {{-- <tr>
                                 <td>Garrett Winters</td>
                                 <td>Accountant</td>
                                 <td>Tokyo</td>
@@ -200,12 +201,12 @@
                                 <td>Accountant</td>
                                 <td>Tokyo</td>
                                 <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </tr> --}}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 @endsection

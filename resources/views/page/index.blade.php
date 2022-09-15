@@ -1,11 +1,11 @@
 @extends('layout.main')
 
 @section('container')
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid px-4">
-        </div>
-    </main>
-</div>
-</div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+            </div>
+        </main>
+    </div>
+    </div>
 @endsection

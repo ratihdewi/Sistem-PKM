@@ -21,11 +21,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::group(['prefix' => 'proposal'], function () {
-    Route::post('submit', CreateProposalController::class);
-    Route::post('edit/{id}', EditProposalController::class);
-});
-
 Route::resources([
     'skema-pkm' => MasterSkemaPKMController::class
 ]);
