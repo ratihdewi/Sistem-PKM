@@ -48,6 +48,9 @@
     <!-- Date Range Picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables-simple-demo.js') }}"></script>
+
     @stack('extra_js')
 </body>
 
