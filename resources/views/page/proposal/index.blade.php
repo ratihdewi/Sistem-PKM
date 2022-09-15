@@ -55,8 +55,8 @@
                                     <td>System Architect</td>
                                     <td>Edinburgh</td>
                                     <td>
-                                        <i class="fa fa-pencil"></i>
-                                        <i class="ml-2 fa fa-trash"></i>
+                                        <a href="/proposal/update"><i class="fa fa-pencil"></i></a>
+                                        <a href="/proposal/delete"><i class="ml-2 fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <tr>
