@@ -29,7 +29,8 @@
                     <div class="mb-3 row">
                         <label for="title" class="col-sm-2 col-form-label">Judul Proposal</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="title" name="title">
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                                name="title">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -93,8 +94,8 @@
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    name="pendanaan_dikti">
+                                <input type="text" class="form-control @error('pendanaan_dikti') is-invalid @enderror"
+                                    aria-label="Amount (to the nearest dollar)" name="pendanaan_dikti">
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -104,8 +105,8 @@
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    name="pendanaan_pt">
+                                <input type="text" class="form-control @error('pendanaan_pt') is-invalid @enderror"
+                                    aria-label="Amount (to the nearest dollar)" name="pendanaan_pt">
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -113,13 +114,15 @@
                     <div class="mb-3 row">
                         <label for="luaran_proposal" class="col-sm-2 col-form-label">Luaran Proposal</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="luaran_proposal" name="luaran_proposal">
+                            <input type="text" class="form-control @error('luaran_proposal') is-invalid @enderror"
+                                id="luaran_proposal" name="luaran_proposal">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="proposal" class="col-sm-2 col-form-label">Upload Proposal</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="file" id="proposal" name="proposal">
+                            <input class="form-control @error('proposal') is-invalid @enderror" type="file"
+                                id="proposal" name="proposal">
                         </div>
                     </div>
                     <div class="mt-4 mb-4 text-center">
