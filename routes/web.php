@@ -30,4 +30,8 @@ Route::get('/index', function () {
 Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm']);
 Route::resources([
     '/proposal' => ProposalController::class,
+], [
+    'parameters' => [
+        'proposal' => 'document'
+    ]
 ]);

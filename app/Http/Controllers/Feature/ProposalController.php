@@ -14,7 +14,9 @@ class ProposalController extends Controller
 {
     public function index()
     {
-        return view('page.proposal.index');
+        $documents = Document::orderBy('id', 'asc')->get();
+
+        return view('page.proposal.index', compact('documents'));
     }
 
     public function create()
@@ -32,7 +34,7 @@ class ProposalController extends Controller
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'nullable|mimes:docx,pdf'
+            'proposal' => 'required|mimes:docx,pdf'
         ]);
 
         $proposal_name = null;
@@ -76,7 +78,7 @@ class ProposalController extends Controller
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'nullable|mimes:docx,pdf'
+            'proposal' => 'required|mimes:docx,pdf'
         ]);
 
         $proposal_name = null;
@@ -108,6 +110,8 @@ class ProposalController extends Controller
 
     public function destroy(Document $document)
     {
+        $document_data = json_decode($document->file);
+        unlink(public_path("documents/{$document_data->proposal}"));
         $document->delete();
 
         return redirect(route('proposal.index'));

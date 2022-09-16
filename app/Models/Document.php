@@ -9,4 +9,23 @@ class Document extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function skema_pkm()
+    {
+        return $this->belongsTo('App\Models\PKM\SkemaPKM', 'skema_pkm_id');
+    }
+
+    public function getPendanaanDiktiAttribute($value)
+    {
+        $value = (int) $value;
+
+        return number_format($value, 0, ',', '.');
+    }
+
+    public function getPendanaanPtAttribute($value)
+    {
+        $value = (int) $value;
+
+        return number_format($value, 0, ',', '.');
+    }
 }
