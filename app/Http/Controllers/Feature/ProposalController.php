@@ -65,9 +65,11 @@ class ProposalController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(Document $document)
     {
-        //
+        $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
+
+        return view('page.proposal.update', compact('document', 'jenis_pkm'));
     }
 
     public function update(Request $request, Document $document)
@@ -90,8 +92,7 @@ class ProposalController extends Controller
             $this->upload($file_name, $file_proposal, 'documents');
             $proposal_name = $file_name;
 
-            $document_data = json_decode($document->file);
-            unlink(public_path("documents/{$document_data->proposal}"));
+            unlink(public_path("documents/{$document->file->proposal}"));
         }
 
         $file = [
@@ -110,8 +111,7 @@ class ProposalController extends Controller
 
     public function destroy(Document $document)
     {
-        $document_data = json_decode($document->file);
-        unlink(public_path("documents/{$document_data->proposal}"));
+        unlink(public_path("documents/{$document->file->proposal}"));
         $document->delete();
 
         return redirect(route('proposal.index'));

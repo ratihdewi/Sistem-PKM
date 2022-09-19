@@ -10,6 +10,11 @@ class Document extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function getFileAttribute($value)
+    {
+        return json_decode($value);
+    }
+
     public function skema_pkm()
     {
         return $this->belongsTo('App\Models\PKM\SkemaPKM', 'skema_pkm_id');
@@ -19,13 +24,13 @@ class Document extends Model
     {
         $value = (int) $value;
 
-        return number_format($value, 0, ',', '.');
+        return $value;
     }
 
     public function getPendanaanPtAttribute($value)
     {
         $value = (int) $value;
 
-        return number_format($value, 0, ',', '.');
+        return $value;
     }
 }

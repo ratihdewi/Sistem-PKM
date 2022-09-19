@@ -9,7 +9,8 @@
                     <div class="mb-3 row">
                         <label for="jenis_pkm" class="col-sm-2 col-form-label">Jenis PKM</label>
                         <div class="col-sm-10">
-                            <select id="jenis_pkm" class="form-select" aria-label="Default select example">
+                            <select id="jenis_pkm" class="form-select @error('skema_pkm') is-invalid @enderror"
+                                aria-label="Default select example">
                                 <option id="select_jenis_pkm" selected disabled>Jenis PKM</option>
 
                                 @foreach ($jenis_pkm as $item)
@@ -21,7 +22,8 @@
                     <div class="mb-3 row">
                         <label for="skema_pkm" class="col-sm-2 col-form-label">Skema PKM</label>
                         <div class="col-sm-10">
-                            <select id="skema_pkm" class="form-select" aria-label="Default select example" name="skema_pkm">
+                            <select id="skema_pkm" class="form-select @error('skema_pkm') is-invalid @enderror"
+                                aria-label="Default select example" name="skema_pkm">
                                 <option id="select_skema_pkm" selected disabled>Skema PKM</option>
                             </select>
                         </div>
@@ -30,7 +32,7 @@
                         <label for="title" class="col-sm-2 col-form-label">Judul Proposal</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                                name="title">
+                                name="title" value="{{ old('title') }}">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -95,7 +97,8 @@
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
                                 <input type="text" class="form-control @error('pendanaan_dikti') is-invalid @enderror"
-                                    aria-label="Amount (to the nearest dollar)" name="pendanaan_dikti">
+                                    aria-label="Amount (to the nearest dollar)" name="pendanaan_dikti"
+                                    value="{{ old('pendanaan_dikti') }}">
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -106,7 +109,8 @@
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
                                 <input type="text" class="form-control @error('pendanaan_pt') is-invalid @enderror"
-                                    aria-label="Amount (to the nearest dollar)" name="pendanaan_pt">
+                                    aria-label="Amount (to the nearest dollar)" name="pendanaan_pt"
+                                    value="{{ old('pendanaan_pt') }}">
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -115,7 +119,7 @@
                         <label for="luaran_proposal" class="col-sm-2 col-form-label">Luaran Proposal</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('luaran_proposal') is-invalid @enderror"
-                                id="luaran_proposal" name="luaran_proposal">
+                                id="luaran_proposal" name="luaran_proposal" value="{{ old('luaran_proposal') }}">
                         </div>
                     </div>
                     <div class="mb-3 row">

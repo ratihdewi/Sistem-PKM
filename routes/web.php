@@ -27,7 +27,7 @@ Route::get('/index', function () {
     return view('page.index');
 });
 
-Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm']);
+Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema.get');
 Route::resources([
     '/proposal' => ProposalController::class,
 ], [

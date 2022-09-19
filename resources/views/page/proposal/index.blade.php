@@ -52,8 +52,8 @@
                                         <td>{{ $document->skema_pkm->name }}</td>
                                         <td>{{ $document->title }}</td>
                                         <td>Ketua/Anggota</td>
-                                        <td>Rp. {{ $document->pendanaan_pt }}</td>
-                                        <td>Rp. {{ $document->pendanaan_dikti }}</td>
+                                        <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
                                         <td></td>
                                         <td>
                                             <a href="{{ route('proposal.edit', $document->id) }}"><i
