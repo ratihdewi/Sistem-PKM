@@ -13,7 +13,6 @@
                             <select id="jenis_pkm" class="form-select @error('skema_pkm') is-invalid @enderror"
                                 aria-label="Default select example">
                                 <option id="select_jenis_pkm" selected disabled>Jenis PKM</option>
-
                                 @foreach ($jenis_pkm as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach

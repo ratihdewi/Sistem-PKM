@@ -34,7 +34,7 @@ class ProposalController extends Controller
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'required|mimes:docx,pdf'
+            'proposal' => 'required|mimes:pdf'
         ]);
 
         $proposal_name = null;
@@ -80,7 +80,7 @@ class ProposalController extends Controller
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'required|mimes:docx,pdf'
+            'proposal' => 'nullable|mimes:pdf'
         ]);
 
         $proposal_name = null;
@@ -97,7 +97,7 @@ class ProposalController extends Controller
 
         $file = [
             'luaran_proposal' => $request->luaran_proposal,
-            'proposal' => $proposal_name
+            'proposal' => $proposal_name ?? $document->file->proposal
         ];
 
         $validated['skema_pkm_id'] = $request->skema_pkm;
