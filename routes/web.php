@@ -19,19 +19,23 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/login', [AuthController::class, 'index'])->name('login.get')->middleware('guest');
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout.post');
 
-Route::get('/index', function () {
-    return view('page.index');
-});
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/index', function () {
+        return view('page.index');
+    })->name('index');
 
-Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema.get');
-Route::resources([
-    '/proposal' => ProposalController::class,
-], [
-    'parameters' => [
-        'proposal' => 'document'
-    ]
-]);
+    Route::group(['middleware' => 'role:Mahasiswa'], function () {
+        Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema');
+        Route::resources([
+            '/proposal' => ProposalController::class,
+        ], [
+            'parameters' => [
+                'proposal' => 'document'
+            ]
+        ]);
+    });
+});
