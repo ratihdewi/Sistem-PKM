@@ -5,7 +5,7 @@
         <main>
             <div class="container-fluid px-4" style="margin-top: 180px">
                 <div>
-                    <a href="/proposal/create">
+                    <a href="{{ route('proposal.create') }}">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan Proposal
                             <i class="fa fa-plus"></i></button>
                     </a>

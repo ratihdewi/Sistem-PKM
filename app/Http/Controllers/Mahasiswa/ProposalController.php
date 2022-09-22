@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Feature;
+namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
@@ -16,14 +16,14 @@ class ProposalController extends Controller
     {
         $documents = Document::orderBy('id', 'asc')->get();
 
-        return view('page.proposal.index', compact('documents'));
+        return view('page.mahasiswa.proposal.index', compact('documents'));
     }
 
     public function create()
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
 
-        return view('page.proposal.create', compact('jenis_pkm'));
+        return view('page.mahasiswa.proposal.create', compact('jenis_pkm'));
     }
 
     public function store(Request $request)
@@ -60,7 +60,7 @@ class ProposalController extends Controller
         return redirect(route('proposal.index'));
     }
 
-    public function show($id)
+    public function show(Document $document)
     {
         //
     }
@@ -69,7 +69,7 @@ class ProposalController extends Controller
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
 
-        return view('page.proposal.update', compact('document', 'jenis_pkm'));
+        return view('page.mahasiswa.proposal.update', compact('document', 'jenis_pkm'));
     }
 
     public function update(Request $request, Document $document)
