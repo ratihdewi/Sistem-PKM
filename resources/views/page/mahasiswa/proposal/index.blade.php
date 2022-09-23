@@ -50,7 +50,10 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $document->created_at->format('Y') }}</td>
                                         <td>{{ $document->skema_pkm->name }}</td>
-                                        <td>{{ $document->title }}</td>
+                                        <td>
+                                            <a href="{{ route('proposal.show', $document->id) }}"
+                                                class="text-decoration-none">{{ $document->judul_proposal }}</a>
+                                        </td>
                                         <td>Ketua/Anggota</td>
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>

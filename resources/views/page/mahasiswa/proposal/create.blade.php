@@ -35,10 +35,10 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="title" class="col-sm-2 col-form-label">Judul Proposal</label>
+                                        <label for="judul_proposal" class="col-sm-2 col-form-label">Judul Proposal</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                                id="title" name="title" value="{{ old('title') }}">
+                                            <input type="text" class="form-control @error('judul_proposal') is-invalid @enderror"
+                                                id="judul_proposal" name="judul_proposal" value="{{ old('judul_proposal') }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">

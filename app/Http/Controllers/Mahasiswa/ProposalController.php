@@ -30,7 +30,7 @@ class ProposalController extends Controller
     {
         $validated = $request->validate([
             'skema_pkm' => 'required',
-            'title' => 'required',
+            'judul_proposal' => 'required',
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
@@ -53,7 +53,7 @@ class ProposalController extends Controller
         ];
 
         $validated['skema_pkm_id'] = $request->skema_pkm;
-        $validated['file'] = json_encode($file);
+        $validated['berkas'] = json_encode($file);
 
         Document::create($validated);
 
@@ -62,7 +62,7 @@ class ProposalController extends Controller
 
     public function show(Document $document)
     {
-        //
+        return view('page.mahasiswa.proposal.review', compact('document'));
     }
 
     public function edit(Document $document)
@@ -76,7 +76,7 @@ class ProposalController extends Controller
     {
         $validated = $request->validate([
             'skema_pkm' => 'required',
-            'title' => 'required',
+            'judul_proposal' => 'required',
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
@@ -101,7 +101,7 @@ class ProposalController extends Controller
         ];
 
         $validated['skema_pkm_id'] = $request->skema_pkm;
-        $validated['file'] = json_encode($file);
+        $validated['berkas'] = json_encode($file);
 
         $document->fill($validated);
         $document->save();

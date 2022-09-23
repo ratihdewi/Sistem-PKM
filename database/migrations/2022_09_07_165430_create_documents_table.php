@@ -16,10 +16,10 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->integer('skema_pkm_id')->unsigned();
-            $table->string('title');
+            $table->string('judul_proposal');
             $table->string('pendanaan_dikti');
             $table->string('pendanaan_pt');
-            $table->json('file')->nullable();
+            $table->json('berkas')->nullable();
             $table->timestamps();
         });
     }
