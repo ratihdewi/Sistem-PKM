@@ -92,12 +92,12 @@ class ProposalController extends Controller
             $this->upload($file_name, $file_proposal, 'documents');
             $proposal_name = $file_name;
 
-            unlink(public_path("documents/{$document->file->proposal}"));
+            unlink(public_path("documents/{$document->berkas->proposal}"));
         }
 
         $file = [
             'luaran_proposal' => $request->luaran_proposal,
-            'proposal' => $proposal_name ?? $document->file->proposal
+            'proposal' => $proposal_name ?? $document->berkas->proposal
         ];
 
         $validated['skema_pkm_id'] = $request->skema_pkm;
@@ -111,7 +111,7 @@ class ProposalController extends Controller
 
     public function destroy(Document $document)
     {
-        unlink(public_path("documents/{$document->file->proposal}"));
+        unlink(public_path("documents/{$document->berkas->proposal}"));
         $document->delete();
 
         return redirect(route('proposal.index'));

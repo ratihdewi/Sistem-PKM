@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Admin\JenisPKMController;
 use App\Http\Controllers\Admin\SkemaPKMController;
 use App\Http\Controllers\AuthController;
@@ -31,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', HomePageController::class)->name('index');
 
     Route::group(['middleware' => 'role:Admin'], function () {
+        Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
+
         Route::resources([
             '/jenis-pkm' => JenisPKMController::class,
             '/skema-pkm' => SkemaPKMController::class

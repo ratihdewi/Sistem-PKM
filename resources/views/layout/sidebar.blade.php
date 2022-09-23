@@ -9,11 +9,11 @@
                         Beranda
                     </a>
                     @can('admin')
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('daftar-usulan.index') }}">
                             <div class="sb-nav-link-icon"></div>
                             Daftar Usulan
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('daftar-usulan.index') }}">
                             <div class="sb-nav-link-icon"></div>
                             Daftar Usulan Didanai
                         </a>
