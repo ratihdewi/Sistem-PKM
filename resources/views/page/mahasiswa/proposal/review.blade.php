@@ -6,7 +6,7 @@
             <div class="container-fluid px-4" style="margin-top: 180px">
                 <h3 class="mb-3" style="color: #5D7DCF">Review Proposal</h3>
                 <div class="row">
-                    <div class="col-lg-5">
+                    <div class="col-lg-8">
                         <div class="card" style="height: 39rem;">
                             <div class="card-header">
                                 <div class="row mb-3">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-4">
                         <div class="card" style="height: 38rem;">
                             <div class="card-header">
                                 <h5>Riwayat Review</h5>

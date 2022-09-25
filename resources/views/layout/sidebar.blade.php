@@ -29,7 +29,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="#">Data Mahasiswa</a>
                                 <a class="nav-link" href="#">Dosen Pendamping</a>
-                                <a class="nav-link" href="#">Pengaturan Reviewer</a>
+                                <a class="nav-link" href="{{ route('pengaturan-reviewer.index') }}">Pengaturan Reviewer</a>
                             </nav>
                         </div>
                         <a class="nav-link" href="#">
@@ -75,8 +75,8 @@
                         <div class="collapse" id="collapsePelaksanaanKegiatan" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Laporan Kemajuan</a>
-                                <a class="nav-link" href="#">Laporan Akhir</a>
+                                <a class="nav-link" href="{{ route('laporan-kemajuan.index') }}">Laporan Kemajuan</a>
+                                <a class="nav-link" href="{{ route('laporan-akhir.index') }}">Laporan Akhir</a>
                             </nav>
                         </div>
                     @endcan

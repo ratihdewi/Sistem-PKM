@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Admin\JenisPKMController;
+use App\Http\Controllers\Admin\PengaturanReviewerController;
 use App\Http\Controllers\Admin\SkemaPKMController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dosen\ReviewProposalController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\Mahasiswa\LaporanAkhirController;
+use App\Http\Controllers\Mahasiswa\LaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\ProposalController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
 
         Route::resources([
+            '/pengaturan-reviewer' => PengaturanReviewerController::class,
             '/jenis-pkm' => JenisPKMController::class,
             '/skema-pkm' => SkemaPKMController::class
         ], [
@@ -50,9 +54,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema');
         Route::resources([
             '/proposal' => ProposalController::class,
+            '/laporan-kemajuan' => LaporanKemajuanController::class,
+            '/laporan-akhir' => LaporanAkhirController::class
         ], [
             'parameters' => [
-                'proposal' => 'document'
+                'proposal' => 'document',
+                'laporan_kemajuan' => 'document',
+                'laporan_akhir' => 'document'
             ]
         ]);
     });
