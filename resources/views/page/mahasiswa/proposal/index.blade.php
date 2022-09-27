@@ -10,10 +10,6 @@
                             <i class="fa fa-plus"></i></button>
                     </a>
                 </div>
-                <div>
-                    <button type="button" class="btn mt-3" style="background-color: #5D7DCF; color: #fff">Sort By <i
-                            class="fa fa-caret-down"></i></button>
-                </div>
 
                 <div class="card mb-4 mt-3">
                     <div class="card-body">

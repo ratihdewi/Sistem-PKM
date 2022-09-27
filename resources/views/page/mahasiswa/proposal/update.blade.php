@@ -136,7 +136,7 @@
                                             <input type="text"
                                                 class="form-control @error('luaran_proposal') is-invalid @enderror"
                                                 id="luaran_proposal" name="luaran_proposal"
-                                                value="{{ old('luaran_proposal', $document->berkas->luaran_proposal) }}">
+                                                value="{{ old('luaran_proposal', $document->berkas->proposal->luaran_proposal) }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">

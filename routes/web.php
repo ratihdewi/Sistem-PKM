@@ -59,8 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
         ], [
             'parameters' => [
                 'proposal' => 'document',
-                'laporan_kemajuan' => 'document',
-                'laporan_akhir' => 'document'
+                'laporan-kemajuan' => 'document',
+                'laporan-akhir' => 'document'
             ]
         ]);
     });

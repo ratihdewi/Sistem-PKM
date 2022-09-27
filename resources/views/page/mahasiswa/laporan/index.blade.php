@@ -4,25 +4,24 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 180px">
-                <div class="mb-3">
-                    <a href="#">
-                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan Laporan
-                            Kemajuan
-                        </button>
-                    </a>
-                </div>
-                <div class="mb-3">
-                    <a href="#">
-                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan
-                            Laporan
-                            Akhir
-                        </button>
-                    </a>
-                </div>
-                <div>
-                    <button type="button" class="btn mt-2" style="background-color: #5D7DCF; color: #fff">Sort By <i
-                            class="fa fa-caret-down"></i></button>
-                </div>
+                @if ($documents->count() > 0)
+                    <div class="mb-3">
+                        <a href="#">
+                            <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan
+                                Laporan
+                                Kemajuan
+                            </button>
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="#">
+                            <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan
+                                Laporan
+                                Akhir
+                            </button>
+                        </a>
+                    </div>
+                @endif
 
                 <div class="card mb-4 mt-3">
                     <div class="card-body">
@@ -56,32 +55,37 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td>#</td>
-                                    <td>2022</td>
-                                    <td>PKM-XX</td>
-                                    <td>ABCDE</td>
-                                    <td>Rp. xxx.xxx.xxx</td>
-                                    <td>Rp. xxx.xxx.xxx</td>
-                                    <td></td>
-                                    <td>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <form action="#" method="post" class="d-inline-block">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                    <td></td>
-                                    <td>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <form action="#" method="post" class="d-inline-block">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                @foreach ($documents as $document)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $document->created_at->format('Y') }}</td>
+                                        <td>{{ $document->skema_pkm->name }}</td>
+                                        <td> <a href="{{ route('laporan-kemajuan.show', $document->id) }}"
+                                                class="text-decoration-none">{{ $document->judul_proposal }}</a></td>
+                                        <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
+                                        <td></td>
+                                        <td>
+                                            <a href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            <form action="#" method="post" class="d-inline-block">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <a href="{{ route('laporan-akhir.edit', $document->id) }}"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            <form action="#" method="post" class="d-inline-block">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
