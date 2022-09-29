@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\DocumentStatus;
 use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Admin\JenisPKMController;
 use App\Http\Controllers\Admin\PengaturanReviewerController;

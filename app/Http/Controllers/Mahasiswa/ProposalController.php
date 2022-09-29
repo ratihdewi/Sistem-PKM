@@ -43,7 +43,7 @@ class ProposalController extends Controller
         if ($request->has('proposal')) {
             $file_proposal = $request->proposal;
             $file_name = Carbon::now()->timestamp . '-' . $file_proposal->getClientOriginalName();
-            $this->upload($file_name, $file_proposal, 'documents');
+            $this->upload($file_name, $file_proposal, 'documents/proposal');
             $proposal_name = $file_name;
         }
 
@@ -84,21 +84,21 @@ class ProposalController extends Controller
         ]);
 
         $proposal_name = null;
-        $file = [];
+        $file = (array) $document->berkas;
 
         if ($request->has('proposal')) {
             $file_proposal = $request->proposal;
             $file_name = Carbon::now()->timestamp . '-' . $file_proposal->getClientOriginalName();
-            $this->upload($file_name, $file_proposal, 'documents');
+            $this->upload($file_name, $file_proposal, 'documents/proposal');
             $proposal_name = $file_name;
 
-            unlink(public_path("documents/{$document->berkas->proposal->file_proposal}"));
+            unlink(public_path("documents/proposal/{$document->berkas->proposal->file_proposal}"));
         }
 
-        $file = ["proposal" => [
+        $file['proposal'] = [
             'luaran_proposal' => $request->luaran_proposal,
             'file_proposal' => $proposal_name
-        ]];
+        ];
 
         $validated['skema_pkm_id'] = $request->skema_pkm;
         $validated['berkas'] = json_encode($file);
@@ -111,7 +111,7 @@ class ProposalController extends Controller
 
     public function destroy(Document $document)
     {
-        unlink(public_path("documents/{$document->berkas->proposal->file_proposal}"));
+        unlink(public_path("documents/proposal/{$document->berkas->proposal->file_proposal}"));
         $document->delete();
 
         return redirect(route('proposal.index'));

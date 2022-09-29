@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class LaporanAkhirController extends Controller
 {
@@ -43,5 +44,11 @@ class LaporanAkhirController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function upload($name, UploadedFile $file, $folder)
+    {
+        $destination_path = $folder;
+        $file->move($destination_path, $name);
     }
 }

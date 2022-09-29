@@ -14,8 +14,8 @@ class AddStatusColumnToDocumentsTable extends Migration
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->enum('status_laporan_kemajuan', ['submitted', 'not_submitted'])->default('not_submitted')->after('berkas');
-            $table->enum('status_laporan_akhir', ['submitted', 'not_submitted'])->default('not_submitted')->after('status_laporan_kemajuan');
+            $table->string('status_laporan_kemajuan')->default('not_submitted')->after('berkas');
+            $table->string('status_laporan_akhir')->default('not_submitted')->after('status_laporan_kemajuan');
         });
     }
 

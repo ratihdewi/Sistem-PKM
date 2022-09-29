@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="card-body">
                                         <embed id="file_proposal" name="file_proposal"
-                                            src="{{ asset("documents/{$document->berkas->proposal->file_proposal}") }}"
+                                            src="{{ asset("documents/laporan_kemajuan/{$document->berkas->laporan_kemajuan->file_laporan_kemajuan}") }}"
                                             type="application/pdf" width="100%" height="100%" readonly="">
                                         </embed>
                                     </div>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="card-body">
                                         <embed id="file_proposal" name="file_proposal"
-                                            src="{{ asset("documents/{$document->berkas->proposal->file_proposal}") }}"
+                                            src="{{ asset("documents/proposal/{$document->berkas->proposal->file_proposal}") }}"
                                             type="application/pdf" width="100%" height="100%" readonly="">
                                         </embed>
                                     </div>

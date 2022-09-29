@@ -8,7 +8,9 @@
                     <div class="col">
                         <div class="card bg-light">
                             <div class="card-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('laporan-kemajuan.update', $document->id) }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @method('PUT')
                                     @csrf
                                     <div class="mb-3 row">
                                         <label for="judul_proposal" class="col-sm-2 col-form-label">Judul Proposal</label>
@@ -67,35 +69,32 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="file_laporan_kemajuan" class="col-sm-2 col-form-label">Upload
+                                            <label for="laporan_kemajuan" class="col-sm-2 col-form-label">Upload
                                                 Laporan
                                                 Kemajuan</label>
                                             <div class="col-sm-10">
-                                                <input
-                                                    class="form-control @error('file_laporan_kemajuan') is-invalid @enderror"
-                                                    type="file" id="file_laporan_kemajuan" name="file_laporan_kemajuan">
+                                                <input class="form-control @error('laporan_kemajuan') is-invalid @enderror"
+                                                    type="file" id="laporan_kemajuan" name="laporan_kemajuan">
                                             </div>
                                         </div>
                                     @endif
 
                                     @if (Request::is('laporan-akhir*'))
                                         <div class="mb-3 row">
-                                            <label for="luaran_laporan_kemajuan" class="col-sm-2 col-form-label">Upload
+                                            <label for="luaran_laporan_akhir" class="col-sm-2 col-form-label">Upload
                                                 Luaran Laporan Akhir</label>
                                             <div class="col-sm-10">
                                                 <input
-                                                    class="form-control @error('luaran_laporan_kemajuan') is-invalid @enderror"
-                                                    type="file" id="luaran_laporan_kemajuan"
-                                                    name="luaran_laporan_kemajuan">
+                                                    class="form-control @error('luaran_laporan_akhir') is-invalid @enderror"
+                                                    type="file" id="luaran_laporan_akhir" name="luaran_laporan_akhir">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="file_laporan_kemajuan" class="col-sm-2 col-form-label">Upload
+                                            <label for="laporan_akhir" class="col-sm-2 col-form-label">Upload
                                                 Laporan Akhir</label>
                                             <div class="col-sm-10">
-                                                <input
-                                                    class="form-control @error('file_laporan_kemajuan') is-invalid @enderror"
-                                                    type="file" id="file_laporan_kemajuan" name="file_laporan_kemajuan">
+                                                <input class="form-control @error('laporan_akhir') is-invalid @enderror"
+                                                    type="file" id="laporan_akhir" name="laporan_akhir">
                                             </div>
                                         </div>
                                     @endif

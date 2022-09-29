@@ -64,11 +64,13 @@
                                                 class="text-decoration-none">{{ $document->judul_proposal }}</a></td>
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
-                                        <td></td>
+                                        <td>{{ $document->status_laporan_kemajuan === 'submitted' ? 'Sudah Submit' : '' }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="#" method="post" class="d-inline-block">
+                                            <form action="{{ route('laporan-kemajuan.destroy', $document->id) }}"
+                                                method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
