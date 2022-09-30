@@ -97,7 +97,7 @@ class ProposalController extends Controller
 
         $file['proposal'] = [
             'luaran_proposal' => $request->luaran_proposal,
-            'file_proposal' => $proposal_name
+            'file_proposal' => $proposal_name ?? $document->berkas->proposal->file_proposal
         ];
 
         $validated['skema_pkm_id'] = $request->skema_pkm;
@@ -111,6 +111,20 @@ class ProposalController extends Controller
 
     public function destroy(Document $document)
     {
+        if (isset($document->berkas->laporan_akhir)) {
+            if ($document->berkas->laporan_akhir->luaran_laporan_akhir != null || $document->berkas->laporan_akhir->file_laporan_akhir != null) {
+                unlink((public_path("documents/laporan_akhir/{$document->berkas->laporan_akhir->luaran_laporan_akhir}")));
+                unlink((public_path("documents/laporan_akhir/{$document->berkas->laporan_akhir->file_laporan_akhir}")));
+            }
+        }
+
+        if (isset($document->berkas->laporan_kemajuan)) {
+            if ($document->berkas->laporan_kemajuan->luaran_laporan_kemajuan != null || $document->berkas->laporan_kemajuan->file_laporan_kemajuan != null) {
+                unlink((public_path("documents/laporan_kemajuan/{$document->berkas->laporan_kemajuan->luaran_laporan_kemajuan}")));
+                unlink((public_path("documents/laporan_kemajuan/{$document->berkas->laporan_kemajuan->file_laporan_kemajuan}")));
+            }
+        }
+
         unlink(public_path("documents/proposal/{$document->berkas->proposal->file_proposal}"));
         $document->delete();
 

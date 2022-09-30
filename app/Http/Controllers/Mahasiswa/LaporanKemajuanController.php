@@ -28,7 +28,6 @@ class LaporanKemajuanController extends Controller
         //
     }
 
-
     public function show(Document $document)
     {
         return view('page.mahasiswa.laporan.review', compact('document'));
@@ -93,6 +92,10 @@ class LaporanKemajuanController extends Controller
     public function destroy(Document $document)
     {
         $file = (array) $document->berkas;
+
+        if (array_key_exists('laporan_akhir', $file)) {
+            return back();
+        }
 
         if (isset($document->berkas->laporan_kemajuan)) {
             if ($document->berkas->laporan_kemajuan->luaran_laporan_kemajuan != null || $document->berkas->laporan_kemajuan->file_laporan_kemajuan != null) {

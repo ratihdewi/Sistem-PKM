@@ -76,11 +76,13 @@
                                                 <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
                                             </form>
                                         </td>
-                                        <td></td>
+                                        <td>{{ $document->status_laporan_akhir === 'submitted' ? 'Sudah Submit' : '' }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('laporan-akhir.edit', $document->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="#" method="post" class="d-inline-block">
+                                            <form action="{{ route('laporan-akhir.destroy', $document->id) }}"
+                                                method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
