@@ -43,46 +43,46 @@
                                                 value="{{ old('judul_proposal') }}">
                                         </div>
                                     </div>
-                                    <div class="mb-3 row">
+                                    <div class="mb-3 row mahasiswa">
                                         <label for="anggota_1" class="col-sm-2 col-form-label">Anggota 1</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota1" name="anggota1">
+                                            <input type="text" class="form-control" id="anggota_1" name="anggota_1">
                                         </div>
                                         <div class="col-sm-7">
-                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                                value="email@example.com">
+                                            <input type="text" readonly class="form-control-plaintext"
+                                                id="anggota_1_name" value="Nama Terisi Otomatis">
                                         </div>
                                     </div>
-                                    <div class="mb-3 row">
+                                    <div class="mb-3 row mahasiswa">
                                         <label for="anggota_2" class="col-sm-2 col-form-label">Anggota 2</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota2" name="anggota2">
+                                            <input type="text" class="form-control" id="anggota_2" name="anggota_2">
                                         </div>
                                         <div class="col-sm-7">
-                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                                value="email@example.com">
+                                            <input type="text" readonly class="form-control-plaintext"
+                                                id="anggota_2_name" value="Nama Terisi Otomatis">
                                         </div>
                                     </div>
-                                    <div class="mb-3 row">
+                                    <div class="mb-3 row mahasiswa">
                                         <label for="anggota_3" class="col-sm-2 col-form-label">Anggota 3</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota3" name="anggota3">
+                                            <input type="text" class="form-control" id="anggota_3" name="anggota_3">
                                             </select>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                                value="email@example.com">
+                                            <input type="text" readonly class="form-control-plaintext"
+                                                id="anggota_3_name" value="Nama Terisi Otomatis">
                                         </div>
                                     </div>
-                                    <div class="mb-3 row">
+                                    <div class="mb-3 row mahasiswa">
                                         <label for="anggota_4" class="col-sm-2 col-form-label">Anggota 4</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota4" name="anggota4">
+                                            <input type="text" class="form-control" id="anggota_4" name="anggota_4">
                                             </select>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                                value="email@example.com">
+                                            <input type="text" readonly class="form-control-plaintext"
+                                                id="anggota_4_name" value="Nama Terisi Otomatis">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -90,7 +90,7 @@
                                             Pendamping</label>
                                         <div class="col-sm-10">
                                             <select class="form-select" aria-label="Default select example">
-                                                <option selected>Dosen Pendamping</option>
+                                                <option selected disabled>Dosen Pendamping</option>
                                             </select>
                                         </div>
                                     </div>
@@ -158,10 +158,14 @@
 @push('extra_js')
     <script>
         $('#jenis_pkm').change(function() {
+            var id = $(this).val()
+            var url = "{{ route('skema', ':id') }}"
+            url = url.replace(':id', id)
+
             $("#jenis_pkm option[id='select_jenis_pkm']").hide()
             $.ajax({
                 type: 'GET',
-                url: 'skema-pkm/' + $(this).val(),
+                url: url,
                 success: function(data) {
                     $('#skema_pkm').empty().append(
                         data.map(function(item) {
@@ -176,5 +180,65 @@
                 }
             });
         });
+
+        $('#anggota_1').on('change', function() {
+            var mhs = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('mahasiswa') }}",
+                data: {
+                    'mhs': mhs
+                },
+                success: function(data) {
+                    $('#anggota_1_name').val(data)
+                }
+            })
+        })
+
+        $('#anggota_2').on('change', function() {
+            var mhs = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('mahasiswa') }}",
+                data: {
+                    'mhs': mhs
+                },
+                success: function(data) {
+                    $('#anggota_2_name').val(data)
+                }
+            })
+        })
+
+        $('#anggota_3').on('change', function() {
+            var mhs = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('mahasiswa') }}",
+                data: {
+                    'mhs': mhs
+                },
+                success: function(data) {
+                    $('#anggota_3_name').val(data)
+                }
+            })
+        })
+
+        $('#anggota_4').on('change', function() {
+            var mhs = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('mahasiswa') }}",
+                data: {
+                    'mhs': mhs
+                },
+                success: function(data) {
+                    $('#anggota_4_name').val(data)
+                }
+            })
+        })
     </script>
 @endpush

@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'role:Mahasiswa'], function () {
         Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema');
+        Route::get('/proposal/mahasiswa', [ProposalController::class, 'mahasiswa'])->name('mahasiswa');
 
         Route::resources([
             '/proposal' => ProposalController::class,

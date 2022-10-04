@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\PKM\JenisPKM;
 use App\Models\PKM\SkemaPKM;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -137,6 +138,13 @@ class ProposalController extends Controller
         $skema_pkm = SkemaPKM::where('jenis_pkm_id', $parent_id)->orderBy('id', 'asc')->get();
 
         return $skema_pkm;
+    }
+
+    public function mahasiswa(Request $request)
+    {
+        $data = User::where('username', $request->mhs)->first();
+
+        return $data->name ?? 'Nama Tidak Ditemukan';
     }
 
     private function upload($name, UploadedFile $file, $folder)
