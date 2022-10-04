@@ -9,11 +9,11 @@
                         <div class="card bg-light">
                             <div class="card-body">
                                 @if (Request::is('laporan-kemajuan*'))
-                                    <form action="{{ route('laporan-kemajuan.update', $document->id) }}" method="post"
+                                    <form action="{{ route('laporan-kemajuan.submit', $document->id) }}" method="post"
                                         enctype="multipart/form-data">
                                 @endif
                                 @if (Request::is('laporan-akhir*'))
-                                    <form action="{{ route('laporan-akhir.update', $document->id) }}" method="post"
+                                    <form action="{{ route('laporan-akhir.submit', $document->id) }}" method="post"
                                         enctype="multipart/form-data">
                                 @endif
                                 @method('PUT')

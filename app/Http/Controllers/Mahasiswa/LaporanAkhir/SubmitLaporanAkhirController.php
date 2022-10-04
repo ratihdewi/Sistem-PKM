@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mahasiswa;
+namespace App\Http\Controllers\Mahasiswa\LaporanAkhir;
 
 use App\Enums\DocumentStatus;
 use App\Http\Controllers\Controller;
@@ -9,42 +9,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
-class LaporanAkhirController extends Controller
+class SubmitLaporanAkhirController extends Controller
 {
-    public function index()
-    {
-        $documents = Document::orderBy('id', 'asc')->get();
-
-        return view('page.mahasiswa.laporan.index', compact('documents'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Document $document)
-    {
-        return view('page.mahasiswa.laporan.review', compact('document'));
-    }
-
-    public function edit(Document $document)
-    {
-        $file = (array) $document->berkas;
-
-        if (!array_key_exists('laporan_kemajuan', $file)) {
-            return back();
-        }
-
-        return view('page.mahasiswa.laporan.update', compact('document'));
-    }
-
-    public function update(Request $request, Document $document)
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function __invoke(Request $request, Document $document)
     {
         $validated = $request->validate([
             'luaran_laporan_akhir' => 'required|mimes:pdf',
@@ -92,26 +65,7 @@ class LaporanAkhirController extends Controller
         $document->fill($validated);
         $document->save();
 
-        return redirect(route('laporan-akhir.index'));
-    }
-
-    public function destroy(Document $document)
-    {
-        $file = (array) $document->berkas;
-
-        if (isset($document->berkas->laporan_akhir)) {
-            if ($document->berkas->laporan_akhir->luaran_laporan_akhir != null || $document->berkas->laporan_akhir->file_laporan_akhir != null) {
-                unlink((public_path("documents/laporan_akhir/{$document->berkas->laporan_akhir->luaran_laporan_akhir}")));
-                unlink((public_path("documents/laporan_akhir/{$document->berkas->laporan_akhir->file_laporan_akhir}")));
-            }
-
-            unset($file['laporan_akhir']);
-        }
-
-        $document->fill(['berkas' => json_encode($file), 'status_laporan_akhir' => DocumentStatus::NotSubmitted]);
-        $document->save();
-
-        return redirect(route('laporan-akhir.index'));
+        return redirect(route('laporan.index'));
     }
 
     private function upload($name, UploadedFile $file, $folder)

@@ -75,8 +75,8 @@
                         <div class="collapse" id="collapsePelaksanaanKegiatan" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('laporan-kemajuan.index') }}">Laporan Kemajuan</a>
-                                <a class="nav-link" href="{{ route('laporan-akhir.index') }}">Laporan Akhir</a>
+                                <a class="nav-link" href="{{ route('laporan.index') }}">Laporan Kemajuan</a>
+                                <a class="nav-link" href="{{ route('laporan.index') }}">Laporan Akhir</a>
                             </nav>
                         </div>
                     @endcan

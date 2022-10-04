@@ -4,25 +4,6 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 180px">
-                @if ($documents->count() > 0)
-                    <div class="mb-3">
-                        <a href="#">
-                            <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan
-                                Laporan
-                                Kemajuan
-                            </button>
-                        </a>
-                    </div>
-                    <div class="mb-3">
-                        <a href="#">
-                            <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan
-                                Laporan
-                                Akhir
-                            </button>
-                        </a>
-                    </div>
-                @endif
-
                 <div class="card mb-4 mt-3">
                     <div class="card-body">
                         <table id="datatablesSimple">
@@ -60,28 +41,55 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $document->created_at->format('Y') }}</td>
                                         <td>{{ $document->skema_pkm->name }}</td>
-                                        <td> <a href="{{ route('laporan-kemajuan.show', $document->id) }}"
+                                        <td> <a href="{{ route('laporan.show', $document->id) }}"
                                                 class="text-decoration-none">{{ $document->judul_proposal }}</a></td>
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
-                                        <td>{{ $document->status_laporan_kemajuan === 'submitted' ? 'Sudah Submit' : '' }}
+                                        <td>
+                                            @if ($document->status_laporan_kemajuan === 'submitted')
+                                                Sudah Submit
+                                            @else
+                                                <div class="mb-3">
+                                                    <a href="{{ route('laporan-kemajuan.edit', $document->id) }}">
+                                                        <button type="button" class="btn"
+                                                            style="background-color: #5D7DCF; color: #fff">Ajukan Laporan
+                                                            Kemajuan
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
-                                                    class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('laporan-kemajuan.destroy', $document->id) }}"
+                                            {{-- <a href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
+                                                    class="fa fa-pencil"></i></a> --}}
+                                            <form action="{{ route('laporan-kemajuan.delete', $document->id) }}"
                                                 method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
                                             </form>
                                         </td>
-                                        <td>{{ $document->status_laporan_akhir === 'submitted' ? 'Sudah Submit' : '' }}
+                                        <td>
+                                            @if ($document->status_laporan_akhir === 'submitted')
+                                                Sudah Submit
+                                            @else
+                                                <div class="mb-3">
+                                                    <a href="{{ route('laporan-akhir.edit', $document->id) }}"
+                                                        @if ($document->status_laporan_kemajuan === 'not_submitted') style="pointer-events: none" @endif>
+                                                        <button type="button"
+                                                            class="btn {{ $document->status_laporan_kemajuan === 'not_submitted' ? 'disabled' : '' }}"
+                                                            style="background-color: #5D7DCF; color: #fff"
+                                                            aria-disabled="true">Ajukan Laporan
+                                                            Akhir
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('laporan-akhir.edit', $document->id) }}"><i
-                                                    class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('laporan-akhir.destroy', $document->id) }}"
+                                            {{-- <a href="{{ route('laporan-akhir.edit', $document->id) }}"><i
+                                                    class="fa fa-pencil"></i></a> --}}
+                                            <form action="{{ route('laporan-akhir.delete', $document->id) }}"
                                                 method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf

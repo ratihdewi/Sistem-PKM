@@ -8,7 +8,12 @@ use App\Http\Controllers\Admin\SkemaPKMController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dosen\ReviewProposalController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\Mahasiswa\LaporanAkhir\DeleteLaporanAkhirController;
+use App\Http\Controllers\Mahasiswa\LaporanAkhir\SubmitLaporanAkhirController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhirController;
+use App\Http\Controllers\Mahasiswa\LaporanController;
+use App\Http\Controllers\Mahasiswa\LaporanKemajuan\DeleteLaporanKemajuanController;
+use App\Http\Controllers\Mahasiswa\LaporanKemajuan\SubmitLaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\LaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\ProposalController;
 use Illuminate\Support\Facades\Route;
@@ -55,14 +60,27 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema');
         Route::resources([
             '/proposal' => ProposalController::class,
-            '/laporan-kemajuan' => LaporanKemajuanController::class,
-            '/laporan-akhir' => LaporanAkhirController::class
         ], [
             'parameters' => [
                 'proposal' => 'document',
-                'laporan-kemajuan' => 'document',
-                'laporan-akhir' => 'document'
             ]
         ]);
+
+        Route::group([], function () {
+            Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
+            Route::get('laporan/{document}', [LaporanController::class, 'show'])->name('laporan.show');
+
+            Route::group(['prefix' => 'laporan-kemajuan'], function () {
+                Route::get('{document}/edit', [LaporanController::class, 'edit'])->name('laporan-kemajuan.edit');
+                Route::put('{document}', SubmitLaporanKemajuanController::class)->name('laporan-kemajuan.submit');
+                Route::delete('{document}', DeleteLaporanKemajuanController::class)->name('laporan-kemajuan.delete');
+            });
+
+            Route::group(['prefix' => 'laporan-akhir'], function () {
+                Route::get('{document}/edit', [LaporanController::class, 'edit'])->name('laporan-akhir.edit');
+                Route::put('{document}', SubmitLaporanAkhirController::class)->name('laporan-akhir.submit');
+                Route::delete('{document}', DeleteLaporanAkhirController::class)->name('laporan-akhir.delete');
+            });
+        });
     });
 });

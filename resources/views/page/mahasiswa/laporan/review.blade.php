@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="my-3">
-                    <a href="{{ route('laporan-akhir.index') }}">
+                    <a href="{{ route('laporan.index') }}">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Kembali
                         </button>
                     </a>

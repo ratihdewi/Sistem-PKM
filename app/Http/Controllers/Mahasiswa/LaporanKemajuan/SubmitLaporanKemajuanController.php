@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mahasiswa;
+namespace App\Http\Controllers\Mahasiswa\LaporanKemajuan;
 
 use App\Enums\DocumentStatus;
 use App\Http\Controllers\Controller;
@@ -9,36 +9,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
-class LaporanKemajuanController extends Controller
+class SubmitLaporanKemajuanController extends Controller
 {
-    public function index()
-    {
-        $documents = Document::orderBy('id', 'asc')->get();
-
-        return view('page.mahasiswa.laporan.index', compact('documents'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Document $document)
-    {
-        return view('page.mahasiswa.laporan.review', compact('document'));
-    }
-
-    public function edit(Document $document)
-    {
-        return view('page.mahasiswa.laporan.update', compact('document'));
-    }
-
-    public function update(Request $request, Document $document)
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function __invoke(Request $request, Document $document)
     {
         $validated = $request->validate([
             'luaran_laporan_kemajuan' => 'required|mimes:pdf',
@@ -86,30 +65,7 @@ class LaporanKemajuanController extends Controller
         $document->fill($validated);
         $document->save();
 
-        return redirect(route('laporan-kemajuan.index'));
-    }
-
-    public function destroy(Document $document)
-    {
-        $file = (array) $document->berkas;
-
-        if (array_key_exists('laporan_akhir', $file)) {
-            return back();
-        }
-
-        if (isset($document->berkas->laporan_kemajuan)) {
-            if ($document->berkas->laporan_kemajuan->luaran_laporan_kemajuan != null || $document->berkas->laporan_kemajuan->file_laporan_kemajuan != null) {
-                unlink((public_path("documents/laporan_kemajuan/{$document->berkas->laporan_kemajuan->luaran_laporan_kemajuan}")));
-                unlink((public_path("documents/laporan_kemajuan/{$document->berkas->laporan_kemajuan->file_laporan_kemajuan}")));
-            }
-
-            unset($file['laporan_kemajuan']);
-        }
-
-        $document->fill(['berkas' => json_encode($file), 'status_laporan_kemajuan' => DocumentStatus::NotSubmitted]);
-        $document->save();
-
-        return redirect(route('laporan-kemajuan.index'));
+        return redirect(route('laporan.index'));
     }
 
     private function upload($name, UploadedFile $file, $folder)
