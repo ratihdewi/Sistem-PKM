@@ -37,16 +37,16 @@
                                     <div class="mb-3 row">
                                         <label for="judul_proposal" class="col-sm-2 col-form-label">Judul Proposal</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control @error('judul_proposal') is-invalid @enderror"
-                                                id="judul_proposal" name="judul_proposal" value="{{ old('judul_proposal') }}">
+                                            <input type="text"
+                                                class="form-control @error('judul_proposal') is-invalid @enderror"
+                                                id="judul_proposal" name="judul_proposal"
+                                                value="{{ old('judul_proposal') }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="anggota_1" class="col-sm-2 col-form-label">Anggota 1</label>
                                         <div class="col-sm-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Anggota 1</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="anggota1" name="anggota1">
                                         </div>
                                         <div class="col-sm-7">
                                             <input type="text" readonly class="form-control-plaintext" id="staticEmail"
@@ -56,9 +56,7 @@
                                     <div class="mb-3 row">
                                         <label for="anggota_2" class="col-sm-2 col-form-label">Anggota 2</label>
                                         <div class="col-sm-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Anggota 2</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="anggota2" name="anggota2">
                                         </div>
                                         <div class="col-sm-7">
                                             <input type="text" readonly class="form-control-plaintext" id="staticEmail"
@@ -68,8 +66,7 @@
                                     <div class="mb-3 row">
                                         <label for="anggota_3" class="col-sm-2 col-form-label">Anggota 3</label>
                                         <div class="col-sm-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Anggota 3</option>
+                                            <input type="text" class="form-control" id="anggota3" name="anggota3">
                                             </select>
                                         </div>
                                         <div class="col-sm-7">
@@ -80,8 +77,7 @@
                                     <div class="mb-3 row">
                                         <label for="anggota_4" class="col-sm-2 col-form-label">Anggota 4</label>
                                         <div class="col-sm-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Anggota 4</option>
+                                            <input type="text" class="form-control" id="anggota4" name="anggota4">
                                             </select>
                                         </div>
                                         <div class="col-sm-7">

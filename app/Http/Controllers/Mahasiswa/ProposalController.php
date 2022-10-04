@@ -68,8 +68,9 @@ class ProposalController extends Controller
     public function edit(Document $document)
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
+        $skema_pkm = SkemaPKM::where('jenis_pkm_id', $document->skema_pkm->jenis_pkm->id)->orderBy('id', 'asc')->get();
 
-        return view('page.mahasiswa.proposal.update', compact('document', 'jenis_pkm'));
+        return view('page.mahasiswa.proposal.update', compact('document', 'jenis_pkm', 'skema_pkm'));
     }
 
     public function update(Request $request, Document $document)

@@ -20,7 +20,12 @@
                                                 aria-label="Default select example">
                                                 <option id="select_jenis_pkm" selected disabled>Jenis PKM</option>
                                                 @foreach ($jenis_pkm as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @if ($item->id === $document->skema_pkm->jenis_pkm->id)
+                                                        <option value="{{ $item->id }}" selected>{{ $item->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -32,6 +37,14 @@
                                                 class="form-select @error('skema_pkm') is-invalid @enderror"
                                                 aria-label="Default select example" name="skema_pkm">
                                                 <option id="select_skema_pkm" selected disabled>Skema PKM</option>
+                                                @foreach ($skema_pkm as $item)
+                                                    @if ($item->id === $document->skema_pkm->id)
+                                                        <option value="{{ $item->id }}" selected>{{ $item->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
