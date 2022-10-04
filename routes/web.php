@@ -66,9 +66,9 @@ Route::group(['middleware' => 'auth'], function () {
             ]
         ]);
 
-        Route::group([], function () {
-            Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
-            Route::get('laporan/{document}', [LaporanController::class, 'show'])->name('laporan.show');
+        Route::group(['prefix' => 'laporan'], function () {
+            Route::get('', [LaporanController::class, 'index'])->name('laporan.index');
+            Route::get('{document}', [LaporanController::class, 'show'])->name('laporan.show');
 
             Route::group(['prefix' => 'laporan-kemajuan'], function () {
                 Route::get('{document}/edit', [LaporanController::class, 'edit'])->name('laporan-kemajuan.edit');
