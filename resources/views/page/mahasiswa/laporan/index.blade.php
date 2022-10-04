@@ -50,7 +50,7 @@
                                                 Sudah Submit
                                             @else
                                                 <div class="mb-3">
-                                                    <a href="{{ route('laporan-kemajuan.edit', $document->id) }}">
+                                                    <a href="{{ route('laporan-kemajuan.create', $document->id) }}">
                                                         <button type="button" class="btn"
                                                             style="background-color: #5D7DCF; color: #fff">Ajukan Laporan
                                                             Kemajuan
@@ -74,7 +74,7 @@
                                                 Sudah Submit
                                             @else
                                                 <div class="mb-3">
-                                                    <a href="{{ route('laporan-akhir.edit', $document->id) }}"
+                                                    <a href="{{ route('laporan-akhir.create', $document->id) }}"
                                                         @if ($document->status_laporan_kemajuan === 'not_submitted') style="pointer-events: none" @endif>
                                                         <button type="button"
                                                             class="btn {{ $document->status_laporan_kemajuan === 'not_submitted' ? 'disabled' : '' }}"

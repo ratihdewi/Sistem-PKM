@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'role:Mahasiswa'], function () {
         Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema');
+
         Route::resources([
             '/proposal' => ProposalController::class,
         ], [
@@ -69,18 +70,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'laporan'], function () {
             Route::get('', [LaporanController::class, 'index'])->name('laporan.index');
             Route::get('{document}', [LaporanController::class, 'show'])->name('laporan.show');
+        });
 
-            Route::group(['prefix' => 'laporan-kemajuan'], function () {
-                Route::get('{document}/edit', [LaporanController::class, 'edit'])->name('laporan-kemajuan.edit');
-                Route::put('{document}', SubmitLaporanKemajuanController::class)->name('laporan-kemajuan.submit');
-                Route::delete('{document}', DeleteLaporanKemajuanController::class)->name('laporan-kemajuan.delete');
-            });
+        Route::group(['prefix' => 'laporan-kemajuan'], function () {
+            Route::get('{document}/create', [LaporanController::class, 'create'])->name('laporan-kemajuan.create');
+            Route::put('{document}', SubmitLaporanKemajuanController::class)->name('laporan-kemajuan.submit');
+            Route::delete('{document}', DeleteLaporanKemajuanController::class)->name('laporan-kemajuan.delete');
+        });
 
-            Route::group(['prefix' => 'laporan-akhir'], function () {
-                Route::get('{document}/edit', [LaporanController::class, 'edit'])->name('laporan-akhir.edit');
-                Route::put('{document}', SubmitLaporanAkhirController::class)->name('laporan-akhir.submit');
-                Route::delete('{document}', DeleteLaporanAkhirController::class)->name('laporan-akhir.delete');
-            });
+        Route::group(['prefix' => 'laporan-akhir'], function () {
+            Route::get('{document}/create', [LaporanController::class, 'create'])->name('laporan-akhir.create');
+            Route::put('{document}', SubmitLaporanAkhirController::class)->name('laporan-akhir.submit');
+            Route::delete('{document}', DeleteLaporanAkhirController::class)->name('laporan-akhir.delete');
         });
     });
 });

@@ -20,7 +20,7 @@ class LaporanController extends Controller
         return view('page.mahasiswa.laporan.review', compact('document'));
     }
 
-    public function edit(Request $request, Document $document)
+    public function create(Request $request, Document $document)
     {
         if ($request->is('laporan-akhir*')) {
             $file = (array) $document->berkas;
