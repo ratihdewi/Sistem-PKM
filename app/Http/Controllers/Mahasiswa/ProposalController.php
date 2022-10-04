@@ -23,8 +23,9 @@ class ProposalController extends Controller
     public function create()
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
+        $data_dosen = User::where('role_id', 2)->get();
 
-        return view('page.mahasiswa.proposal.create', compact('jenis_pkm'));
+        return view('page.mahasiswa.proposal.create', compact('jenis_pkm', 'data_dosen'));
     }
 
     public function store(Request $request)
@@ -70,8 +71,9 @@ class ProposalController extends Controller
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
         $skema_pkm = SkemaPKM::where('jenis_pkm_id', $document->skema_pkm->jenis_pkm->id)->orderBy('id', 'asc')->get();
+        $data_dosen = User::where('role_id', 2)->get();
 
-        return view('page.mahasiswa.proposal.update', compact('document', 'jenis_pkm', 'skema_pkm'));
+        return view('page.mahasiswa.proposal.update', compact('document', 'jenis_pkm', 'skema_pkm', 'data_dosen'));
     }
 
     public function update(Request $request, Document $document)

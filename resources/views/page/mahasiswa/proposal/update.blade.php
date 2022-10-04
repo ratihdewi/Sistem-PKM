@@ -19,6 +19,7 @@
                                                 class="form-select @error('skema_pkm') is-invalid @enderror"
                                                 aria-label="Default select example">
                                                 <option id="select_jenis_pkm" selected disabled>Jenis PKM</option>
+
                                                 @foreach ($jenis_pkm as $item)
                                                     @if ($item->id === $document->skema_pkm->jenis_pkm->id)
                                                         <option value="{{ $item->id }}" selected>{{ $item->name }}
@@ -104,7 +105,11 @@
                                             Pendamping</label>
                                         <div class="col-sm-10">
                                             <select class="form-select" aria-label="Default select example">
-                                                <option selected>Dosen Pendamping</option>
+                                                <option selected disabled>Dosen Pendamping</option>
+
+                                                @foreach ($data_dosen as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

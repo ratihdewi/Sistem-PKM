@@ -91,6 +91,10 @@
                                         <div class="col-sm-10">
                                             <select class="form-select" aria-label="Default select example">
                                                 <option selected disabled>Dosen Pendamping</option>
+
+                                                @foreach ($data_dosen as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
