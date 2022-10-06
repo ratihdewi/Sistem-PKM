@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\DocumentOwner;
 use App\Models\PKM\JenisPKM;
 use App\Models\PKM\SkemaPKM;
 use App\Models\User;
@@ -36,7 +37,12 @@ class ProposalController extends Controller
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'required|mimes:pdf'
+            'proposal' => 'required|mimes:pdf',
+            'anggota_1' => 'required',
+            'anggota_2' => 'required',
+            'anggota_3' => 'required',
+            'anggota_4' => 'required',
+            'dosen_pendamping' => 'required'
         ]);
 
         $proposal_name = null;
@@ -57,7 +63,13 @@ class ProposalController extends Controller
         $validated['skema_pkm_id'] = $request->skema_pkm;
         $validated['berkas'] = json_encode($file);
 
-        Document::create($validated);
+        $document = Document::create($validated);
+
+        DocumentOwner::create([
+            'document_id' => $document->id,
+            'id_dosen' => $request->dosen_pendamping,
+            'id_mahasiswa' => json_encode([$request->anggota_1_id, $request->anggota_2_id, $request->anggota_3_id, $request->anggota_4_id] ?? [])
+        ]);
 
         return redirect(route('proposal.index'));
     }
@@ -84,7 +96,12 @@ class ProposalController extends Controller
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'nullable|mimes:pdf'
+            'proposal' => 'nullable|mimes:pdf',
+            'anggota_1' => 'required',
+            'anggota_2' => 'required',
+            'anggota_3' => 'required',
+            'anggota_4' => 'required',
+            'dosen_pendamping' => 'required'
         ]);
 
         $proposal_name = null;
@@ -110,11 +127,18 @@ class ProposalController extends Controller
         $document->fill($validated);
         $document->save();
 
+        DocumentOwner::where('document_id', $document->id)->update([
+            'id_dosen' => $request->dosen_pendamping,
+            'id_mahasiswa' => json_encode([$request->anggota_1_id, $request->anggota_2_id, $request->anggota_3_id, $request->anggota_4_id] ?? [])
+        ]);
+
         return redirect(route('proposal.index'));
     }
 
     public function destroy(Document $document)
     {
+        DocumentOwner::where('document_id', $document->id)->delete();
+
         if (isset($document->berkas->laporan_akhir)) {
             if ($document->berkas->laporan_akhir->luaran_laporan_akhir != null || $document->berkas->laporan_akhir->file_laporan_akhir != null) {
                 unlink((public_path("documents/laporan_akhir/{$document->berkas->laporan_akhir->luaran_laporan_akhir}")));
@@ -146,7 +170,7 @@ class ProposalController extends Controller
     {
         $data = User::where('username', $request->mhs)->first();
 
-        return $data->name ?? 'Nama Tidak Ditemukan';
+        return $data ?? null;
     }
 
     private function upload($name, UploadedFile $file, $folder)

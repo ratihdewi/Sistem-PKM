@@ -61,9 +61,12 @@
                                     <div class="mb-3 row mahasiswa">
                                         <label for="anggota_1" class="col-sm-2 col-form-label">Anggota 1</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota_1" name="anggota_1">
+                                            <input type="text"
+                                                class="form-control @error('anggota_1') is-invalid @enderror" id="anggota_1"
+                                                name="anggota_1">
                                         </div>
                                         <div class="col-sm-7">
+                                            <input type="hidden" id="anggota_1_id" name="anggota_1_id" value="">
                                             <input type="text" readonly class="form-control-plaintext"
                                                 id="anggota_1_name" value="Nama Terisi Otomatis">
                                         </div>
@@ -71,9 +74,12 @@
                                     <div class="mb-3 row mahasiswa">
                                         <label for="anggota_2" class="col-sm-2 col-form-label">Anggota 2</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota_2" name="anggota_2">
+                                            <input type="text"
+                                                class="form-control @error('anggota_2') is-invalid @enderror" id="anggota_2"
+                                                name="anggota_2">
                                         </div>
                                         <div class="col-sm-7">
+                                            <input type="hidden" id="anggota_2_id" name="anggota_2_id" value="">
                                             <input type="text" readonly class="form-control-plaintext"
                                                 id="anggota_2_name" value="Nama Terisi Otomatis">
                                         </div>
@@ -81,10 +87,13 @@
                                     <div class="mb-3 row mahasiswa">
                                         <label for="anggota_3" class="col-sm-2 col-form-label">Anggota 3</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota_3" name="anggota_3">
+                                            <input type="text"
+                                                class="form-control @error('anggota_3') is-invalid @enderror" id="anggota_3"
+                                                name="anggota_3">
                                             </select>
                                         </div>
                                         <div class="col-sm-7">
+                                            <input type="hidden" id="anggota_3_id" name="anggota_3_id" value="">
                                             <input type="text" readonly class="form-control-plaintext"
                                                 id="anggota_3_name" value="Nama Terisi Otomatis">
                                         </div>
@@ -92,10 +101,13 @@
                                     <div class="mb-3 row mahasiswa">
                                         <label for="anggota_4" class="col-sm-2 col-form-label">Anggota 4</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="anggota_4" name="anggota_4">
+                                            <input type="text"
+                                                class="form-control @error('anggota_4') is-invalid @enderror" id="anggota_4"
+                                                name="anggota_4">
                                             </select>
                                         </div>
                                         <div class="col-sm-7">
+                                            <input type="hidden" id="anggota_4_id" name="anggota_4_id" value="">
                                             <input type="text" readonly class="form-control-plaintext"
                                                 id="anggota_4_name" value="Nama Terisi Otomatis">
                                         </div>
@@ -104,7 +116,8 @@
                                         <label for="dosen_pendamping" class="col-sm-2 col-form-label">Dosen
                                             Pendamping</label>
                                         <div class="col-sm-10">
-                                            <select class="form-select" aria-label="Default select example">
+                                            <select class="form-select @error('dosen_pendamping') is-invalid @enderror"
+                                                aria-label="Default select example" name="dosen_pendamping">
                                                 <option selected disabled>Dosen Pendamping</option>
 
                                                 @foreach ($data_dosen as $item)
@@ -210,7 +223,8 @@
                     'mhs': mhs
                 },
                 success: function(data) {
-                    $('#anggota_1_name').val(data)
+                    $('#anggota_1_id').val(data['id'])
+                    $('#anggota_1_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
                 }
             })
         })
@@ -225,7 +239,8 @@
                     'mhs': mhs
                 },
                 success: function(data) {
-                    $('#anggota_2_name').val(data)
+                    $('#anggota_2_id').val(data['id'])
+                    $('#anggota_2_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
                 }
             })
         })
@@ -240,7 +255,8 @@
                     'mhs': mhs
                 },
                 success: function(data) {
-                    $('#anggota_3_name').val(data)
+                    $('#anggota_3_id').val(data['id'])
+                    $('#anggota_3_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
                 }
             })
         })
@@ -255,7 +271,8 @@
                     'mhs': mhs
                 },
                 success: function(data) {
-                    $('#anggota_4_name').val(data)
+                    $('#anggota_4_id').val(data['id'])
+                    $('#anggota_4_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
                 }
             })
         })
