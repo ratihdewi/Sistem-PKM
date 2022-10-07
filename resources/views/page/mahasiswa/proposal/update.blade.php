@@ -21,7 +21,7 @@
                                                 <option id="select_jenis_pkm" selected disabled>Jenis PKM</option>
 
                                                 @foreach ($jenis_pkm as $item)
-                                                    @if ($item->id === $document->skema_pkm->jenis_pkm->id)
+                                                    @if (old('jenis_pkm', $document->skema_pkm->jenis_pkm->id) == $item->id)
                                                         <option value="{{ $item->id }}" selected>{{ $item->name }}
                                                         </option>
                                                     @else
@@ -38,14 +38,9 @@
                                                 class="form-select @error('skema_pkm') is-invalid @enderror"
                                                 aria-label="Default select example" name="skema_pkm">
                                                 <option id="select_skema_pkm" selected disabled>Skema PKM</option>
-                                                @foreach ($skema_pkm as $item)
-                                                    @if ($item->id === $document->skema_pkm->id)
-                                                        <option value="{{ $item->id }}" selected>{{ $item->name }}
-                                                        </option>
-                                                    @else
-                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                    @endif
-                                                @endforeach
+
+                                                <input type="hidden" id="skema_pkm_old" name="skema_pkm_old"
+                                                    value="{{ old('skema_pkm', $document->skema_pkm_id) }}">
                                             </select>
                                         </div>
                                     </div>
@@ -158,10 +153,8 @@
                                         <label for="luaran_proposal" class="col-sm-2 col-form-label">Luaran
                                             Proposal</label>
                                         <div class="col-sm-10">
-                                            <input type="text"
-                                                class="form-control @error('luaran_proposal') is-invalid @enderror"
-                                                id="luaran_proposal" name="luaran_proposal"
-                                                value="{{ old('luaran_proposal', $document->berkas->proposal->luaran_proposal) }}">
+                                            <textarea class="form-control @error('luaran_proposal') is-invalid @enderror" id="luaran_proposal"
+                                                name="luaran_proposal">{{ old('luaran_proposal', $document->berkas->proposal->luaran_proposal) }}</textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -194,14 +187,21 @@
             var url = "{{ route('skema', ':id') }}"
             url = url.replace(':id', id)
 
-            $("#jenis_pkm option[id='select_jenis_pkm']").hide()
             $.ajax({
                 type: 'GET',
                 url: url,
                 success: function(data) {
-                    $('#skema_pkm').empty().append(
+                    $('#skema_pkm').empty()
+                    $('#skema_pkm').append(
+                        `<option id="select_skema_pkm" selected disabled>Skema PKM</option>`
+                    )
+                    $('#skema_pkm').append(
                         data.map(function(item) {
-                            return `<option value="${item.id}">${item.name}</option>`
+                            if (parseInt($('#skema_pkm_old').val()) == item.id) {
+                                return `<option selected value="${item.id}">${item.name}</option>`
+                            } else {
+                                return `<option value="${item.id}">${item.name}</option>`
+                            }
                         })
                     )
                 },
@@ -212,6 +212,7 @@
                 }
             });
         });
+        $('#jenis_pkm').trigger('change');
 
         $('#anggota_1').on('change', function() {
             var mhs = $(this).val();
