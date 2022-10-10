@@ -45,58 +45,24 @@
                                                 value="{{ old('judul_proposal') }}">
                                         </div>
                                     </div>
-                                    <div class="mb-3 row mahasiswa">
-                                        <label for="anggota_1" class="col-sm-2 col-form-label">Anggota 1</label>
-                                        <div class="col-sm-3">
-                                            <input type="text"
-                                                class="form-control @error('anggota_1') is-invalid @enderror" id="anggota_1"
-                                                name="anggota_1">
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <input type="hidden" id="anggota_1_id" name="anggota_1_id" value="">
-                                            <input type="text" readonly class="form-control-plaintext"
-                                                id="anggota_1_name" value="Nama Terisi Otomatis">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row mahasiswa">
-                                        <label for="anggota_2" class="col-sm-2 col-form-label">Anggota 2</label>
-                                        <div class="col-sm-3">
-                                            <input type="text"
-                                                class="form-control @error('anggota_2') is-invalid @enderror" id="anggota_2"
-                                                name="anggota_2">
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <input type="hidden" id="anggota_2_id" name="anggota_2_id" value="">
-                                            <input type="text" readonly class="form-control-plaintext"
-                                                id="anggota_2_name" value="Nama Terisi Otomatis">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row mahasiswa">
-                                        <label for="anggota_3" class="col-sm-2 col-form-label">Anggota 3</label>
-                                        <div class="col-sm-3">
-                                            <input type="text"
-                                                class="form-control @error('anggota_3') is-invalid @enderror" id="anggota_3"
-                                                name="anggota_3">
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <input type="hidden" id="anggota_3_id" name="anggota_3_id" value="">
-                                            <input type="text" readonly class="form-control-plaintext"
-                                                id="anggota_3_name" value="Nama Terisi Otomatis">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row mahasiswa">
-                                        <label for="anggota_4" class="col-sm-2 col-form-label">Anggota 4</label>
-                                        <div class="col-sm-3">
-                                            <input type="text"
-                                                class="form-control @error('anggota_4') is-invalid @enderror" id="anggota_4"
-                                                name="anggota_4">
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <input type="hidden" id="anggota_4_id" name="anggota_4_id" value="">
-                                            <input type="text" readonly class="form-control-plaintext"
-                                                id="anggota_4_name" value="Nama Terisi Otomatis">
+                                    <div id="mahasiswa">
+                                        <div class="mb-3 row mahasiswa">
+                                            <label for="anggota_1" class="col-sm-2 col-form-label">Anggota 1</label>
+                                            <div class="col-sm-3">
+                                                <input type="text"
+                                                    class="form-control @error('anggota_1') is-invalid @enderror"
+                                                    id="anggota_1" name="anggota_1" placeholder="NIM"
+                                                    onchange="checkName(1)">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="hidden" id="anggota_1_id" name="anggota_1_id" value="">
+                                                <input type="text" readonly class="form-control-plaintext"
+                                                    id="anggota_1_name" value="Nama Terisi Otomatis">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <button type="button" id="add_anggota"><i
+                                                        class="ml-2 fa fa-plus fa-2x"></i></button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -174,100 +140,83 @@
 
 @push('extra_js')
     <script>
-        $('#jenis_pkm').change(function() {
-            var id = $(this).val()
-            var url = "{{ route('skema', ':id') }}"
-            url = url.replace(':id', id)
+        function checkName(anggota) {
+            var mhs = $(`#anggota_${anggota}`).val();
 
             $.ajax({
                 type: 'GET',
-                url: url,
-                success: function(data) {
-                    $('#skema_pkm').empty()
-                    $('#skema_pkm').append(
-                        `<option id="select_skema_pkm" selected disabled>Skema PKM</option>`
-                    )
-                    $('#skema_pkm').append(
-                        data.map(function(item) {
-                            if (parseInt($('#skema_pkm_old').val()) == item.id) {
-                                return `<option selected value="${item.id}">${item.name}</option>`
-                            } else {
-                                return `<option value="${item.id}">${item.name}</option>`
-                            }
-                        })
-                    )
+                url: "{{ route('mahasiswa') }}",
+                data: {
+                    'mhs': mhs
                 },
-                error: function(xhr, textStatus, errorThrown) {
-                    console.log('XHR', xhr);
-                    console.log('status', textStatus);
-                    console.log('Error in', errorThrown);
+                success: function(data) {
+                    $(`#anggota_${anggota}_id`).val(data['id'])
+                    $(`#anggota_${anggota}_name`).val(data['name'] ?? 'Nama Tidak Ditemukan')
+                }
+            })
+        }
+
+        $(document).ready(function() {
+            var currentAnggota = 1;
+
+            $('#jenis_pkm').change(function() {
+                var id = $(this).val()
+                var url = "{{ route('skema', ':id') }}"
+                url = url.replace(':id', id)
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function(data) {
+                        $('#skema_pkm').empty()
+                        $('#skema_pkm').append(
+                            `<option id="select_skema_pkm" selected disabled>Skema PKM</option>`
+                        )
+                        $('#skema_pkm').append(
+                            data.map(function(item) {
+                                if (parseInt($('#skema_pkm_old').val()) == item.id) {
+                                    return `<option selected value="${item.id}">${item.name}</option>`
+                                } else {
+                                    return `<option value="${item.id}">${item.name}</option>`
+                                }
+                            })
+                        )
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.log('XHR', xhr);
+                        console.log('status', textStatus);
+                        console.log('Error in', errorThrown);
+                    }
+                });
+            });
+            $('#jenis_pkm').trigger('change');
+
+            $('#add_anggota').on('click', function() {
+                currentAnggota++;
+
+                if (currentAnggota <= 4) {
+                    $('div[id=mahasiswa]').append(`     
+                        <div class="mb-3 row mahasiswa">                    
+                            <label for="anggota_` + currentAnggota +
+                        `" class="col-sm-2 col-form-label">Anggota ${currentAnggota.toString()}</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control @error('anggota_` + currentAnggota + `') is-invalid @enderror" id="anggota_` +
+                        currentAnggota + `" name="anggota_` + currentAnggota + `" placeholder="NIM" onchange="checkName(${currentAnggota})">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="hidden" id="anggota_` + currentAnggota + `_id" name="anggota_` +
+                        currentAnggota + `_id" value="">
+                                <input type="text" readonly class="form-control-plaintext" id="anggota_` +
+                        currentAnggota + `_name" value="Nama Terisi Otomatis">
+                            </div>           
+                        </div>          
+                    `);
+                }
+
+                if (currentAnggota == 4) {
+                    $('#add_anggota').hide();
                 }
             });
         });
-        $('#jenis_pkm').trigger('change');
-
-        $('#anggota_1').on('change', function() {
-            var mhs = $(this).val();
-
-            $.ajax({
-                type: 'GET',
-                url: "{{ route('mahasiswa') }}",
-                data: {
-                    'mhs': mhs
-                },
-                success: function(data) {
-                    $('#anggota_1_id').val(data['id'])
-                    $('#anggota_1_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
-                }
-            })
-        })
-
-        $('#anggota_2').on('change', function() {
-            var mhs = $(this).val();
-
-            $.ajax({
-                type: 'GET',
-                url: "{{ route('mahasiswa') }}",
-                data: {
-                    'mhs': mhs
-                },
-                success: function(data) {
-                    $('#anggota_2_id').val(data['id'])
-                    $('#anggota_2_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
-                }
-            })
-        })
-
-        $('#anggota_3').on('change', function() {
-            var mhs = $(this).val();
-
-            $.ajax({
-                type: 'GET',
-                url: "{{ route('mahasiswa') }}",
-                data: {
-                    'mhs': mhs
-                },
-                success: function(data) {
-                    $('#anggota_3_id').val(data['id'])
-                    $('#anggota_3_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
-                }
-            })
-        })
-
-        $('#anggota_4').on('change', function() {
-            var mhs = $(this).val();
-
-            $.ajax({
-                type: 'GET',
-                url: "{{ route('mahasiswa') }}",
-                data: {
-                    'mhs': mhs
-                },
-                success: function(data) {
-                    $('#anggota_4_id').val(data['id'])
-                    $('#anggota_4_name').val(data['name'] ?? 'Nama Tidak Ditemukan')
-                }
-            })
-        })
     </script>
 @endpush

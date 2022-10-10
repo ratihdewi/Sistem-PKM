@@ -39,9 +39,9 @@ class ProposalController extends Controller
             'luaran_proposal' => 'required',
             'proposal' => 'required|mimes:pdf',
             'anggota_1' => 'required',
-            'anggota_2' => 'required',
-            'anggota_3' => 'required',
-            'anggota_4' => 'required',
+            'anggota_2' => 'nullable',
+            'anggota_3' => 'nullable',
+            'anggota_4' => 'nullable',
             'dosen_pendamping' => 'required'
         ]);
 
@@ -97,9 +97,9 @@ class ProposalController extends Controller
             'luaran_proposal' => 'required',
             'proposal' => 'nullable|mimes:pdf',
             'anggota_1' => 'required',
-            'anggota_2' => 'required',
-            'anggota_3' => 'required',
-            'anggota_4' => 'required',
+            'anggota_2' => 'nullable',
+            'anggota_3' => 'nullable',
+            'anggota_4' => 'nullable',
             'dosen_pendamping' => 'required'
         ]);
 

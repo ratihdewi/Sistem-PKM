@@ -22,5 +22,14 @@ class SkemaPKMSeeder extends Seeder
                 'name' => $item
             ]);
         }
+
+        SkemaPKM::create([
+            'jenis_pkm_id' => 2,
+            'name' => 'PKM Artikel Ilmiah',
+        ]);
+        SkemaPKM::create([
+            'jenis_pkm_id' => 3,
+            'name' => 'PKM Gagasan Futuristik Tertulis',
+        ]);
     }
 }
