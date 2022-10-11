@@ -38,10 +38,7 @@ class ProposalController extends Controller
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
             'proposal' => 'required|mimes:pdf',
-            'anggota_1' => 'required',
-            'anggota_2' => 'nullable',
-            'anggota_3' => 'nullable',
-            'anggota_4' => 'nullable',
+            'anggota' => 'required',
             'dosen_pendamping' => 'required'
         ]);
 
@@ -68,7 +65,7 @@ class ProposalController extends Controller
         DocumentOwner::create([
             'document_id' => $document->id,
             'id_dosen' => $request->dosen_pendamping,
-            'id_mahasiswa' => json_encode([$request->anggota_1_id, $request->anggota_2_id, $request->anggota_3_id, $request->anggota_4_id] ?? [])
+            'id_mahasiswa' => json_encode($request->anggota_id ?? [])
         ]);
 
         return redirect(route('proposal.index'));
