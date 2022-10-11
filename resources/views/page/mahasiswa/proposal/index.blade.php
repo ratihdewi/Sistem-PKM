@@ -55,12 +55,15 @@
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
                                         <td></td>
                                         <td style="vertical-align: middle;">
-                                            <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="{{ route('proposal.edit', $document->id) }}"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                href="{{ route('proposal.edit', $document->id) }}"><i
+                                                    class="fa fa-pencil"></i></a>
                                             <form action="{{ route('proposal.destroy', $document->id) }}" method="post"
                                                 class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark" type="submit"><i class="fa fa-trash"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                    type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>

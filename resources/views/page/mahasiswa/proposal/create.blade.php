@@ -60,7 +60,7 @@
                                                     id="anggota_1_name" value="Nama Terisi Otomatis">
                                             </div>
                                             <div class="col-sm-1">
-                                                <button type="button" id="add_anggota"><i
+                                                <button class="btn btn-transparent-dark" type="button" id="add_anggota"><i
                                                         class="ml-2 fa fa-plus fa-2x"></i></button>
                                             </div>
                                         </div>
@@ -122,7 +122,7 @@
                                                 type="file" id="proposal" name="proposal">
                                         </div>
                                     </div>
-                                    <!-- INI TUH INPUTNTYA YER-->
+                                    {{-- <!-- INI TUH INPUTNTYA YER-->
                                     <div class="mb-3 row">
                                         <label for="pendanaan_pt" class="col-sm-2 col-form-label">Rincian Pengeluaran</label>
                                     </div>
@@ -183,7 +183,7 @@
                                         </table>
                                     </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                     <div class="mt-4 text-center">
                                         <a href="#">
                                             <button type="submit" class="btn"
@@ -293,7 +293,7 @@
                         `" class="col-sm-2 col-form-label">Anggota ${currentAnggota.toString()}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control @error('anggota_` + currentAnggota + `') is-invalid @enderror" id="anggota_` +
-                        currentAnggota + `" name="anggota_` + currentAnggota + `" placeholder="NIM" onchange="checkName(${currentAnggota})">
+                        currentAnggota + `" name="anggota_` + currentAnggota + `" placeholder="NIM" onchange="checkName(${currentAnggota})"}}>
                             </div>
                             <div class="col-sm-6">
                                 <input type="hidden" id="anggota_` + currentAnggota + `_id" name="anggota_` +

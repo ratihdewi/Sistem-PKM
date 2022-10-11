@@ -59,14 +59,15 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td>
-                                            {{-- <a href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
-                                                    class="fa fa-pencil"></i></a> --}}
+                                        <td style="padding: 0">
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#"><i
+                                                    class="fa fa-pencil"></i></a>
                                             <form action="{{ route('laporan-kemajuan.delete', $document->id) }}"
                                                 method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                    type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                         <td>
@@ -86,14 +87,15 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td>
-                                            {{-- <a href="{{ route('laporan-akhir.edit', $document->id) }}"><i
-                                                    class="fa fa-pencil"></i></a> --}}
+                                        <td style="padding: 0">
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#"><i
+                                                    class="fa fa-pencil"></i></a>
                                             <form action="{{ route('laporan-akhir.delete', $document->id) }}"
                                                 method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                    type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
