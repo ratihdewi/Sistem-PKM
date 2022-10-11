@@ -55,9 +55,7 @@
                                     <label for="luaran_proposal" class="col-sm-2 col-form-label">Luaran
                                         Proposal</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="luaran_proposal"
-                                            name="luaran_proposal"
-                                            value="{{ $document->berkas->proposal->luaran_proposal }}" readonly>
+                                        <textarea type="text" class="form-control" id="luaran_proposal" name="luaran_proposal" readonly>{{ $document->berkas->proposal->luaran_proposal }}</textarea>
                                     </div>
                                 </div>
 
