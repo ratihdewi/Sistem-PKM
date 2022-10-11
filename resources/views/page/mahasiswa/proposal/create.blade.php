@@ -200,7 +200,8 @@
     </div>
 @endsection
 
-<!-- INI TUH SCRIPT BUAT NAMBAH DATA DARI INPUT HTML DIATAS, DATANYA NANTI LANGSUNG MASUK KETABEL-->
+<!-- INI TUH SCRIPT BUAT NAMBAH DATA DARI INPUT HTML DIATAS, DATANYA NANTI LANGSUNG MASUK KETABEL
+
 <script>
     let btnAdd = document.querySelector('#addItem');
     let table = document.querySelector('table');
@@ -226,6 +227,8 @@
         table.innerHTML += template;
     });
 </script>
+
+-->
 
 @push('extra_js')
     <script>
