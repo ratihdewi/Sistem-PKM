@@ -103,68 +103,49 @@
                                     </div>
                                 @endif
 
-                                {{-- <!-- INI TUH INPUTNTYA YER-->
-                                    <div class="mb-3 row">
-                                        <label for="pendanaan_pt" class="col-sm-2 col-form-label">Rincian Pengeluaran</label>
+                                <!-- INI TUH INPUTNTYA YER-->
+                                <div class="mb-3 row">
+                                    <label for="pendanaan_pt" class="col-sm-10 col-form-label">Rincian Pengeluaran</label>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-transparent-dark" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"><i class="ml-2 fa fa-plus fa-2x"></i></button>
                                     </div>
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-12" id="data">
-                                            <input type="text" id="item" placeholder="Enter an Item">
-                                            <input type="number" id="jumlah" placeholder="Enter the quantity">
-                                            <input type="number" id="harga_satuan" placeholder="Enter the price">
-                                            <input type="file" id="bukti" placeholder="Upload Bukti">
-                                            <button id="addItem">Add</button>
-                                        </div>
-                                    </div>
-                                    <!-- INI TUH TABELNYA -->
-                                    <div class="mb-3 row">
-                                        <div class="card mb-4">
-                                            <div class="card-body">
-                                        <table id="datatablesSimple">
+                                </div>
+                                <!-- INI TUH TABELNYA -->
+                                <div class="mb-3 row">
+                                    <div class="table-responsive">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Deskripsi Item</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Harga Satuan</th>
-                                                    <th>Total</th>
-                                                    <th>Bukti Transaksi</th>
-                                                    <th>Aksi</th>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Deskripsi Item</th>
+                                                    <th scope="col">Jumlah</th>
+                                                    <th scope="col">Harga Satuan</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Bukti Transaksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Peter</td>
-                                                    <td>20</td>
-                                                    <td>20000</td>
-                                                    <td>400000</td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th scope="row">1</th>
+                                                    <td>ABCDEFG</td>
+                                                    <td>-----</td>
+                                                    <td>-----</td>
+                                                    <td>-----</td>
+                                                    <td>-----</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>James</td>
-                                                    <td>40</td>
-                                                    <td>20000</td>
-                                                    <td>800000</td>
+                                                    <th scope="row"></th>
+                                                    <td><strong>Total</strong></td>
                                                     <td></td>
                                                     <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Ronald</td>
-                                                    <td>30</td>
-                                                    <td>20000</td>
-                                                    <td>600000</td>
-                                                    <td></td>
+                                                    <td><strong>-----</strong></td>
                                                     <td></td>
                                                 </tr>
-                                        </tbody>
+                                            </tbody>
                                         </table>
                                     </div>
-                                    </div>
-                                </div> --}}
+                                </div>
 
                                 <div class="mt-4 text-center">
                                     <a href="#">
@@ -179,6 +160,25 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    AAA
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
