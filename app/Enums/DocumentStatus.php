@@ -13,4 +13,6 @@ final class DocumentStatus extends Enum
 {
     const Submitted = "submitted";
     const NotSubmitted = "not_submitted";
+    const Revision = "revision";
+    const Approved = "approved";
 }
