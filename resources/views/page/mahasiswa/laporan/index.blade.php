@@ -117,7 +117,7 @@
             var form = this;
             ev.preventDefault();
             swal({
-                    title: "Yakin ingin menghapus file?",
+                    title: "Hapus Laporan Kemajuan?",
                     text: "Laporan kemajuan akan terhapus secara permanen!",
                     icon: "warning",
                     buttons: true,
@@ -136,7 +136,7 @@
             var form = this;
             ev.preventDefault();
             swal({
-                    title: "Yakin ingin menghapus file?",
+                    title: "Hapus Laporan Akhir?",
                     text: "Laporan akhir akan terhapus secara permanen!",
                     icon: "warning",
                     buttons: true,

@@ -84,7 +84,7 @@
             var form = this;
             ev.preventDefault();
             swal({
-                    title: "Yakin ingin menghapus file?",
+                    title: "Hapus Proposal?",
                     text: "Proposal akan terhapus secara permanen!",
                     icon: "warning",
                     buttons: true,
