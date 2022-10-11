@@ -62,7 +62,8 @@
                                         <td style="padding: 0">
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('laporan-kemajuan.delete', $document->id) }}"
+                                            <form id="delete-laporan-kemajuan"
+                                                action="{{ route('laporan-kemajuan.delete', $document->id) }}"
                                                 method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
@@ -90,8 +91,9 @@
                                         <td style="padding: 0">
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('laporan-akhir.delete', $document->id) }}"
-                                                method="post" class="d-inline-block">
+                                            <form id="delete-laporan-akhir"
+                                                action="{{ route('laporan-akhir.delete', $document->id) }}" method="post"
+                                                class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-datatable btn-icon btn-transparent-dark"
@@ -108,3 +110,45 @@
         </main>
     </div>
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).on('submit', '[id^=delete-laporan-kemajuan]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Yakin ingin menghapus file?",
+                    text: "Laporan kemajuan akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
+
+        $(document).on('submit', '[id^=delete-laporan-akhir]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Yakin ingin menghapus file?",
+                    text: "Laporan akhir akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
+    </script>
+@endpush

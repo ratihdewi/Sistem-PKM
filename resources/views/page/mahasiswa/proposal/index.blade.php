@@ -58,7 +58,8 @@
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark me-2"
                                                 href="{{ route('proposal.edit', $document->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('proposal.destroy', $document->id) }}" method="post"
+                                            <form id="delete-proposal"
+                                                action="{{ route('proposal.destroy', $document->id) }}" method="post"
                                                 class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
@@ -76,3 +77,26 @@
         </main>
     </div>
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).on('submit', '[id^=delete-proposal]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Yakin ingin menghapus file?",
+                    text: "Proposal akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
+    </script>
+@endpush
