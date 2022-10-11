@@ -24,22 +24,28 @@ html,body{
 
 .navbar {
   background-color: #5D7DCF;
-  height: 150px;
+  height: 120px;
+}
+
+.nav .navbar-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 .navbar .navbar-text {
   text-align: center;
-  font-size: 35px;
+  font-size: 30px;
   color: #ffff;
-  margin-left: 200px;
-  place-items: center;
   font-weight: bold;
 }
 
 .logo{
-    margin-top: -20px;
+    margin-top: -8px;
     margin-left: -20px;
-  }
+}
 
 .login-div {
 	margin: 70px auto;
@@ -48,7 +54,6 @@ html,body{
 	padding: 60px;
   border-radius: 5px;
   box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
-
 }
 
 .form {

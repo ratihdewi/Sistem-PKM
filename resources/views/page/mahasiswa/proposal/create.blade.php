@@ -122,6 +122,68 @@
                                                 type="file" id="proposal" name="proposal">
                                         </div>
                                     </div>
+                                    <!-- INI TUH INPUTNTYA YER-->
+                                    <div class="mb-3 row">
+                                        <label for="pendanaan_pt" class="col-sm-2 col-form-label">Rincian Pengeluaran</label>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <div class="col-sm-12" id="data">
+                                            <input type="text" id="item" placeholder="Enter an Item">
+                                            <input type="number" id="jumlah" placeholder="Enter the quantity">
+                                            <input type="number" id="harga_satuan" placeholder="Enter the price">
+                                            <input type="file" id="bukti" placeholder="Upload Bukti">
+                                            <button id="addItem">Add</button>
+                                        </div>
+                                    </div>
+                                    <!-- INI TUH TABELNYA -->
+                                    <div class="mb-3 row">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                        <table id="datatablesSimple">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Deskripsi Item</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Harga Satuan</th>
+                                                    <th>Total</th>
+                                                    <th>Bukti Transaksi</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Peter</td>
+                                                    <td>20</td>
+                                                    <td>20000</td>
+                                                    <td>400000</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>James</td>
+                                                    <td>40</td>
+                                                    <td>20000</td>
+                                                    <td>800000</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Ronald</td>
+                                                    <td>30</td>
+                                                    <td>20000</td>
+                                                    <td>600000</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                </div>
                                     <div class="mt-4 text-center">
                                         <a href="#">
                                             <button type="submit" class="btn"
@@ -137,6 +199,36 @@
         </main>
     </div>
 @endsection
+
+<!-- INI TUH SCRIPT BUAT NAMBAH DATA DARI INPUT HTML DIATAS, DATANYA NANTI LANGSUNG MASUK KETABEL
+
+<script>
+    let btnAdd = document.querySelector('#addItem');
+    let table = document.querySelector('table');
+    let itemInput = document.querySelector('#item');
+    let jumlahInput = document.querySelector('#jumlah');
+    let hargaInput = document.querySelector('#harga_satuan');
+    let buktiInput = document.querySelector('#bukti');
+    btnAdd.addEventListener('click', () => {
+        let item = itemInput.value;
+        let jumlah = jumlahInput.value;
+        let harga = hargaInput.value;
+        let total = harga * jumlah;
+        let bukti = buktiInput.value;
+        let template = `
+                    <tr>
+                        <td>${item}</td>
+                        <td>${jumlah}</td>
+                        <td>${harga}</td>
+                        <td>${total}</td>
+                        <td>${bukti}</td>
+                        <td></td>
+                    </tr>`;
+        table.innerHTML += template;
+    });
+</script>
+
+-->
 
 @push('extra_js')
     <script>
@@ -195,8 +287,8 @@
                 currentAnggota++;
 
                 if (currentAnggota <= 4) {
-                    $('div[id=mahasiswa]').append(`     
-                        <div class="mb-3 row mahasiswa">                    
+                    $('div[id=mahasiswa]').append(`
+                        <div class="mb-3 row mahasiswa">
                             <label for="anggota_` + currentAnggota +
                         `" class="col-sm-2 col-form-label">Anggota ${currentAnggota.toString()}</label>
                             <div class="col-sm-3">
@@ -208,8 +300,8 @@
                         currentAnggota + `_id" value="">
                                 <input type="text" readonly class="form-control-plaintext" id="anggota_` +
                         currentAnggota + `_name" value="Nama Terisi Otomatis">
-                            </div>           
-                        </div>          
+                            </div>
+                        </div>
                     `);
                 }
 
