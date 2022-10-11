@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card mb-4 mt-3">
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -37,11 +37,11 @@
                                             <td>#</td>
                                             <td></td>
                                             <td>
-                                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                                <form action="#" method="post" class="d-inline-block">
+                                                <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa fa-pencil"></i></a>
+                                                <form action="#" method="post" class="d-inline">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-solid fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

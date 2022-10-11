@@ -54,14 +54,13 @@
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
                                         <td></td>
-                                        <td>
-                                            <a href="{{ route('proposal.edit', $document->id) }}"><i
-                                                    class="fa fa-pencil"></i></a>
+                                        <td style="vertical-align: middle;">
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="{{ route('proposal.edit', $document->id) }}"><i class="fa fa-pencil"></i></a>
                                             <form action="{{ route('proposal.destroy', $document->id) }}" method="post"
-                                                class="d-inline-block">
+                                                class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark" type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
