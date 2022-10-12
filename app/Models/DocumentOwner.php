@@ -9,7 +9,7 @@ class DocumentOwner extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $appends = ['nama_mahasiswa', 'nim_mahasiswa'];
+    protected $appends = ['data_mahasiswa'];
 
     public function getDataMahasiswaAttribute()
     {

@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'laporan'], function () {
             Route::get('', [LaporanController::class, 'index'])->name('laporan.index');
             Route::get('{document}', [LaporanController::class, 'show'])->name('laporan.show');
+            Route::post('pengeluaran', [LaporanController::class, 'pengeluaran'])->name('pengeluaran');
         });
 
         Route::group(['prefix' => 'laporan-kemajuan'], function () {
