@@ -39,21 +39,26 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2022</td>
-                                    <td>PKM-XX</td>
-                                    <td>User</td>
-                                    <td>10xxxxxx</td>
-                                    <td>ABCDEFGH</td>
-                                    <td></td>
-                                    <td>
-                                        <a href="#"><i class="fa fa-file-circle-question"></i></a>
-                                    </td>
-                                    <td>
-                                        <a href="#"><i class="fa fa-file-circle-question"></i></a>
-                                    </td>
-                                </tr>
+                                @foreach ($documents as $document)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $document->created_at->format('Y') }}</td>
+                                        <td>{{ $document->skema_pkm->name }}</td>
+                                        <td>{{ $document->document_owners->data_mahasiswa->implode('name', ', ') }}</td>
+                                        <td>{{ $document->document_owners->data_mahasiswa->implode('username', ', ') }}</td>
+                                        <td>
+                                            <a href="#"
+                                                class="text-decoration-none">{{ $document->judul_proposal }}</a>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <a href="#"><i class="fa fa-file-circle-question"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="#"><i class="fa fa-file-circle-question"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

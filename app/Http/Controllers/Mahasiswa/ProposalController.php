@@ -16,7 +16,9 @@ class ProposalController extends Controller
 {
     public function index()
     {
-        $documents = Document::orderBy('id', 'asc')->get();
+        $documents = Document::whereHas('document_owners', function ($q) {
+            $q->whereJsonContains('id_mahasiswa', (string) auth()->user()->id);
+        })->get();
 
         return view('page.mahasiswa.proposal.index', compact('documents'));
     }

@@ -15,6 +15,11 @@ class Document extends Model
         return $this->belongsTo('App\Models\PKM\SkemaPKM', 'skema_pkm_id');
     }
 
+    public function document_owners()
+    {
+        return $this->hasOne('App\Models\DocumentOwner', 'document_id');
+    }
+
     public function getPendanaanDiktiAttribute($value)
     {
         $value = (int) $value;
