@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\DocumentBudget;
 use App\Models\DocumentOwner;
 use App\Models\PKM\JenisPKM;
 use App\Models\PKM\SkemaPKM;
@@ -136,6 +137,13 @@ class ProposalController extends Controller
     public function destroy(Document $document)
     {
         DocumentOwner::where('document_id', $document->id)->delete();
+
+        $document_budgets = DocumentBudget::where('document_id', $document->id)->get();
+
+        foreach ($document_budgets as $data) {
+            unlink((public_path("documents/bukti_transaksi/{$data->bukti_transaksi}")));
+            $data->delete();
+        }
 
         if (isset($document->berkas->laporan_akhir)) {
             if ($document->berkas->laporan_akhir->luaran_laporan_akhir != null || $document->berkas->laporan_akhir->file_laporan_akhir != null) {

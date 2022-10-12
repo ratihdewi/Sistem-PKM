@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\DocumentBudget;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class LaporanController extends Controller
 {
@@ -23,7 +25,7 @@ class LaporanController extends Controller
 
     public function create(Request $request, Document $document)
     {
-        $budgets = $this->budget($document->id);
+        $budgets = DocumentBudget::where('document_id', $document->id)->get();
 
         if ($request->is('laporan-akhir*')) {
             $file = (array) $document->berkas;
@@ -43,23 +45,27 @@ class LaporanController extends Controller
         $validated = $request->validate([
             'deskripsi_item' => 'required',
             'jumlah' => 'required',
-            'harga_satuan' => 'required'
+            'harga_satuan' => 'required',
+            'bukti_transaksi' => 'required'
         ]);
 
+        if ($request->has('bukti_transaksi')) {
+            $file = $request->bukti_transaksi;
+            $file_name = Carbon::now()->timestamp . '-' . $file->getClientOriginalName();
+            $this->upload($file_name, $file, 'documents/bukti_transaksi');
+            $validated['bukti_transaksi'] = $file_name;
+        }
+
         $validated['document_id'] = $request->document_id;
-        $validated['bukti_transaksi'] = 'test';
 
-        $budget = DocumentBudget::create($validated);
+        DocumentBudget::create($validated);
 
-        $budgets = $this->budget((int) $request->document_id);
-
-        return $budgets;
+        return back();
     }
 
-    private function budget($document_id)
+    private function upload($name, UploadedFile $file, $folder)
     {
-        $budgets = DocumentBudget::where('document_id', $document_id)->get();
-
-        return $budgets;
+        $destination_path = $folder;
+        $file->move($destination_path, $name);
     }
 }

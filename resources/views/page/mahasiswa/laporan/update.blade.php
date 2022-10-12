@@ -138,8 +138,11 @@
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $budget->deskripsi_item }}</td>
                                                     <td>{{ $budget->jumlah }}</td>
-                                                    <td>{{ $budget->harga_satuan }}</td>
-                                                    <td>-----</td>
+                                                    <td>Rp. {{ number_format($budget->harga_satuan, 0, ',', '.') }}</td>
+
+                                                    <td>Rp.
+                                                        {{ number_format((string) ((int) $budget->jumlah * (int) $budget->harga_satuan), 0, ',', '.') }}
+                                                    </td>
                                                     <td>{{ $budget->bukti_transaksi }}</td>
                                                 </tr>
                                             @endforeach
@@ -173,25 +176,29 @@
     <!-- Modal -->
     <div class="modal fade" id="pengeluaran" tabindex="-1" aria-labelledby="pengeluaranLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-            <form id="submit-pengeluaran">
+            <form method="post" action="{{ route('pengeluaran') }}" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Pengeluaran</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        @csrf
+                        <input type="hidden" name="document_id" value="{{ $document->id }}">
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <label class="form-label">Deskripsi Item</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="deskripsi_item"
-                                        name="deskripsi_item">
+                                    <input type="text" class="form-control" id="deskripsi_item" name="deskripsi_item"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Jumlah</label>
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="jumlah" name="jumlah">
+                                    <input type="number" class="form-control" id="jumlah" name="jumlah"
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -204,18 +211,18 @@
                                         <span class="input-group-text">Rp</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" id="harga_satuan"
-                                            name="harga_satuan">
+                                            name="harga_satuan" autocomplete="off">
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-6">
+                            <div class="col-lg-6">
                                 <label for="bukti_transaksi" class="form-label">Bukti Transaksi</label>
                                 <div class="form-group">
                                     <input class="form-control" type="file" id="bukti_transaksi"
-                                        name="bukti_transaksi" required="required" autocomplete="off">
+                                        name="bukti_transaksi" autocomplete="off" required="required">
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -227,78 +234,3 @@
         </div>
     </div>
 @endsection
-
-@push('extra_js')
-    <script>
-        $('#submit-pengeluaran').on('submit', function(ev) {
-            ev.preventDefault();
-
-            let deskripsiItem = $('#deskripsi_item').val();
-            let jumlah = $('#jumlah').val();
-            let hargaSatuan = $('#harga_satuan').val();
-
-            $.ajax({
-                url: "{{ route('pengeluaran') }}",
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    document_id: "{{ $document->id }}",
-                    deskripsi_item: deskripsiItem,
-                    jumlah: jumlah,
-                    harga_satuan: hargaSatuan,
-                },
-                success: function(data) {
-                    $('#pengeluaran').modal('toggle');
-
-                    let myTable = $('#datatablesSimple');
-                    console.log(myTable);
-
-                    $('#budget-table').empty();
-                    $('#budget-table').append(
-                        data.map(function(item, index) {
-                            return `<tr>
-                                        <th scope="row">${++index}</th>
-                                        <td>${item.deskripsi_item}</td>
-                                        <td>${item.jumlah}</td>
-                                        <td>${item.harga_satuan}</td>
-                                        <td>-----</td>
-                                        <td>${item.bukti_transaksi}</td>
-                                    </tr>`
-                        })
-                    );
-                    myTable.update();
-                }
-            });
-        });
-    </script>
-@endpush
-
-<!-- INI TUH SCRIPT BUAT NAMBAH DATA DARI INPUT HTML DIATAS, DATANYA NANTI LANGSUNG MASUK KETABEL
-
-<script>
-    let btnAdd = document.querySelector('#addItem');
-    let table = document.querySelector('table');
-    let itemInput = document.querySelector('#item');
-    let jumlahInput = document.querySelector('#jumlah');
-    let hargaInput = document.querySelector('#harga_satuan');
-    let buktiInput = document.querySelector('#bukti');
-    btnAdd.addEventListener('click', () => {
-        let item = itemInput.value;
-        let jumlah = jumlahInput.value;
-        let harga = hargaInput.value;
-        let total = harga * jumlah;
-        let bukti = buktiInput.value;
-        let template = `
-                    <tr>
-                        <td>${item}</td>
-                        <td>${jumlah}</td>
-                        <td>${harga}</td>
-                        <td>${total}</td>
-                        <td>${bukti}</td>
-                        <td></td>
-                    </tr>`;
-        table.innerHTML += template;
-    });
-</script>
-
--->
