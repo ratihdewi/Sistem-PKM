@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusColumnToDocumentsTable extends Migration
+class AddCommentsColumnToDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddStatusColumnToDocumentsTable extends Migration
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->string('status_laporan_kemajuan')->default('not_submitted')->after('berkas');
-            $table->string('status_laporan_akhir')->default('not_submitted')->after('status_laporan_kemajuan');
+            $table->json('comments')->nullable()->after('status_laporan_akhir');
         });
     }
 
@@ -27,8 +26,7 @@ class AddStatusColumnToDocumentsTable extends Migration
     public function down()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->dropColumn('status_laporan_kemajuan');
-            $table->dropColumn('status_laporan_akhir');
+            $table->dropColumn('comments');
         });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\DocumentBudget;
+use App\Models\DocumentCheck;
 use App\Models\DocumentOwner;
 use App\Models\PKM\JenisPKM;
 use App\Models\PKM\SkemaPKM;
@@ -69,6 +70,10 @@ class ProposalController extends Controller
             'document_id' => $document->id,
             'id_dosen' => $request->dosen_pendamping,
             'id_mahasiswa' => json_encode($request->anggota_id ?? [])
+        ]);
+
+        DocumentCheck::create([
+            'document_id' => $document->id
         ]);
 
         return redirect(route('proposal.index'));
