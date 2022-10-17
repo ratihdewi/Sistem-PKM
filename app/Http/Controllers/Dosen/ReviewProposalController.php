@@ -16,4 +16,9 @@ class ReviewProposalController extends Controller
 
         return view('page.dosen.review.index', compact('documents'));
     }
+
+    public function proposal(Document $document)
+    {
+        return view('page.dosen.review.proposal', compact('document'));
+    }
 }

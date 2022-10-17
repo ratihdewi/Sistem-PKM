@@ -53,7 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'role:Dosen'], function () {
-        Route::get('/proposal/review', [ReviewProposalController::class, 'index'])->name('review.index');
+        Route::get('/review', [ReviewProposalController::class, 'index'])->name('review.index');
+        Route::get('/review/proposal/{document}', [ReviewProposalController::class, 'proposal'])->name('review.proposal');
     });
 
     Route::group(['middleware' => 'role:Mahasiswa'], function () {

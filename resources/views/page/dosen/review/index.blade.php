@@ -47,7 +47,7 @@
                                         <td>{{ $document->document_owners->data_mahasiswa->implode('name', ', ') }}</td>
                                         <td>{{ $document->document_owners->data_mahasiswa->implode('username', ', ') }}</td>
                                         <td>
-                                            <a href="#"
+                                            <a href="{{ route('review.proposal', $document->id) }}"
                                                 class="text-decoration-none">{{ $document->judul_proposal }}</a>
                                         </td>
                                         <td></td>
