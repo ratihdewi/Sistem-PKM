@@ -52,12 +52,16 @@
                                         </td>
                                         <td></td>
                                         <td>
-                                            <a href="{{ route('review.laporan-kemajuan', $document->id) }}"><i
-                                                    class="fa fa-file-circle-question"></i></a>
+                                            @if ($document->status_laporan_kemajuan !== 'not_submitted')
+                                                <a href="{{ route('review.laporan-kemajuan', $document->id) }}"><i
+                                                        class="fa fa-file-circle-question"></i></a>
+                                            @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('review.laporan-akhir', $document->id) }}"><i
-                                                    class="fa fa-file-circle-question"></i></a>
+                                            @if ($document->status_laporan_akhir !== 'not_submitted')
+                                                <a href="{{ route('review.laporan-akhir', $document->id) }}"><i
+                                                        class="fa fa-file-circle-question"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

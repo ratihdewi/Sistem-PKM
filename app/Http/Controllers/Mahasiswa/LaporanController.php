@@ -30,12 +30,16 @@ class LaporanController extends Controller
         if ($request->is('laporan-akhir*')) {
             $file = (array) $document->berkas;
 
-            if (!array_key_exists('laporan_kemajuan', $file)) {
+            if (!array_key_exists('laporan_kemajuan', $file) || $document->status_laporan_kemajuan !== 'approved') {
                 return back();
             }
 
             return view('page.mahasiswa.laporan.update', compact('document', 'budgets'));
         } else {
+            if ($request->is('laporan-kemajuan*') && $document->status_proposal !== 'approved') {
+                return back();
+            }
+
             return view('page.mahasiswa.laporan.update', compact('document', 'budgets'));
         }
     }

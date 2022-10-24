@@ -46,17 +46,19 @@
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
                                         <td>
-                                            @if ($document->status_laporan_kemajuan === 'submitted')
-                                                Sudah Submit
-                                            @else
+                                            @if ($document->status_laporan_kemajuan === 'not_submitted')
                                                 <div class="mb-3">
-                                                    <a href="{{ route('laporan-kemajuan.create', $document->id) }}">
-                                                        <button type="button" class="btn"
+                                                    <a href="{{ route('laporan-kemajuan.create', $document->id) }}"
+                                                        @if ($document->status_proposal !== 'approved') style="pointer-events: none" @endif>
+                                                        <button type="button"
+                                                            class="btn {{ $document->status_proposal !== 'approved' ? 'disabled' : '' }}"
                                                             style="background-color: #5D7DCF; color: #fff">Ajukan Laporan
                                                             Kemajuan
                                                         </button>
                                                     </a>
                                                 </div>
+                                            @else
+                                                {{ \App\Enums\DocumentStatus::getDescription($document->status_laporan_kemajuan) }}
                                             @endif
                                         </td>
                                         <td style="padding: 0">
@@ -72,20 +74,20 @@
                                             </form>
                                         </td>
                                         <td>
-                                            @if ($document->status_laporan_akhir === 'submitted')
-                                                Sudah Submit
-                                            @else
+                                            @if ($document->status_laporan_akhir === 'not_submitted')
                                                 <div class="mb-3">
                                                     <a href="{{ route('laporan-akhir.create', $document->id) }}"
-                                                        @if ($document->status_laporan_kemajuan === 'not_submitted') style="pointer-events: none" @endif>
+                                                        @if ($document->status_laporan_kemajuan !== 'approved') style="pointer-events: none" @endif>
                                                         <button type="button"
-                                                            class="btn {{ $document->status_laporan_kemajuan === 'not_submitted' ? 'disabled' : '' }}"
+                                                            class="btn {{ $document->status_laporan_kemajuan !== 'approved' ? 'disabled' : '' }}"
                                                             style="background-color: #5D7DCF; color: #fff"
                                                             aria-disabled="true">Ajukan Laporan
                                                             Akhir
                                                         </button>
                                                     </a>
                                                 </div>
+                                            @else
+                                                {{ \App\Enums\DocumentStatus::getDescription($document->status_laporan_akhir) }}
                                             @endif
                                         </td>
                                         <td style="padding: 0">

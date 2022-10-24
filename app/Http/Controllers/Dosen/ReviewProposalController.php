@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dosen;
 
+use App\Enums\DocumentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Illuminate\Http\Request;
@@ -24,11 +25,19 @@ class ReviewProposalController extends Controller
 
     public function laporan_kemajuan(Document $document)
     {
+        if ($document->status_laporan_kemajuan === 'not_submitted') {
+            return back();
+        }
+
         return view('page.dosen.review.laporan_kemajuan', compact('document'));
     }
 
     public function laporan_akhir(Document $document)
     {
+        if ($document->status_laporan_akhir === 'not_submitted') {
+            return back();
+        }
+
         return view('page.dosen.review.laporan_akhir', compact('document'));
     }
 }
