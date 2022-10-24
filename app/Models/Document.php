@@ -20,6 +20,11 @@ class Document extends Model
         return $this->hasOne('App\Models\DocumentOwner', 'document_id');
     }
 
+    public function document_checks()
+    {
+        return $this->hasOne('App\Models\DocumentCheck', 'document_id');
+    }
+
     public function getPendanaanDiktiAttribute($value)
     {
         $value = (int) $value;

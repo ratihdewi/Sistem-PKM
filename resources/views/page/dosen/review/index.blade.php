@@ -52,10 +52,12 @@
                                         </td>
                                         <td></td>
                                         <td>
-                                            <a href="#"><i class="fa fa-file-circle-question"></i></a>
+                                            <a href="{{ route('review.laporan-kemajuan', $document->id) }}"><i
+                                                    class="fa fa-file-circle-question"></i></a>
                                         </td>
                                         <td>
-                                            <a href="#"><i class="fa fa-file-circle-question"></i></a>
+                                            <a href="{{ route('review.laporan-akhir', $document->id) }}"><i
+                                                    class="fa fa-file-circle-question"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

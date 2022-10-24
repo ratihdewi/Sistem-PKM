@@ -21,4 +21,14 @@ class ReviewProposalController extends Controller
     {
         return view('page.dosen.review.proposal', compact('document'));
     }
+
+    public function laporan_kemajuan(Document $document)
+    {
+        return view('page.dosen.review.laporan_kemajuan', compact('document'));
+    }
+
+    public function laporan_akhir(Document $document)
+    {
+        return view('page.dosen.review.laporan_akhir', compact('document'));
+    }
 }

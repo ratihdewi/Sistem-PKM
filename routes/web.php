@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\PengaturanReviewerController;
 use App\Http\Controllers\Admin\SkemaPKMController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dosen\ReviewProposalController;
+use App\Http\Controllers\Dosen\SubmitProposalReviewControlle;
+use App\Http\Controllers\Dosen\SubmitProposalReviewController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\DeleteLaporanAkhirController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\SubmitLaporanAkhirController;
@@ -55,6 +57,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:Dosen'], function () {
         Route::get('/review', [ReviewProposalController::class, 'index'])->name('review.index');
         Route::get('/review/proposal/{document}', [ReviewProposalController::class, 'proposal'])->name('review.proposal');
+        Route::post('/review/proposal/{document}', SubmitProposalReviewController::class)->name('review.submit-proposal');
+        Route::get('/review/laporan_kemajuan/{document}', [ReviewProposalController::class, 'laporan_kemajuan'])->name('review.laporan-kemajuan');
+        Route::post('/review/laporan_kemajuan/{document}', SubmitLaporanKemajuanController::class)->name('review.submit-laporan-kemajuan');
+        Route::get('/review/laporan_akhir/{document}', [ReviewProposalController::class, 'laporan_akhir'])->name('review.laporan-akhir');
+        Route::post('/review/laporan_akhir/{document}', SubmitLaporanAkhirController::class)->name('review.submit-laporan-akhir');
     });
 
     Route::group(['middleware' => 'role:Mahasiswa'], function () {
