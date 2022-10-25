@@ -22,7 +22,7 @@ class SubmitProposalReviewController extends Controller
     {
         $request->validate([
             'komentar' => 'required',
-            'hasil_evaluasi' => 'required|mimes:pdf'
+            'hasil_evaluasi' => 'nullable|mimes:pdf'
         ]);
 
         $file_hasil_evaluasi = null;
@@ -32,14 +32,14 @@ class SubmitProposalReviewController extends Controller
         if ($request->has('hasil_evaluasi')) {
             $file = $request->hasil_evaluasi;
             $file_name = Carbon::now()->timestamp . '-hasil-evaluasi-' . $file->getClientOriginalName();
-            $this->upload($file_name, $file, 'documents/proposal');
+            $this->upload($file_name, $file, 'documents/hasil_evaluasi/proposal');
             $file_hasil_evaluasi = $file_name;
         }
 
         $comment = [
             'reviewer' => auth()->user()->name,
             'komentar' => $request->komentar,
-            'hasil_evaluasi' => $file_hasil_evaluasi,
+            'file_evaluasi' => $file_hasil_evaluasi,
             'waktu' => Carbon::now()->timestamp
         ];
         array_push($comments, $comment);

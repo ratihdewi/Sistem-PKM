@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Enums\DocumentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Illuminate\Http\Request;
