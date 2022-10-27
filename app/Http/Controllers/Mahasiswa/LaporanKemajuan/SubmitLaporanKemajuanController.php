@@ -8,6 +8,7 @@ use App\Models\Document;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rule;
 
 class SubmitLaporanKemajuanController extends Controller
 {
@@ -20,12 +21,12 @@ class SubmitLaporanKemajuanController extends Controller
     public function __invoke(Request $request, Document $document)
     {
         $validated = $request->validate([
-            'luaran_laporan_kemajuan' => 'required|mimes:pdf',
-            'laporan_kemajuan' => 'required|mimes:pdf'
+            'luaran_laporan_kemajuan' => ['mimes:pdf', Rule::when(($request->key === 'submit'), ['required'])],
+            'laporan_kemajuan' => ['mimes:pdf', Rule::when(($request->key === 'submit'), ['required'])]
         ]);
 
-        $luaran_laporan_kemajuan = null;
-        $file_laporan_kemajuan = null;
+        $luaran_laporan_kemajuan = $document->berkas->laporan_kemajuan->luaran_laporan_kemajuan ?? null;
+        $file_laporan_kemajuan = $document->berkas->laporan_kemajuan->file_laporan_kemajuan ?? null;
         $file = (array) $document->berkas;
 
         if ($request->has('luaran_laporan_kemajuan')) {
@@ -59,7 +60,7 @@ class SubmitLaporanKemajuanController extends Controller
             "file_laporan_kemajuan" => $file_laporan_kemajuan
         ];
 
-        $validated['status_laporan_kemajuan'] = DocumentStatus::Submitted;
+        if ($request->key === 'submit') $validated['status_laporan_kemajuan'] = DocumentStatus::Submitted;
         $validated['berkas'] = json_encode($file);
 
         $document->fill($validated);
