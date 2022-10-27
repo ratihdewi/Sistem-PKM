@@ -81,7 +81,6 @@
                         </div>
                     @endcan
                 </div>
-
                 <div class="mt-4 mb-5 text-center">
                     <form action="{{ route('logout.post') }}" method="post">
                         @csrf
@@ -90,6 +89,7 @@
                     </form>
                 </div>
             </div>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 bg-white" id="sidebarToggle" href="#!" style="position: absolute; left: 220px; top:120px;"><i class="fa fa-chevron-right"></i></button>
         </nav>
     </div>
     <!-- End of Sidebar -->
