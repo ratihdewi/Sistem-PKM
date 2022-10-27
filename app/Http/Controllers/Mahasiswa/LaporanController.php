@@ -27,6 +27,7 @@ class LaporanController extends Controller
 
     public function create(Request $request, Document $document)
     {
+        $key = 'submit';
         $budgets = DocumentBudget::where('document_id', $document->id)->get();
 
         if ($request->is('laporan-akhir*')) {
@@ -36,13 +37,35 @@ class LaporanController extends Controller
                 return back();
             }
 
-            return view('page.mahasiswa.laporan.update', compact('document', 'budgets'));
+            return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key'));
         } else {
             if ($request->is('laporan-kemajuan*') && $document->status_proposal !== 'approved') {
                 return back();
             }
 
-            return view('page.mahasiswa.laporan.update', compact('document', 'budgets'));
+            return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key'));
+        }
+    }
+
+    public function edit(Request $request, Document $document)
+    {
+        $key = 'edit';
+        $budgets = DocumentBudget::where('document_id', $document->id)->get();
+
+        if ($request->is('laporan-akhir*')) {
+            $file = (array) $document->berkas;
+
+            if (!array_key_exists('laporan_kemajuan', $file) || $document->status_laporan_kemajuan !== 'approved') {
+                return back();
+            }
+
+            return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key'));
+        } else {
+            if ($request->is('laporan-kemajuan*') && $document->status_proposal !== 'approved') {
+                return back();
+            }
+
+            return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key'));
         }
     }
 

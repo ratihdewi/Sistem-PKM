@@ -18,6 +18,8 @@
                                 @endif
                                 @method('PUT')
                                 @csrf
+                                <input type="hidden" name="key" value="{{ $key }}">
+
                                 <div class="mb-3 row">
                                     <label for="judul_proposal" class="col-sm-2 col-form-label">Judul Proposal</label>
                                     <div class="col-sm-10">

@@ -62,7 +62,8 @@
                                             @endif
                                         </td>
                                         <td style="padding: 0">
-                                            <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#"><i
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
                                             <form id="delete-laporan-kemajuan"
                                                 action="{{ route('laporan-kemajuan.delete', $document->id) }}"
@@ -91,7 +92,8 @@
                                             @endif
                                         </td>
                                         <td style="padding: 0">
-                                            <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#"><i
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                href="{{ route('laporan-akhir.edit', $document->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
                                             <form id="delete-laporan-akhir"
                                                 action="{{ route('laporan-akhir.delete', $document->id) }}" method="post"

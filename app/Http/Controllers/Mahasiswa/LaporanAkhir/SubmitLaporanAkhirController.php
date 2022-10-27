@@ -8,6 +8,7 @@ use App\Models\Document;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rule;
 
 class SubmitLaporanAkhirController extends Controller
 {
@@ -20,12 +21,12 @@ class SubmitLaporanAkhirController extends Controller
     public function __invoke(Request $request, Document $document)
     {
         $validated = $request->validate([
-            'luaran_laporan_akhir' => 'required|mimes:pdf',
-            'laporan_akhir' => 'required|mimes:pdf'
+            'luaran_laporan_akhir' => ['mimes:pdf', Rule::when(($request->key === 'submit'), ['required'])],
+            'laporan_akhir' => ['mimes:pdf', Rule::when(($request->key === 'submit'), ['required'])]
         ]);
 
-        $luaran_laporan_akhir = null;
-        $file_laporan_akhir = null;
+        $luaran_laporan_akhir = $document->berkas->laporan_akhir->luaran_laporan_akhir ?? null;
+        $file_laporan_akhir = $document->berkas->laporan_akhir->file_laporan_akhir ?? null;
         $file = (array) $document->berkas;
 
         if ($request->has('luaran_laporan_akhir')) {
@@ -59,7 +60,7 @@ class SubmitLaporanAkhirController extends Controller
             "file_laporan_akhir" => $file_laporan_akhir
         ];
 
-        $validated['status_laporan_akhir'] = DocumentStatus::Submitted;
+        if ($request->key === 'submit') $validated['status_laporan_akhir'] = DocumentStatus::Submitted;
         $validated['berkas'] = json_encode($file);
 
         $document->fill($validated);
