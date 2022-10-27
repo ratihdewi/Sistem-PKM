@@ -23,13 +23,13 @@ class UserSeeder extends Seeder
             'role_id' => 1
         ]);
 
-        // User::create([
-        //     'username' => 'dosen',
-        //     'name' => 'Dosen',
-        //     'email' => 'dosen@gmail.com',
-        //     'password' => Hash::make('12345'),
-        //     'role_id' => 2
-        // ]);
+        User::create([
+            'username' => 'dosen',
+            'name' => 'Dosen',
+            'email' => 'dosen@gmail.com',
+            'password' => Hash::make('12345'),
+            'role_id' => 2
+        ]);
 
         // $username = ['mahasiswa1', 'mahasiswa2', 'mahasiswa3', 'mahasiswa4', 'mahasiswa5'];
         // $name = ['Mahasiswa 1', 'Mahasiswa 2', 'Mahasiswa 3', 'Mahasiswa 4', 'Mahasiswa 5'];

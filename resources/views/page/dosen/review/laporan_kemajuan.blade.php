@@ -80,7 +80,134 @@
                                     <h5>Riwayat Review</h5>
                                 </div>
                                 <div class="card-body">
-
+                                    <div class="timeline timeline-xs">
+                                        <!-- Timeline Item 1-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">27 min</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                        <!-- Timeline Item 2-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">58 min</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                        <!-- Timeline Item 3-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">2 hrs</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                        <!-- Timeline Item 4-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">1 day</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                        <!-- Timeline Item 5-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">1 day</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                        <!-- Timeline Item 6-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">1 day</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                        <!-- Timeline Item 7-->
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                {{-- <div class="timeline-item-marker-text">2 days</div> --}}
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                <i class="fa-regular fa-calendar"></i> 27/10/2022 07:40
+                                                <br/>
+                                                <i class="fa-solid fa-pencil"></i> <a class="fw-bold text-success"> Surat Disetujui oleh, </a>
+                                                Asisten Manajer Infrastruktur
+                                                <br/>
+                                                <a class="btn btn-icon btn-transparent-dark m-0 p-0"><img class="img-fluid ml-1" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 40px;"/></a>
+                                                Ardhi Priagung
+                                                <p style="margin: 0 0 0 50px;"><span class="badge badge-pill badge-success m-0">Success</span></p>
+                                                <span style="margin: 0 0 0 50px;"><i class="fa-solid fa-comment"></i> Setuju</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
