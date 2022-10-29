@@ -63,11 +63,13 @@
                                         </td>
                                         <td style="padding: 0">
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark"
-                                                href="{{ route('laporan-kemajuan.edit', $document->id) }}"><i
+                                                href="{{ route('laporan-kemajuan.edit', $document->id) }}"
+                                                @if ($document->status_laporan_kemajuan === 'not_submitted') style="opacity: 0.5; cursor: default; pointer-events: none" @endif><i
                                                     class="fa fa-pencil"></i></a>
                                             <form id="delete-laporan-kemajuan"
                                                 action="{{ route('laporan-kemajuan.delete', $document->id) }}"
-                                                method="post" class="d-inline-block">
+                                                method="post" class="d-inline-block"
+                                                @if ($document->status_laporan_kemajuan === 'not_submitted') style="opacity: 0.5; cursor: default; pointer-events: none" @endif>
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-datatable btn-icon btn-transparent-dark"
@@ -93,11 +95,13 @@
                                         </td>
                                         <td style="padding: 0">
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark"
-                                                href="{{ route('laporan-akhir.edit', $document->id) }}"><i
+                                                href="{{ route('laporan-akhir.edit', $document->id) }}"
+                                                @if ($document->status_laporan_akhir === 'not_submitted') style="opacity: 0.5; cursor: default; pointer-events: none" @endif><i
                                                     class="fa fa-pencil"></i></a>
                                             <form id="delete-laporan-akhir"
                                                 action="{{ route('laporan-akhir.delete', $document->id) }}" method="post"
-                                                class="d-inline-block">
+                                                class="d-inline-block"
+                                                @if ($document->status_laporan_akhir === 'not_submitted') style="opacity: 0.5; cursor: default; pointer-events: none" @endif>
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-datatable btn-icon btn-transparent-dark"
