@@ -38,15 +38,16 @@ class SubmitProposalReviewController extends Controller
 
         $comment = [
             'reviewer' => auth()->user()->name,
+            'status' => DocumentStatus::getDescription($request->hasil_review),
             'komentar' => $request->komentar,
             'file_evaluasi' => $file_hasil_evaluasi,
             'waktu' => Carbon::now()->timestamp
         ];
         array_push($comments, $comment);
 
-        if ($request->hasil_review == 'setuju') {
+        if ($request->hasil_review == 'approved') {
             $status_proposal = DocumentStatus::Approved;
-        } elseif ($request->hasil_review == 'revisi') {
+        } elseif ($request->hasil_review == 'revision') {
             $status_proposal = DocumentStatus::Revision;
         }
 

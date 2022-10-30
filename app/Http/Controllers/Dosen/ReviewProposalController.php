@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Dosen;
 
+use App\Enums\DocumentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReviewProposalController extends Controller
@@ -19,7 +21,18 @@ class ReviewProposalController extends Controller
 
     public function proposal(Document $document)
     {
-        return view('page.dosen.review.proposal', compact('document'));
+        $comments = collect(json_decode($document->proposal_comments));
+        $comments->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        return view('page.dosen.review.proposal', compact('document', 'comments'));
     }
 
     public function laporan_kemajuan(Document $document)
