@@ -22,7 +22,30 @@ class LaporanController extends Controller
 
     public function show(Document $document)
     {
-        return view('page.mahasiswa.laporan.review', compact('document'));
+        $comments_laporan_kemajuan = collect(json_decode($document->laporan_kemajuan_comments));
+        $comments_laporan_akhir = collect(json_decode($document->laporan_akhir_comments));
+
+        $comments_laporan_kemajuan->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        $comments_laporan_akhir->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        return view('page.mahasiswa.laporan.review', compact('document', 'comments_laporan_kemajuan', 'comments_laporan_akhir'));
     }
 
     public function create(Request $request, Document $document)

@@ -167,8 +167,6 @@
                                         <div class="col">
                                             <h5>{{ $document->judul_proposal }}</h5>
                                         </div>
-                                        <div class="col text-right"><i class="ml-2 fa fa-file-arrow-down fa-3x"></i>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body">

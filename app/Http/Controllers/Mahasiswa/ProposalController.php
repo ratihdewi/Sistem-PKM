@@ -81,7 +81,18 @@ class ProposalController extends Controller
 
     public function show(Document $document)
     {
-        return view('page.mahasiswa.proposal.review', compact('document'));
+        $comments = collect(json_decode($document->proposal_comments));
+        $comments->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        return view('page.mahasiswa.proposal.review', compact('document', 'comments'));
     }
 
     public function edit(Document $document)
