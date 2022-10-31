@@ -153,12 +153,31 @@ class ProposalController extends Controller
     public function destroy(Document $document)
     {
         DocumentOwner::where('document_id', $document->id)->delete();
+        DocumentCheck::where('document_id', $document->id)->delete();
 
         $document_budgets = DocumentBudget::where('document_id', $document->id)->get();
 
         foreach ($document_budgets as $data) {
             unlink((public_path("documents/bukti_transaksi/{$data->bukti_transaksi}")));
             $data->delete();
+        }
+
+        if (isset($document->laporan_akhir_comments)) {
+            foreach (json_decode($document->laporan_akhir_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/laporan_akhir/{$data->file_evaluasi}")));
+            }
+        }
+
+        if (isset($document->laporan_kemajuan_comments)) {
+            foreach (json_decode($document->laporan_kemajuan_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/laporan_kemajuan/{$data->file_evaluasi}")));
+            }
+        }
+
+        if (isset($document->proposal_comments)) {
+            foreach (json_decode($document->proposal_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/proposal/{$data->file_evaluasi}")));
+            }
         }
 
         if (isset($document->berkas->laporan_akhir)) {
