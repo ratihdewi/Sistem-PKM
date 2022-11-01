@@ -122,6 +122,7 @@
                                                 <th scope="col">Harga Satuan</th>
                                                 <th scope="col">Total</th>
                                                 <th scope="col">Bukti Transaksi</th>
+                                                <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -132,6 +133,7 @@
                                                 <th scope="col">Harga Satuan</th>
                                                 <th scope="col">Total</th>
                                                 <th scope="col">Bukti Transaksi</th>
+                                                <th scope="col">Aksi</th>
                                             </tr>
                                         </tfoot>
                                         <tbody id="budget-table">
@@ -145,7 +147,23 @@
                                                     <td>Rp.
                                                         {{ number_format((string) ((int) $budget->jumlah * (int) $budget->harga_satuan), 0, ',', '.') }}
                                                     </td>
-                                                    <td>{{ $budget->bukti_transaksi }}</td>
+                                                    <td><a class="mfp-image bukti_transaksi" href="#"
+                                                            data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}">
+                                                            <img style="cursor: pointer" width="125px"
+                                                                src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}"
+                                                                alt="{{ $budget->bukti_transaksi }}">
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding: 0">
+                                                        <a class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                                            href="#"><i class="fa fa-pencil"></i></a>
+                                                        {{-- <form action="#" method="post" class="d-inline">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                                type="submit"><i class="fa fa-trash"></i></button>
+                                                        </form> --}}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             {{-- <tr>
@@ -236,3 +254,15 @@
         </div>
     </div>
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).ready(function() {
+            $('.bukti_transaksi').magnificPopup({
+                type: 'image',
+                removalDelay: 300,
+                mainClass: 'mfp-fade'
+            });
+        });
+    </script>
+@endpush

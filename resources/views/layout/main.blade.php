@@ -18,6 +18,7 @@
     <!-- Date Range Picker -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style_manual.css') }}">
 
@@ -53,6 +54,8 @@
     <!-- Date Range Picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+
+    <script src="{{ asset('assets/js/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/datatables-simple-demo.js') }}"></script>
 
