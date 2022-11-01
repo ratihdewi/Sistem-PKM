@@ -20,6 +20,7 @@ use App\Http\Controllers\Mahasiswa\LaporanKemajuan\DeleteLaporanKemajuanControll
 use App\Http\Controllers\Mahasiswa\LaporanKemajuan\SubmitLaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\LaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\ProposalController;
+use App\Http\Controllers\Mahasiswa\RincianPengeluaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,7 +82,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'laporan'], function () {
             Route::get('', [LaporanController::class, 'index'])->name('laporan.index');
             Route::get('{document}', [LaporanController::class, 'show'])->name('laporan.show');
-            Route::post('pengeluaran', [LaporanController::class, 'pengeluaran'])->name('pengeluaran');
         });
 
         Route::group(['prefix' => 'laporan-kemajuan'], function () {
@@ -96,6 +96,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{document}/edit', [LaporanController::class, 'edit'])->name('laporan-akhir.edit');
             Route::put('{document}', SubmitLaporanAkhirController::class)->name('laporan-akhir.submit');
             Route::delete('{document}', DeleteLaporanAkhirController::class)->name('laporan-akhir.delete');
+        });
+
+        Route::group(['prefix' => 'pengeluaran'], function () {
+            Route::post('', [RincianPengeluaranController::class, 'create'])->name('pengeluaran.create');
+            Route::post('edit', [RincianPengeluaranController::class, 'update'])->name('pengeluaran.update');
+            Route::delete('{item}', [RincianPengeluaranController::class, 'delete'])->name('pengeluaran.delete');
         });
     });
 });

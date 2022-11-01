@@ -91,33 +91,4 @@ class LaporanController extends Controller
             return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key'));
         }
     }
-
-    public function pengeluaran(Request $request)
-    {
-        $validated = $request->validate([
-            'deskripsi_item' => 'required',
-            'jumlah' => 'required',
-            'harga_satuan' => 'required',
-            'bukti_transaksi' => 'required'
-        ]);
-
-        if ($request->has('bukti_transaksi')) {
-            $file = $request->bukti_transaksi;
-            $file_name = Carbon::now()->timestamp . '-' . $file->getClientOriginalName();
-            $this->upload($file_name, $file, 'documents/bukti_transaksi');
-            $validated['bukti_transaksi'] = $file_name;
-        }
-
-        $validated['document_id'] = $request->document_id;
-
-        DocumentBudget::create($validated);
-
-        return back();
-    }
-
-    private function upload($name, UploadedFile $file, $folder)
-    {
-        $destination_path = $folder;
-        $file->move($destination_path, $name);
-    }
 }
