@@ -204,7 +204,7 @@
             </div>
         </main>
     </div>
-    @include('page.mahasiswa.laporan.pengeluaran')
+    @include('page.mahasiswa.laporan.pengeluaran', ['laporan_akhir_status' => $laporan_akhir])
 @endsection
 
 @push('extra_js')

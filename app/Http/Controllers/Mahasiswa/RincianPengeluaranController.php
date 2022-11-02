@@ -13,6 +13,8 @@ class RincianPengeluaranController extends Controller
 
     public function create(Request $request)
     {
+        $laporan_akhir_status = filter_var($request->laporan_akhir_status, FILTER_VALIDATE_BOOLEAN);
+
         $validated = $request->validate([
             'deskripsi_item' => 'required',
             'jumlah' => 'required',
@@ -28,6 +30,7 @@ class RincianPengeluaranController extends Controller
         }
 
         $validated['document_id'] = $request->document_id;
+        if ($laporan_akhir_status) $validated['flag'] = 1;
 
         DocumentBudget::create($validated);
 

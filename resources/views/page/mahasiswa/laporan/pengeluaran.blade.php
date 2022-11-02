@@ -13,6 +13,7 @@
                     <div class="modal-body">
                         @csrf
                         <input type="hidden" name="document_id" value="{{ $document->id }}">
+                        <input type="hidden" name="laporan_akhir_status" value="{{ $laporan_akhir_status }}">
 
                         <div class="row">
                             <div class="col-lg-6">
@@ -80,8 +81,8 @@
                             <div class="col-lg-6">
                                 <label class="form-label">Deskripsi Item</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="deskripsi_item" name="deskripsi_item"
-                                        autocomplete="off">
+                                    <input type="text" class="form-control" id="deskripsi_item"
+                                        name="deskripsi_item" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-6">
