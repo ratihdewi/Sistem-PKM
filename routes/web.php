@@ -11,6 +11,7 @@ use App\Http\Controllers\Dosen\SubmitLaporanAkhirReviewController;
 use App\Http\Controllers\Dosen\SubmitLaporanKemajuanReviewController;
 use App\Http\Controllers\Dosen\SubmitProposalReviewControlle;
 use App\Http\Controllers\Dosen\SubmitProposalReviewController;
+use App\Http\Controllers\ExportBudgetController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\DeleteLaporanAkhirController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\SubmitLaporanAkhirController;
@@ -44,6 +45,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout.post');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', HomePageController::class)->name('index');
+
+    Route::group(['prefix' => 'export'], function () {
+        Route::get('laporan_kemajuan_budgets/{document_id}', [ExportBudgetController::class, 'laporan_kemajuan'])->name('kemajuan-budgets.export');
+        Route::get('laporan_akhir_budgets/{document_id}', [ExportBudgetController::class, 'laporan_akhir'])->name('akhir-budgets.export');
+    });
 
     Route::group(['middleware' => 'role:Admin'], function () {
         Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');

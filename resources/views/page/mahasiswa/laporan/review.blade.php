@@ -92,6 +92,10 @@
                                             <div class="col">
                                                 <h5>Rincian Pengeluaran</h5>
                                             </div>
+                                            <div class="col text-right">
+                                                <a href="{{ route('kemajuan-budgets.export', $document->id) }}"><i
+                                                        class="ml-2 fa fa-file-arrow-down fa-3x"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -243,6 +247,10 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h5>Rincian Pengeluaran</h5>
+                                            </div>
+                                            <div class="col text-right">
+                                                <a href="{{ route('akhir-budgets.export', $document->id) }}"><i
+                                                        class="ml-2 fa fa-file-arrow-down fa-3x"></i></a>
                                             </div>
                                         </div>
                                     </div>
