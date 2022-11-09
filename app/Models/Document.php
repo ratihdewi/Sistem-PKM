@@ -25,6 +25,11 @@ class Document extends Model
         return $this->hasOne('App\Models\DocumentCheck', 'document_id');
     }
 
+    public function document_budgets()
+    {
+        return $this->hasMany('App\Models\DocumentBudget', 'document_id');
+    }
+
     public function getPendanaanDiktiAttribute($value)
     {
         $value = (int) $value;

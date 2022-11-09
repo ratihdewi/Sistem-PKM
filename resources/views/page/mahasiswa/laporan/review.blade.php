@@ -17,7 +17,7 @@
                             <div class="col-lg-8">
                                 <div class="card" style="height: 39rem;">
                                     <div class="card-header">
-                                        <div class="row mb-3">
+                                        <div class="row">
                                             <div class="col">
                                                 <h5>{{ $document->judul_proposal }}</h5>
                                             </div>
@@ -169,7 +169,7 @@
                             <div class="col-lg-8">
                                 <div class="card" style="height: 39rem;">
                                     <div class="card-header">
-                                        <div class="row mb-3">
+                                        <div class="row">
                                             <div class="col">
                                                 <h5>{{ $document->judul_proposal }}</h5>
                                             </div>

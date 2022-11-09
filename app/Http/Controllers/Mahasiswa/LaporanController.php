@@ -24,7 +24,6 @@ class LaporanController extends Controller
     {
         $comments_laporan_kemajuan = collect(json_decode($document->laporan_kemajuan_comments));
         $comments_laporan_akhir = collect(json_decode($document->laporan_akhir_comments));
-        $budgets = DocumentBudget::where('document_id', $document->id)->orderBy('flag', 'asc')->get();
 
         $comments_laporan_kemajuan->transform(function ($item) {
             return [
@@ -47,8 +46,8 @@ class LaporanController extends Controller
         });
 
         return view('page.mahasiswa.laporan.review', [
-            'laporan_kemajuan_budgets' => $budgets->filter(fn ($item) => $item->flag === 0),
-            'laporan_akhir_budgets' => $budgets,
+            'laporan_kemajuan_budgets' => $document->document_budgets->filter(fn ($item) => $item->flag === 0),
+            'laporan_akhir_budgets' => $document->document_budgets->sortBy('flag'),
         ], compact('document', 'comments_laporan_kemajuan', 'comments_laporan_akhir'));
     }
 

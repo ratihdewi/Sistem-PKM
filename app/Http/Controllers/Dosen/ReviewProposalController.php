@@ -52,7 +52,9 @@ class ReviewProposalController extends Controller
             return back();
         }
 
-        return view('page.dosen.review.laporan_kemajuan', compact('document', 'comments'));
+        $laporan_kemajuan_budgets = $document->document_budgets->filter(fn ($item) => $item->flag === 0);
+
+        return view('page.dosen.review.laporan_kemajuan', compact('document', 'comments', 'laporan_kemajuan_budgets'));
     }
 
     public function laporan_akhir(Document $document)
@@ -72,6 +74,8 @@ class ReviewProposalController extends Controller
             return back();
         }
 
-        return view('page.dosen.review.laporan_akhir', compact('document', 'comments'));
+        $laporan_akhir_budgets = $document->document_budgets->sortBy('flag');
+
+        return view('page.dosen.review.laporan_akhir', compact('document', 'comments', 'laporan_akhir_budgets'));
     }
 }
