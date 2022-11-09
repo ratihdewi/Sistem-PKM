@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card">
+                        <div class="card" style="height: 39rem;">
                             <div class="card-header">
                                 <h5>Riwayat Review</h5>
                             </div>

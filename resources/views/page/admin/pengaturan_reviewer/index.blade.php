@@ -37,11 +37,14 @@
                                             <td>#</td>
                                             <td></td>
                                             <td>
-                                                <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                        class="fa fa-pencil"></i></a>
                                                 <form action="#" method="post" class="d-inline">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-solid fa-trash"></i></button>
+                                                    <button type="submit"
+                                                        class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                            class="fa-solid fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -13,7 +13,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-lg-8">
                                 <div class="card" style="height: 39rem;">
                                     <div class="card-header">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="card">
+                                <div class="card" style="height: 39rem;">
                                     <div class="card-header">
                                         <h5>Riwayat Review</h5>
                                     </div>
@@ -83,8 +83,77 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
 
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>Rincian Pengeluaran</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3 row">
+                                            <table id="datatablesSimple">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Deskripsi Item</th>
+                                                        <th scope="col">Jumlah</th>
+                                                        <th scope="col">Harga Satuan</th>
+                                                        <th scope="col">Total</th>
+                                                        <th scope="col">Bukti Transaksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Deskripsi Item</th>
+                                                        <th scope="col">Jumlah</th>
+                                                        <th scope="col">Harga Satuan</th>
+                                                        <th scope="col">Total</th>
+                                                        <th scope="col">Bukti Transaksi</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody id="budget-table">
+                                                    @foreach ($laporan_kemajuan_budgets as $budget)
+                                                        <tr>
+                                                            <th scope="row">{{ $loop->iteration }}</th>
+                                                            <td>{{ $budget->deskripsi_item }}</td>
+                                                            <td>{{ $budget->jumlah }}</td>
+                                                            <td>Rp. {{ number_format($budget->harga_satuan, 0, ',', '.') }}
+                                                            </td>
+
+                                                            <td>Rp.
+                                                                {{ number_format((string) ((int) $budget->jumlah * (int) $budget->harga_satuan), 0, ',', '.') }}
+                                                            </td>
+                                                            <td><a class="mfp-image bukti_transaksi" href="#"
+                                                                    data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}">
+                                                                    <img style="cursor: pointer" width="125px"
+                                                                        src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}"
+                                                                        alt="{{ $budget->bukti_transaksi }}">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    {{-- <tr>
+                                                        <th scope="row"></th>
+                                                        <td><strong>Total</strong></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><strong>-----</strong></td>
+                                                        <td></td>
+                                                    </tr> --}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="mb-3">
@@ -96,7 +165,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-lg-8">
                                 <div class="card" style="height: 39rem;">
                                     <div class="card-header">
@@ -115,7 +184,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="card">
+                                <div class="card" style="height: 39rem;">
                                     <div class="card-header">
                                         <h5>Riwayat Review</h5>
                                     </div>
@@ -166,8 +235,77 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
 
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>Rincian Pengeluaran</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3 row">
+                                            <table id="datatablesSimple2">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Deskripsi Item</th>
+                                                        <th scope="col">Jumlah</th>
+                                                        <th scope="col">Harga Satuan</th>
+                                                        <th scope="col">Total</th>
+                                                        <th scope="col">Bukti Transaksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Deskripsi Item</th>
+                                                        <th scope="col">Jumlah</th>
+                                                        <th scope="col">Harga Satuan</th>
+                                                        <th scope="col">Total</th>
+                                                        <th scope="col">Bukti Transaksi</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody id="budget-table">
+                                                    @foreach ($laporan_akhir_budgets as $budget)
+                                                        <tr>
+                                                            <th scope="row">{{ $loop->iteration }}</th>
+                                                            <td>{{ $budget->deskripsi_item }}</td>
+                                                            <td>{{ $budget->jumlah }}</td>
+                                                            <td>Rp. {{ number_format($budget->harga_satuan, 0, ',', '.') }}
+                                                            </td>
+
+                                                            <td>Rp.
+                                                                {{ number_format((string) ((int) $budget->jumlah * (int) $budget->harga_satuan), 0, ',', '.') }}
+                                                            </td>
+                                                            <td><a class="mfp-image bukti_transaksi" href="#"
+                                                                    data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}">
+                                                                    <img style="cursor: pointer" width="125px"
+                                                                        src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}"
+                                                                        alt="{{ $budget->bukti_transaksi }}">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    {{-- <tr>
+                                                        <th scope="row"></th>
+                                                        <td><strong>Total</strong></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><strong>-----</strong></td>
+                                                        <td></td>
+                                                    </tr> --}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="my-3">
@@ -180,3 +318,15 @@
         </main>
     </div>
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).ready(function() {
+            $('.bukti_transaksi').magnificPopup({
+                type: 'image',
+                removalDelay: 300,
+                mainClass: 'mfp-fade'
+            });
+        });
+    </script>
+@endpush
