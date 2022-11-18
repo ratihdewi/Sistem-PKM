@@ -8,6 +8,7 @@ use App\Models\Document;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rule;
 
 class SubmitLaporanAkhirReviewController extends Controller
 {
@@ -20,8 +21,9 @@ class SubmitLaporanAkhirReviewController extends Controller
     public function __invoke(Request $request, Document $document)
     {
         $request->validate([
+            'hasil_review' => 'required',
             'komentar' => 'required',
-            'hasil_evaluasi' => 'nullable|mimes:pdf'
+            'hasil_evaluasi' => ['mimes:pdf', Rule::when(($request->hasil_review == 'revision'), ['required'])]
         ]);
 
         $file_hasil_evaluasi = null;
