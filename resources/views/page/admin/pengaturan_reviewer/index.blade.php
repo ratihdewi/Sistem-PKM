@@ -33,21 +33,25 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>#</td>
-                                            <td></td>
-                                            <td>
-                                                <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark"><i
-                                                        class="fa fa-pencil"></i></a>
-                                                <form action="#" method="post" class="d-inline">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit"
+                                        @foreach ($reviewers as $reviewer)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $reviewer->name }}</td>
+                                                <td style="padding: 0">
+                                                    {{-- <a href="#"
                                                         class="btn btn-datatable btn-icon btn-transparent-dark"><i
-                                                            class="fa-solid fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                            class="fa fa-pencil"></i></a> --}}
+                                                    <form action="{{ route('pengaturan-reviewer.destroy', $reviewer->id) }}"
+                                                        method="post" class="d-inline">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                                class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

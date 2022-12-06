@@ -54,13 +54,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:Admin'], function () {
         Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
 
-        Route::resources([
-            '/pengaturan-reviewer' => PengaturanReviewerController::class,
-            '/jenis-pkm' => JenisPKMController::class,
-            '/skema-pkm' => SkemaPKMController::class
-        ], [
-            'except' => ['show']
-        ]);
+        Route::resource('pengaturan-reviewer', PengaturanReviewerController::class)->except(['show', 'edit', 'update']);
+        Route::resource('jenis-pkm', JenisPKMController::class)->only(['index']);
+        Route::resource('skema-pkm', SkemaPKMController::class)->except(['show']);
     });
 
     Route::group(['middleware' => 'role:Dosen'], function () {
