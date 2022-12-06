@@ -3,6 +3,7 @@
 use App\Enums\DocumentStatus;
 use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Admin\JenisPKMController;
+use App\Http\Controllers\Admin\PengaturanDokumenController;
 use App\Http\Controllers\Admin\PengaturanReviewerController;
 use App\Http\Controllers\Admin\SkemaPKMController;
 use App\Http\Controllers\AuthController;
@@ -54,6 +55,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:Admin'], function () {
         Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
 
+        Route::group(['prefix' => 'pengaturan-dokumen'], function () {
+            Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');
+            Route::post('submit', [PengaturanDokumenController::class, 'submit'])->name('pengaturan-dokumen.submit');
+        });
         Route::resource('pengaturan-reviewer', PengaturanReviewerController::class)->except(['show', 'edit', 'update']);
         Route::resource('jenis-pkm', JenisPKMController::class)->only(['index']);
         Route::resource('skema-pkm', SkemaPKMController::class)->except(['show']);

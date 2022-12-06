@@ -41,7 +41,7 @@
                         <div class="collapse" id="collapsePengaturan" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Dokumen</a>
+                                <a class="nav-link" href="{{ route('pengaturan-dokumen.create') }}">Dokumen</a>
                                 <a class="nav-link" href="{{ route('jenis-pkm.index') }}">Jenis PKM</a>
                                 <a class="nav-link" href="{{ route('skema-pkm.index') }}">Skema PKM</a>
                                 <a class="nav-link" href="#">Konten</a>
