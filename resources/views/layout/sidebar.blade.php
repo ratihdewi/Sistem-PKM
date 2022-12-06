@@ -32,14 +32,6 @@
                                 <a class="nav-link" href="{{ route('pengaturan-reviewer.index') }}">Pengaturan Reviewer</a>
                             </nav>
                         </div>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"></div>
-                            Dokumen
-                        </a>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"></div>
-                            Pengaturan Konten
-                        </a>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapsePengaturan" aria-expanded="false" aria-controls="collapsePengaturan">
                             <div class="sb-nav-link-icon"></div>
@@ -49,8 +41,10 @@
                         <div class="collapse" id="collapsePengaturan" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="#">Dokumen</a>
                                 <a class="nav-link" href="{{ route('jenis-pkm.index') }}">Jenis PKM</a>
                                 <a class="nav-link" href="{{ route('skema-pkm.index') }}">Skema PKM</a>
+                                <a class="nav-link" href="#">Konten</a>
                             </nav>
                         </div>
                     @endcan
@@ -89,7 +83,9 @@
                     </form>
                 </div>
             </div>
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 bg-white" id="sidebarToggle" href="#!" style="position: absolute; left: 220px; top:120px;"><i class="fa fa-chevron-right"></i></button>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 bg-white" id="sidebarToggle"
+                href="#!" style="position: absolute; left: 220px; top:120px;"><i
+                    class="fa fa-chevron-right"></i></button>
         </nav>
     </div>
     <!-- End of Sidebar -->
