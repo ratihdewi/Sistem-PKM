@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityDocument;
+use App\Models\JenisSurat;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,15 +14,15 @@ class PengaturanDokumenController extends Controller
 {
     public function create()
     {
+        $jenis_surat = JenisSurat::orderBy('id', 'asc')->get();
         $data_dosen = User::where('role_id', 2)->get();
 
-        return view('page.admin.pengaturan_dokumen.create', compact('data_dosen'));
+        return view('page.admin.pengaturan_dokumen.create', compact('jenis_surat', 'data_dosen'));
     }
 
     public function submit(Request $request)
     {
         $validated = $request->validate([
-            'reviewer' => 'required',
             'file_sk' => 'required|mimes:pdf'
         ]);
 
@@ -32,6 +33,7 @@ class PengaturanDokumenController extends Controller
             $validated['file_sk'] = $file_name;
         }
 
+        $validated['jenis_surat_id'] = (int) $request->jenis_surat;
         $validated['id_reviewer'] = json_encode($request->reviewer ?? []);
         ActivityDocument::create($validated);
 

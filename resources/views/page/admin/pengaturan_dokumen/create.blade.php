@@ -12,15 +12,15 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3 row">
-                                        <label for="jenis_sk" class="col-sm-3 col-form-label">Jenis Surat Keputusan</label>
+                                        <label for="jenis_surat" class="col-sm-3 col-form-label">Jenis Surat
+                                            Keputusan</label>
                                         <div class="col-sm-9">
-                                            <select id="jenis_sk" class="form-select js-example-basic-single"
-                                                aria-label="Default select example" name="jenis_sk">
-                                                <option>A</option>
-                                                <option>E</option>
-                                                <option>I</option>
-                                                <option>O</option>
-                                                <option>U</option>
+                                            <select id="jenis_surat" class="form-select js-example-basic-single"
+                                                aria-label="Default select example" name="jenis_surat">
+
+                                                @foreach ($jenis_surat as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -45,7 +45,6 @@
                                             <div class="col-sm-9">
                                                 <select id="reviewer" class="form-select js-example-basic-multiple"
                                                     name="reviewer[]" multiple="multiple">
-                                                    <option disabled>Pilih Dosen</option>
 
                                                     @foreach ($data_dosen as $item)
                                                         <option value="{{ $item->id }}">{{ $item->name }}</option>

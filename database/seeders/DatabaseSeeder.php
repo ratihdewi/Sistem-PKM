@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\JenisSurat;
 use Database\Seeders\PKM\JenisPKMSeeder;
 use Database\Seeders\PKM\SkemaPKMSeeder;
 use Illuminate\Database\Seeder;
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             JenisPKMSeeder::class,
-            SkemaPKMSeeder::class
+            SkemaPKMSeeder::class,
+            JenisSuratSeeder::class
         ]);
     }
 }
