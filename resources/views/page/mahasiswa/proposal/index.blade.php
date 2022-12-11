@@ -3,7 +3,7 @@
 @section('container')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4" style="margin-top: 180px">
+            <div class="container-fluid px-4" style="margin-top: 4%">
                 <div>
                     <a href="{{ route('proposal.create') }}">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Pengajuan Proposal

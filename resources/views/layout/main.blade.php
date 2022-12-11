@@ -26,7 +26,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body class="sb-nav-fixed">
+<body>
     <!-- Site wrapper -->
     @include('layout.navbar')
     @include('layout.sidebar')
