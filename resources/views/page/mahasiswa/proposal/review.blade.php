@@ -3,7 +3,7 @@
 @section('container')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4" style="margin-top: 180px">
+            <div class="container-fluid px-4" style="margin-top: 4%">
                 <h3 class="mb-3" style="color: #5D7DCF">Review Proposal</h3>
                 <div class="row">
                     <div class="col-lg-8">
