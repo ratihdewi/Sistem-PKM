@@ -3,7 +3,7 @@
 @section('container')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4" style="margin-top: 4%">
+            <div class="container-fluid px-4" style="margin-top: 5%">
                 <div class="mb-3">
                     <h3 class="mb-3" style="color: #5D7DCF">Review Laporan Kemajuan</h3>
                     @if ($document->status_laporan_kemajuan === 'not_submitted')

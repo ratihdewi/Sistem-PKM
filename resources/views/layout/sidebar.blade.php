@@ -2,7 +2,7 @@
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
-            <div class="sb-sidenav-menu mt-5">
+            <div class="sb-sidenav-menu mt-3">
                 <div class="nav">
                     <a class="nav-link" href="{{ route('index') }}">
                         <div class="sb-nav-link-icon"></div>
@@ -84,8 +84,7 @@
                 </div>
             </div>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 bg-white" id="sidebarToggle"
-                href="#!" style="position: absolute; left: 220px; top:120px;"><i
-                    class="fa fa-chevron-right"></i></button>
+                href="#!" style="position: absolute; left: 220px;"><i class="fa fa-chevron-right"></i></button>
         </nav>
     </div>
     <!-- End of Sidebar -->
