@@ -144,35 +144,43 @@
                                             @foreach ($budgets as $budget)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $budget->deskripsi_item }}</td>
-                                                    <td>{{ $budget->jumlah }}</td>
-                                                    <td>Rp. {{ number_format($budget->harga_satuan, 0, ',', '.') }}</td>
+                                                    <td>{{ $budget['deskripsi_item'] }}</td>
+                                                    <td>{{ $budget['jumlah'] }}</td>
+                                                    <td>Rp.
+                                                        {{ number_format($budget['harga_satuan'], 0, ',', '.') }}
+                                                    </td>
 
                                                     <td>Rp.
-                                                        {{ number_format((string) ((int) $budget->jumlah * (int) $budget->harga_satuan), 0, ',', '.') }}
+                                                        {{ number_format((string) ((int) $budget['jumlah'] * (int) $budget['harga_satuan']), 0, ',', '.') }}
                                                     </td>
-                                                    <td><a class="mfp-image bukti_transaksi" href="#"
-                                                            data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}">
-                                                            <img style="cursor: pointer" width="125px"
-                                                                src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}"
-                                                                alt="{{ $budget->bukti_transaksi }}">
-                                                        </a>
+                                                    <td>
+                                                        @if ($budget['is_image'] === true)
+                                                            <a class="mfp-image bukti_transaksi" href="#"
+                                                                data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget['bukti_transaksi']}") }}">
+                                                                <img style="cursor: pointer" width="125px"
+                                                                    src="{{ asset("documents/bukti_transaksi/{$budget['bukti_transaksi']}") }}"
+                                                                    alt="{{ $budget['bukti_transaksi'] }}">
+                                                            </a>
+                                                        @else
+                                                            <a
+                                                                href="{{ route('download-bukti-transaksi', "{$budget['bukti_transaksi']}") }}">{{ $budget['bukti_transaksi'] }}</a>
+                                                        @endif
                                                     </td>
                                                     <td style="padding: 0">
                                                         <button type="button"
                                                             class="btn btn-datatable btn-icon btn-transparent-dark me-2"
                                                             data-bs-toggle="modal" data-bs-target="#pengeluaran_update"
-                                                            data-id="{{ $budget->id }}"
-                                                            data-deskripsiitem="{{ $budget->deskripsi_item }}"
-                                                            data-jumlahitem="{{ $budget->jumlah }}"
-                                                            data-hargasatuan="{{ $budget->harga_satuan }}"><i
+                                                            data-id="{{ $budget['id'] }}"
+                                                            data-deskripsiitem="{{ $budget['deskripsi_item'] }}"
+                                                            data-jumlahitem="{{ $budget['jumlah'] }}"
+                                                            data-hargasatuan="{{ $budget['harga_satuan'] }}"><i
                                                                 class="fa fa-pencil"></i></button>
                                                         <form id="delete-budget-item"
-                                                            action="{{ route('pengeluaran.delete', $budget->id) }}"
+                                                            action="{{ route('pengeluaran.delete', $budget['id']) }}"
                                                             method="post" class="d-inline">
                                                             @method('DELETE')
                                                             @csrf
-                                                            <button data-id="{{ $budget->id }}"
+                                                            <button data-id="{{ $budget['id'] }}"
                                                                 class="btn btn-datatable btn-icon btn-transparent-dark"
                                                                 type="submit"><i class="fa fa-trash"></i></button>
                                                         </form>

@@ -45,9 +45,35 @@ class LaporanController extends Controller
             ];
         });
 
+        $laporan_kemajuan_budgets = $document->document_budgets->filter(fn ($item) => $item->flag === 0);
+        $laporan_kemajuan_budgets->transform(function ($item) {
+            $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+            return [
+                'deskripsi_item' => $item->deskripsi_item,
+                'jumlah' => $item->jumlah,
+                'harga_satuan' => $item->harga_satuan,
+                'bukti_transaksi' => $item->bukti_transaksi,
+                'is_image' => $is_image
+            ];
+        });
+
+        $laporan_akhir_budgets = $document->document_budgets->sortBy('flag');
+        $laporan_akhir_budgets->transform(function ($item) {
+            $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+            return [
+                'deskripsi_item' => $item->deskripsi_item,
+                'jumlah' => $item->jumlah,
+                'harga_satuan' => $item->harga_satuan,
+                'bukti_transaksi' => $item->bukti_transaksi,
+                'is_image' => $is_image
+            ];
+        });
+
         return view('page.mahasiswa.laporan.review', [
-            'laporan_kemajuan_budgets' => $document->document_budgets->filter(fn ($item) => $item->flag === 0),
-            'laporan_akhir_budgets' => $document->document_budgets->sortBy('flag'),
+            'laporan_kemajuan_budgets' => $laporan_kemajuan_budgets,
+            'laporan_akhir_budgets' => $laporan_akhir_budgets,
         ], compact('document', 'comments_laporan_kemajuan', 'comments_laporan_akhir'));
     }
 
@@ -59,6 +85,18 @@ class LaporanController extends Controller
 
         if ($request->is('laporan-akhir*')) {
             $budgets = $budgets->orderBy('flag', 'asc')->get();
+            $budgets->transform(function ($item) {
+                $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+                return [
+                    'deskripsi_item' => $item->deskripsi_item,
+                    'jumlah' => $item->jumlah,
+                    'harga_satuan' => $item->harga_satuan,
+                    'bukti_transaksi' => $item->bukti_transaksi,
+                    'is_image' => $is_image
+                ];
+            });
+
             $file = (array) $document->berkas;
             $laporan_akhir = true;
 
@@ -69,6 +107,18 @@ class LaporanController extends Controller
             return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key', 'laporan_akhir'));
         } else {
             $budgets = $budgets->where('flag', 0)->get();
+            $budgets->transform(function ($item) {
+                $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+                return [
+                    'id' => $item->id,
+                    'deskripsi_item' => $item->deskripsi_item,
+                    'jumlah' => $item->jumlah,
+                    'harga_satuan' => $item->harga_satuan,
+                    'bukti_transaksi' => $item->bukti_transaksi,
+                    'is_image' => $is_image
+                ];
+            });
 
             if ($request->is('laporan-kemajuan*') && $document->status_proposal !== 'approved') {
                 return back();
@@ -86,6 +136,19 @@ class LaporanController extends Controller
 
         if ($request->is('laporan-akhir*')) {
             $budgets = $budgets->orderBy('flag', 'asc')->get();
+            $budgets->transform(function ($item) {
+                $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+                return [
+                    'id' => $item->id,
+                    'deskripsi_item' => $item->deskripsi_item,
+                    'jumlah' => $item->jumlah,
+                    'harga_satuan' => $item->harga_satuan,
+                    'bukti_transaksi' => $item->bukti_transaksi,
+                    'is_image' => $is_image
+                ];
+            });
+
             $file = (array) $document->berkas;
             $laporan_akhir = true;
 
@@ -96,6 +159,18 @@ class LaporanController extends Controller
             return view('page.mahasiswa.laporan.submit', compact('document', 'budgets', 'key', 'laporan_akhir'));
         } else {
             $budgets = $budgets->where('flag', 0)->get();
+            $budgets->transform(function ($item) {
+                $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+                return [
+                    'id' => $item->id,
+                    'deskripsi_item' => $item->deskripsi_item,
+                    'jumlah' => $item->jumlah,
+                    'harga_satuan' => $item->harga_satuan,
+                    'bukti_transaksi' => $item->bukti_transaksi,
+                    'is_image' => $is_image
+                ];
+            });
 
             if ($request->is('laporan-kemajuan*') && $document->status_proposal !== 'approved') {
                 return back();

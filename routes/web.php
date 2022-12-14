@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\DocumentStatus;
 use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Admin\JenisPKMController;
 use App\Http\Controllers\Admin\PengaturanDokumenController;
@@ -10,17 +9,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dosen\ReviewProposalController;
 use App\Http\Controllers\Dosen\SubmitLaporanAkhirReviewController;
 use App\Http\Controllers\Dosen\SubmitLaporanKemajuanReviewController;
-use App\Http\Controllers\Dosen\SubmitProposalReviewControlle;
 use App\Http\Controllers\Dosen\SubmitProposalReviewController;
+use App\Http\Controllers\DownloadBuktiTransaksiController;
 use App\Http\Controllers\ExportBudgetController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\DeleteLaporanAkhirController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\SubmitLaporanAkhirController;
-use App\Http\Controllers\Mahasiswa\LaporanAkhirController;
 use App\Http\Controllers\Mahasiswa\LaporanController;
 use App\Http\Controllers\Mahasiswa\LaporanKemajuan\DeleteLaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\LaporanKemajuan\SubmitLaporanKemajuanController;
-use App\Http\Controllers\Mahasiswa\LaporanKemajuanController;
 use App\Http\Controllers\Mahasiswa\ProposalController;
 use App\Http\Controllers\Mahasiswa\RincianPengeluaranController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +43,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout.post');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', HomePageController::class)->name('index');
+    Route::get('/download/{file}', DownloadBuktiTransaksiController::class)->name('download-bukti-transaksi');
 
     Route::group(['prefix' => 'export'], function () {
         Route::get('laporan_kemajuan_budgets/{document_id}', [ExportBudgetController::class, 'laporan_kemajuan'])->name('kemajuan-budgets.export');

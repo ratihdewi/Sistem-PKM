@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Testing\MimeType;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class ReviewProposalController extends Controller
 {
@@ -53,6 +56,17 @@ class ReviewProposalController extends Controller
         }
 
         $laporan_kemajuan_budgets = $document->document_budgets->filter(fn ($item) => $item->flag === 0);
+        $laporan_kemajuan_budgets->transform(function ($item) {
+            $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+            return [
+                'deskripsi_item' => $item->deskripsi_item,
+                'jumlah' => $item->jumlah,
+                'harga_satuan' => $item->harga_satuan,
+                'bukti_transaksi' => $item->bukti_transaksi,
+                'is_image' => $is_image
+            ];
+        });
 
         return view('page.dosen.review.laporan_kemajuan', compact('document', 'comments', 'laporan_kemajuan_budgets'));
     }
@@ -75,6 +89,17 @@ class ReviewProposalController extends Controller
         }
 
         $laporan_akhir_budgets = $document->document_budgets->sortBy('flag');
+        $laporan_akhir_budgets->transform(function ($item) {
+            $is_image = exif_imagetype(public_path("documents/bukti_transaksi/{$item->bukti_transaksi}")) ? true : false;
+
+            return [
+                'deskripsi_item' => $item->deskripsi_item,
+                'jumlah' => $item->jumlah,
+                'harga_satuan' => $item->harga_satuan,
+                'bukti_transaksi' => $item->bukti_transaksi,
+                'is_image' => $is_image
+            ];
+        });
 
         return view('page.dosen.review.laporan_akhir', compact('document', 'comments', 'laporan_akhir_budgets'));
     }

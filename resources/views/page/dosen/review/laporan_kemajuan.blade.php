@@ -165,20 +165,26 @@
                                             @foreach ($laporan_kemajuan_budgets as $budget)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $budget->deskripsi_item }}</td>
-                                                    <td>{{ $budget->jumlah }}</td>
-                                                    <td>Rp. {{ number_format($budget->harga_satuan, 0, ',', '.') }}
+                                                    <td>{{ $budget['deskripsi_item'] }}</td>
+                                                    <td>{{ $budget['jumlah'] }}</td>
+                                                    <td>Rp. {{ number_format($budget['harga_satuan'], 0, ',', '.') }}
                                                     </td>
 
                                                     <td>Rp.
-                                                        {{ number_format((string) ((int) $budget->jumlah * (int) $budget->harga_satuan), 0, ',', '.') }}
+                                                        {{ number_format((string) ((int) $budget['jumlah'] * (int) $budget['harga_satuan']), 0, ',', '.') }}
                                                     </td>
-                                                    <td><a class="mfp-image bukti_transaksi" href="#"
-                                                            data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}">
-                                                            <img style="cursor: pointer" width="125px"
-                                                                src="{{ asset("documents/bukti_transaksi/{$budget->bukti_transaksi}") }}"
-                                                                alt="{{ $budget->bukti_transaksi }}">
-                                                        </a>
+                                                    <td>
+                                                        @if ($budget['is_image'] === true)
+                                                            <a class="mfp-image bukti_transaksi" href="#"
+                                                                data-mfp-src="{{ asset("documents/bukti_transaksi/{$budget['bukti_transaksi']}") }}">
+                                                                <img style="cursor: pointer" width="125px"
+                                                                    src="{{ asset("documents/bukti_transaksi/{$budget['bukti_transaksi']}") }}"
+                                                                    alt="{{ $budget['bukti_transaksi'] }}">
+                                                            </a>
+                                                        @else
+                                                            <a
+                                                                href="{{ route('download-bukti-transaksi', "{$budget['bukti_transaksi']}") }}">{{ $budget['bukti_transaksi'] }}</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
