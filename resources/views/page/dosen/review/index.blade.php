@@ -45,7 +45,8 @@
                                         <td>{{ $document->created_at->format('Y') }}</td>
                                         <td>{{ $document->skema_pkm->name }}</td>
                                         <td>{{ $document->document_owners->data_mahasiswa->implode('name', ', ') }}</td>
-                                        <td>{{ $document->document_owners->data_mahasiswa->implode('username', ', ') }}</td>
+                                        <td>{{ $document->document_owners->data_mahasiswa->implode('nomor_induk', ', ') }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('review.proposal', $document->id) }}"
                                                 class="text-decoration-none">{{ $document->judul_proposal }}</a>

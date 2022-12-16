@@ -209,7 +209,7 @@ class ProposalController extends Controller
 
     public function mahasiswa(Request $request)
     {
-        $data = User::where('username', $request->mhs)->first();
+        $data = User::where('nomor_induk', $request->mhs)->first();
 
         return $data ?? null;
     }

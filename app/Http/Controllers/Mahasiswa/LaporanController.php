@@ -7,7 +7,6 @@ use App\Models\Document;
 use App\Models\DocumentBudget;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 
 class LaporanController extends Controller
 {
