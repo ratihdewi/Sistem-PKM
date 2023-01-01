@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\PKM;
+namespace Database\Seeders\Master;
 
 use App\Models\Master\SkemaPKM;
 use Illuminate\Database\Seeder;

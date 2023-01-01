@@ -16,7 +16,7 @@ class AddColumnsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('prodi_id')->after('id')->unsigned()->nullable();
-            $table->string('nomor_induk')->after('name');
+            $table->string('nomor_induk')->after('name')->nullable();
             $table->string('position')->after('email')->nullable();
         });
 

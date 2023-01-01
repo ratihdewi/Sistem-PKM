@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Master;
 
-use App\Models\Master\JenisSurat;
+use App\Models\Master\JenisPKM;
 use Illuminate\Database\Seeder;
 
-class JenisSuratSeeder extends Seeder
+class JenisPKMSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,10 @@ class JenisSuratSeeder extends Seeder
      */
     public function run()
     {
-        $data = ['Surat Keputusan', 'Adhoc', 'Tugas'];
+        $data = ['PKM 8 Bidang', 'PKM Artikel Ilmiah', 'PKM Gagasan Futuristik Tertulis'];
 
         foreach ($data as $item) {
-            JenisSurat::create([
+            JenisPKM::create([
                 'name' => $item
             ]);
         }

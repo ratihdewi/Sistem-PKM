@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Master\Prodi;
 use App\Models\User;
 use App\Services\SoapApiService;
 use Illuminate\Database\Seeder;
@@ -20,7 +21,6 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'name' => 'Admin',
             'nomor_induk' => '',
-            'prodi' => '',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345'),
             'role_id' => 1
@@ -30,7 +30,6 @@ class UserSeeder extends Seeder
             'username' => 'dosen',
             'name' => 'Dosen',
             'nomor_induk' => '',
-            'prodi' => '',
             'email' => 'dosen@gmail.com',
             'password' => Hash::make('12345'),
             'role_id' => 2
@@ -45,10 +44,10 @@ class UserSeeder extends Seeder
 
         foreach (json_decode($response)->data as $data) {
             User::create([
+                'prodi_id' => Prodi::where('name', $data->prodi)->first()->id,
                 'username' => $data->username,
                 'name' => $data->nama,
                 'nomor_induk' => $data->nomor_induk,
-                'prodi' => $data->prodi,
                 'email' => $data->email,
                 'password' => Hash::make('12345'),
                 'role_id' => 3
