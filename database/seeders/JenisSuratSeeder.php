@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\JenisSurat;
+use App\Models\Master\JenisSurat;
 use Illuminate\Database\Seeder;
 
 class JenisSuratSeeder extends Seeder

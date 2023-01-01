@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\PKM;
 
-use App\Models\PKM\SkemaPKM;
+use App\Models\Master\SkemaPKM;
 use Illuminate\Database\Seeder;
 
 class SkemaPKMSeeder extends Seeder

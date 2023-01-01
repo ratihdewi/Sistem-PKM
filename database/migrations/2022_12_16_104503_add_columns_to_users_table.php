@@ -15,8 +15,9 @@ class AddColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->integer('prodi_id')->after('id')->unsigned()->nullable();
             $table->string('nomor_induk')->after('name');
-            $table->string('prodi')->after('nomor_induk');
+            $table->string('position')->after('email')->nullable();
         });
 
         DB::table('users')->truncate();
@@ -30,8 +31,9 @@ class AddColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('prodi_id');
             $table->dropColumn('nomor_induk');
-            $table->dropColumn('prodi');
+            $table->dropColumn('position');
 
             DB::table('users')->truncate();
         });

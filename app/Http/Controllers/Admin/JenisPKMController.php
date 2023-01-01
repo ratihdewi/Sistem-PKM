@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\PKM\JenisPKM;
+use App\Models\Master\JenisPKM;
 use Illuminate\Http\Request;
 
 class JenisPKMController extends Controller

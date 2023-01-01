@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\PKM;
 
-use App\Models\PKM\JenisPKM;
+use App\Models\Master\JenisPKM;
 use Illuminate\Database\Seeder;
 
 class JenisPKMSeeder extends Seeder

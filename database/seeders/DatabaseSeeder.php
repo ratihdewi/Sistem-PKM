@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\JenisSurat;
 use Database\Seeders\PKM\JenisPKMSeeder;
 use Database\Seeders\PKM\SkemaPKMSeeder;
 use Illuminate\Database\Seeder;

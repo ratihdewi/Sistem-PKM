@@ -12,7 +12,7 @@ class Document extends Model
 
     public function skema_pkm()
     {
-        return $this->belongsTo('App\Models\PKM\SkemaPKM', 'skema_pkm_id');
+        return $this->belongsTo('App\Models\Master\SkemaPKM', 'skema_pkm_id');
     }
 
     public function document_owners()

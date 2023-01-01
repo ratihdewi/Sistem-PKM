@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJenisPkmTable extends Migration
+class CreateMasterTahunAkademikTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateJenisPkmTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_pkm', function (Blueprint $table) {
+        Schema::create('master_tahun_akademik', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('tahun');
+            $table->string('term');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateJenisPkmTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_pkm');
+        Schema::dropIfExists('tahun_akademik');
     }
 }

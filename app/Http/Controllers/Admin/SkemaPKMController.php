@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\PKM\JenisPKM;
-use App\Models\PKM\SkemaPKM;
+use App\Models\Master\JenisPKM;
+use App\Models\Master\SkemaPKM;
 use Illuminate\Http\Request;
 
 class SkemaPKMController extends Controller

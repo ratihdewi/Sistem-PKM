@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJenisSuratTable extends Migration
+class CreateMasterJenisSuratTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateJenisSuratTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_surat', function (Blueprint $table) {
+        Schema::create('master_jenis_surat', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();

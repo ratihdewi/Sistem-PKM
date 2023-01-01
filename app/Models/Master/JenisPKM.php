@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\PKM;
+namespace App\Models\Master;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class JenisPKM extends Model
 {
     use HasFactory;
-    protected $table = 'jenis_pkm';
+    protected $table = 'master_jenis_pkm';
     protected $guarded = ['id'];
 }
