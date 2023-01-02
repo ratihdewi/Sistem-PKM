@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\JenisPKM;
@@ -13,14 +13,14 @@ class SkemaPKMController extends Controller
     {
         $skema_pkm = SkemaPKM::orderBy('id', 'asc')->get();
 
-        return view('page.admin.skema_pkm.index', compact('skema_pkm'));
+        return view('page.admin.master.skema_pkm.index', compact('skema_pkm'));
     }
 
     public function create()
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
 
-        return view('page.admin.skema_pkm.create', compact('jenis_pkm'));
+        return view('page.admin.master.skema_pkm.create', compact('jenis_pkm'));
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class SkemaPKMController extends Controller
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
 
-        return view('page.admin.skema_pkm.update', compact('jenis_pkm', 'skema_pkm'));
+        return view('page.admin.master.skema_pkm.update', compact('jenis_pkm', 'skema_pkm'));
     }
 
     public function update(Request $request, SkemaPKM $skema_pkm)

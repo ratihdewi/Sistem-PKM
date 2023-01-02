@@ -4,6 +4,8 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 5%">
+                <h3 class="mb-3" style="color: #5D7DCF">Skema PKM</h3>
+
                 <div>
                     <a href="{{ route('skema-pkm.create') }}">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah Skema PKM

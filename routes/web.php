@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\DaftarUsulanController;
-use App\Http\Controllers\Admin\JenisPKMController;
+use App\Http\Controllers\Admin\DataDosenPendampingController;
+use App\Http\Controllers\Admin\DataMahasiswaController;
+use App\Http\Controllers\Admin\Master\JenisPKMController;
+use App\Http\Controllers\Admin\Master\ProdiController;
+use App\Http\Controllers\Admin\Master\SkemaPKMController;
+use App\Http\Controllers\Admin\Master\TahunAkademikController;
 use App\Http\Controllers\Admin\PengaturanDokumenController;
 use App\Http\Controllers\Admin\PengaturanReviewerController;
-use App\Http\Controllers\Admin\SkemaPKMController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dosen\ReviewProposalController;
 use App\Http\Controllers\Dosen\SubmitLaporanAkhirReviewController;
@@ -57,7 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');
             Route::post('submit', [PengaturanDokumenController::class, 'submit'])->name('pengaturan-dokumen.submit');
         });
+        Route::resource('data-mahasiswa', DataMahasiswaController::class)->only(['index']);
+        Route::resource('data-dosen-pendamping', DataDosenPendampingController::class)->only(['index']);
         Route::resource('pengaturan-reviewer', PengaturanReviewerController::class)->except(['show', 'edit', 'update']);
+        Route::resource('prodi', ProdiController::class)->only(['index']);
+        Route::resource('tahun-akademik', TahunAkademikController::class)->except(['show']);
         Route::resource('jenis-pkm', JenisPKMController::class)->only(['index']);
         Route::resource('skema-pkm', SkemaPKMController::class)->except(['show']);
     });

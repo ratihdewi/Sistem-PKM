@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\Master\JenisPKM;
+use App\Models\Master\Prodi;
 use Illuminate\Http\Request;
 
-class JenisPKMController extends Controller
+class ProdiController extends Controller
 {
     public function index()
     {
-        $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
+        $prodi = Prodi::orderBy('id', 'asc')->get();
 
-        return view('page.admin.jenis_pkm.index', compact('jenis_pkm'));
+        return view('page.admin.master.prodi.index', compact('prodi'));
     }
 
     public function create()

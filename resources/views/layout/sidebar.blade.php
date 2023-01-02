@@ -27,8 +27,8 @@
                         <div class="collapse" id="collapseDataPendukung" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Data Mahasiswa</a>
-                                <a class="nav-link" href="#">Dosen Pendamping</a>
+                                <a class="nav-link" href="{{ route('data-mahasiswa.index') }}">Data Mahasiswa</a>
+                                <a class="nav-link" href="{{ route('data-dosen-pendamping.index') }}">Dosen Pendamping</a>
                                 <a class="nav-link" href="{{ route('pengaturan-reviewer.index') }}">Pengaturan Reviewer</a>
                             </nav>
                         </div>
@@ -42,6 +42,8 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('pengaturan-dokumen.create') }}">Dokumen</a>
+                                <a class="nav-link" href="{{ route('prodi.index') }}">Prodi</a>
+                                <a class="nav-link" href="{{ route('tahun-akademik.index') }}">Tahun Akademik</a>
                                 <a class="nav-link" href="{{ route('jenis-pkm.index') }}">Jenis PKM</a>
                                 <a class="nav-link" href="{{ route('skema-pkm.index') }}">Skema PKM</a>
                                 <a class="nav-link" href="#">Konten</a>

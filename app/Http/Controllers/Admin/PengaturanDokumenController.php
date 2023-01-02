@@ -15,7 +15,7 @@ class PengaturanDokumenController extends Controller
     public function create()
     {
         $jenis_surat = JenisSurat::orderBy('id', 'asc')->get();
-        $data_dosen = User::where('role_id', 2)->get();
+        $data_dosen = User::userRoleId(2)->get();
 
         return view('page.admin.pengaturan_dokumen.create', compact('jenis_surat', 'data_dosen'));
     }

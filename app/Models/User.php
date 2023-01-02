@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function prodi()
+    {
+        return $this->belongsTo('App\Models\Master\Prodi', 'prodi_id');
+    }
+
     public function role()
     {
         return $this->belongsTo('App\Models\Role', 'role_id');
@@ -50,5 +55,15 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->role->name == $role;
+    }
+
+    public function scopeActive($query, $active = true)
+    {
+        return ($active ? $query->where('is_active', 1) : $query->where('is_active', 0));
+    }
+
+    public function scopeUserRoleId($query, $value)
+    {
+        return $query->where('role_id', $value);
     }
 }
