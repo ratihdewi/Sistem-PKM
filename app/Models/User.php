@@ -62,6 +62,11 @@ class User extends Authenticatable
         return ($active ? $query->where('is_active', 1) : $query->where('is_active', 0));
     }
 
+    public function scopeReviewer($query, $reviewer = true)
+    {
+        return ($reviewer ? $query->where('is_reviewer', 1) : $query->where('is_reviewer', 0));
+    }
+
     public function scopeUserRoleId($query, $value)
     {
         return $query->where('role_id', $value);

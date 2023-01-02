@@ -10,14 +10,14 @@ class PengaturanReviewerController extends Controller
 {
     public function index()
     {
-        $reviewers = User::where('role_id', 2)->where('is_reviewer', 1)->get();
+        $reviewers = User::userRoleId(2)->reviewer()->get();
 
         return view('page.admin.pengaturan_reviewer.index', compact('reviewers'));
     }
 
     public function create()
     {
-        $data_dosen = User::where('role_id', 2)->get();
+        $data_dosen = User::userRoleId(2)->get();
 
         return view('page.admin.pengaturan_reviewer.create', compact('data_dosen'));
     }

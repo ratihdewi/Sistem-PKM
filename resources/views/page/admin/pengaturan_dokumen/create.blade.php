@@ -30,11 +30,11 @@
                                         <div class="col-sm-9">
                                             <select id="periode_akademik" class="form-select js-example-basic-single"
                                                 aria-label="Default select example" name="periode_akademik">
-                                                <option>A</option>
-                                                <option>E</option>
-                                                <option>I</option>
-                                                <option>O</option>
-                                                <option>U</option>
+
+                                                @foreach ($tahun_akademik as $item)
+                                                    <option value="{{ $item->id }}">{{ "{$item->tahun}-{$item->term}" }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

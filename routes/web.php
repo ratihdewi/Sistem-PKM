@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Admin\DataDosenPendampingController;
 use App\Http\Controllers\Admin\DataMahasiswaController;
 use App\Http\Controllers\Admin\Master\JenisPKMController;
+use App\Http\Controllers\Admin\Master\JenisSuratController;
 use App\Http\Controllers\Admin\Master\ProdiController;
 use App\Http\Controllers\Admin\Master\SkemaPKMController;
 use App\Http\Controllers\Admin\Master\TahunAkademikController;
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('pengaturan-reviewer', PengaturanReviewerController::class)->except(['show', 'edit', 'update']);
         Route::resource('prodi', ProdiController::class)->only(['index']);
         Route::resource('tahun-akademik', TahunAkademikController::class)->except(['show']);
+        Route::resource('jenis-surat', JenisSuratController::class)->only(['index']);
         Route::resource('jenis-pkm', JenisPKMController::class)->only(['index']);
         Route::resource('skema-pkm', SkemaPKMController::class)->except(['show']);
     });
