@@ -28,6 +28,6 @@ class CreateMasterSkemaPkmTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skema_pkm');
+        Schema::dropIfExists('master_skema_pkm');
     }
 }

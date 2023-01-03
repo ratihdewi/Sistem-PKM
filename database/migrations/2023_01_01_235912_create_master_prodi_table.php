@@ -27,6 +27,6 @@ class CreateMasterProdiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prodi');
+        Schema::dropIfExists('master_prodi');
     }
 }

@@ -27,6 +27,6 @@ class CreateMasterJenisPkmTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_pkm');
+        Schema::dropIfExists('master_jenis_pkm');
     }
 }

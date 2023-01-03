@@ -28,6 +28,6 @@ class CreateMasterTahunAkademikTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tahun_akademik');
+        Schema::dropIfExists('master_tahun_akademik');
     }
 }

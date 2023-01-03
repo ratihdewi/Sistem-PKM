@@ -27,6 +27,6 @@ class CreateMasterJenisSuratTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_surat');
+        Schema::dropIfExists('master_jenis_surat');
     }
 }
