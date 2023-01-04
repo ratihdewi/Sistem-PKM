@@ -3,7 +3,7 @@
 @section('container')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4" style="margin-top: 4%">
+            <div class="container-fluid px-4" style="margin-top: 5%">
                 <div>
                     <button type="button" class="btn mt-3" style="background-color: #5D7DCF; color: #fff">Sort By <i
                             class="fa fa-caret-down"></i></button>
@@ -45,7 +45,8 @@
                                         <td>{{ $document->created_at->format('Y') }}</td>
                                         <td>{{ $document->skema_pkm->name }}</td>
                                         <td>{{ $document->document_owners->data_mahasiswa->implode('name', ', ') }}</td>
-                                        <td>{{ $document->document_owners->data_mahasiswa->implode('username', ', ') }}</td>
+                                        <td>{{ $document->document_owners->data_mahasiswa->implode('nomor_induk', ', ') }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('review.proposal', $document->id) }}"
                                                 class="text-decoration-none">{{ $document->judul_proposal }}</a>

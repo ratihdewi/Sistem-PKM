@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/documents
+/public/activity_documents
 /storage/*.key
 /vendor
 .env

@@ -3,7 +3,7 @@
 @section('container')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4" style="margin-top: 4%">
+            <div class="container-fluid px-4" style="margin-top: 5%">
                 <h3 class="mb-3" style="color: #5D7DCF">Pengaturan Reviewer</h3>
 
                 <div>
@@ -33,18 +33,25 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>#</td>
-                                            <td></td>
-                                            <td>
-                                                <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa fa-pencil"></i></a>
-                                                <form action="#" method="post" class="d-inline">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-solid fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        @foreach ($reviewers as $reviewer)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $reviewer->name }}</td>
+                                                <td style="padding: 0">
+                                                    {{-- <a href="#"
+                                                        class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                            class="fa fa-pencil"></i></a> --}}
+                                                    <form action="{{ route('pengaturan-reviewer.destroy', $reviewer->id) }}"
+                                                        method="post" class="d-inline">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                                class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

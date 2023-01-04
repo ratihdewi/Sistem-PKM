@@ -23,6 +23,12 @@ class DeleteLaporanKemajuanController extends Controller
             return back();
         }
 
+        if (isset($document->laporan_kemajuan_comments)) {
+            foreach (json_decode($document->laporan_kemajuan_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/laporan_kemajuan/{$data->file_evaluasi}")));
+            }
+        }
+
         if (isset($document->berkas->laporan_kemajuan)) {
             if ($document->berkas->laporan_kemajuan->luaran_laporan_kemajuan != null || $document->berkas->laporan_kemajuan->file_laporan_kemajuan != null) {
                 unlink((public_path("documents/laporan_kemajuan/{$document->berkas->laporan_kemajuan->luaran_laporan_kemajuan}")));
@@ -32,7 +38,7 @@ class DeleteLaporanKemajuanController extends Controller
             unset($file['laporan_kemajuan']);
         }
 
-        $document->fill(['berkas' => json_encode($file), 'status_laporan_kemajuan' => DocumentStatus::NotSubmitted]);
+        $document->fill(['berkas' => json_encode($file), 'status_laporan_kemajuan' => DocumentStatus::NotSubmitted, 'laporan_kemajuan_comments' => null]);
         $document->save();
 
         return redirect(route('laporan.index'));

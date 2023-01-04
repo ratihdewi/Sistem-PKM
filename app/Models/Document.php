@@ -12,7 +12,7 @@ class Document extends Model
 
     public function skema_pkm()
     {
-        return $this->belongsTo('App\Models\PKM\SkemaPKM', 'skema_pkm_id');
+        return $this->belongsTo('App\Models\Master\SkemaPKM', 'skema_pkm_id');
     }
 
     public function document_owners()
@@ -23,6 +23,11 @@ class Document extends Model
     public function document_checks()
     {
         return $this->hasOne('App\Models\DocumentCheck', 'document_id');
+    }
+
+    public function document_budgets()
+    {
+        return $this->hasMany('App\Models\DocumentBudget', 'document_id');
     }
 
     public function getPendanaanDiktiAttribute($value)

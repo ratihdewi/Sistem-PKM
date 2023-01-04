@@ -28,7 +28,7 @@
         @include('layout.navbar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="margin-top: 200px">
+        <div class="content-wrapper">
             <div class="login-div">
                 <div class="form-container">
                     <form action="{{ route('login.post') }}" method="post">

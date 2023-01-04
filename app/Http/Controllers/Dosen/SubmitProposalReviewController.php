@@ -9,6 +9,7 @@ use App\Models\DocumentCheck;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rule;
 
 class SubmitProposalReviewController extends Controller
 {
@@ -21,8 +22,9 @@ class SubmitProposalReviewController extends Controller
     public function __invoke(Request $request, Document $document)
     {
         $request->validate([
+            'hasil_review' => 'required',
             'komentar' => 'required',
-            'hasil_evaluasi' => 'nullable|mimes:pdf'
+            'hasil_evaluasi' => ['mimes:pdf', Rule::when(($request->hasil_review == 'revision'), ['required'])]
         ]);
 
         $file_hasil_evaluasi = null;
@@ -38,15 +40,16 @@ class SubmitProposalReviewController extends Controller
 
         $comment = [
             'reviewer' => auth()->user()->name,
+            'status' => DocumentStatus::getDescription($request->hasil_review),
             'komentar' => $request->komentar,
             'file_evaluasi' => $file_hasil_evaluasi,
             'waktu' => Carbon::now()->timestamp
         ];
         array_push($comments, $comment);
 
-        if ($request->hasil_review == 'setuju') {
+        if ($request->hasil_review == 'approved') {
             $status_proposal = DocumentStatus::Approved;
-        } elseif ($request->hasil_review == 'revisi') {
+        } elseif ($request->hasil_review == 'revision') {
             $status_proposal = DocumentStatus::Revision;
         }
 

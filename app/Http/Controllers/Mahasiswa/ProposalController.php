@@ -7,8 +7,8 @@ use App\Models\Document;
 use App\Models\DocumentBudget;
 use App\Models\DocumentCheck;
 use App\Models\DocumentOwner;
-use App\Models\PKM\JenisPKM;
-use App\Models\PKM\SkemaPKM;
+use App\Models\Master\JenisPKM;
+use App\Models\Master\SkemaPKM;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class ProposalController extends Controller
     public function create()
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
-        $data_dosen = User::where('role_id', 2)->get();
+        $data_dosen = User::userRoleId(2)->get();
 
         return view('page.mahasiswa.proposal.create', compact('jenis_pkm', 'data_dosen'));
     }
@@ -81,13 +81,24 @@ class ProposalController extends Controller
 
     public function show(Document $document)
     {
-        return view('page.mahasiswa.proposal.review', compact('document'));
+        $comments = collect(json_decode($document->proposal_comments));
+        $comments->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        return view('page.mahasiswa.proposal.review', compact('document', 'comments'));
     }
 
     public function edit(Document $document)
     {
         $jenis_pkm = JenisPKM::orderBy('id', 'asc')->get();
-        $data_dosen = User::where('role_id', 2)->get();
+        $data_dosen = User::userRoleId(2)->get();
 
         return view('page.mahasiswa.proposal.update', compact('document', 'jenis_pkm', 'data_dosen'));
     }
@@ -142,12 +153,31 @@ class ProposalController extends Controller
     public function destroy(Document $document)
     {
         DocumentOwner::where('document_id', $document->id)->delete();
+        DocumentCheck::where('document_id', $document->id)->delete();
 
         $document_budgets = DocumentBudget::where('document_id', $document->id)->get();
 
         foreach ($document_budgets as $data) {
             unlink((public_path("documents/bukti_transaksi/{$data->bukti_transaksi}")));
             $data->delete();
+        }
+
+        if (isset($document->laporan_akhir_comments)) {
+            foreach (json_decode($document->laporan_akhir_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/laporan_akhir/{$data->file_evaluasi}")));
+            }
+        }
+
+        if (isset($document->laporan_kemajuan_comments)) {
+            foreach (json_decode($document->laporan_kemajuan_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/laporan_kemajuan/{$data->file_evaluasi}")));
+            }
+        }
+
+        if (isset($document->proposal_comments)) {
+            foreach (json_decode($document->proposal_comments) as $data) {
+                if ($data->file_evaluasi !== null) unlink((public_path("documents/hasil_evaluasi/proposal/{$data->file_evaluasi}")));
+            }
         }
 
         if (isset($document->berkas->laporan_akhir)) {
@@ -179,7 +209,7 @@ class ProposalController extends Controller
 
     public function mahasiswa(Request $request)
     {
-        $data = User::where('username', $request->mhs)->first();
+        $data = User::where('nomor_induk', $request->mhs)->first();
 
         return $data ?? null;
     }

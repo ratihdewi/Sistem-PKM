@@ -3,7 +3,7 @@
 @section('container')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4 mb-3" style="margin-top: 4%">
+            <div class="container-fluid px-4 mb-3" style="margin-top: 5%">
                 <div class="row">
                     <div class="col">
                         <div class="card bg-light">
