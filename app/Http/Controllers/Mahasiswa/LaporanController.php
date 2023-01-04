@@ -13,7 +13,7 @@ class LaporanController extends Controller
     public function index()
     {
         $documents = Document::whereHas('document_owners', function ($q) {
-            $q->whereJsonContains('id_mahasiswa', (string) auth()->user()->id);
+            $q->where('id_ketua', (string) auth()->user()->id)->orWhereJsonContains('id_anggota', (string) auth()->user()->id);
         })->get();
 
         return view('page.mahasiswa.laporan.index', compact('documents'));

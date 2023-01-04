@@ -19,7 +19,7 @@ class ProposalController extends Controller
     public function index()
     {
         $documents = Document::whereHas('document_owners', function ($q) {
-            $q->whereJsonContains('id_mahasiswa', (string) auth()->user()->id);
+            $q->where('id_ketua', (string) auth()->user()->id)->orWhereJsonContains('id_anggota', (string) auth()->user()->id);
         })->get();
 
         return view('page.mahasiswa.proposal.index', compact('documents'));
@@ -66,10 +66,20 @@ class ProposalController extends Controller
 
         $document = Document::create($validated);
 
+        $id_mahasiswa = $request->anggota_id;
+        $id_mahasiswa = array_unique($id_mahasiswa);
+
+        if (in_array((string) auth()->user()->id, $id_mahasiswa)) {
+            if (($key = array_search((string)auth()->user()->id, $id_mahasiswa)) !== false) {
+                unset($id_mahasiswa[$key]);
+            }
+        }
+
         DocumentOwner::create([
             'document_id' => $document->id,
             'id_dosen' => $request->dosen_pendamping,
-            'id_mahasiswa' => json_encode($request->anggota_id ?? [])
+            'id_ketua' => strval(auth()->user()->id),
+            'id_anggota' => json_encode(array_values($id_mahasiswa) ?? [])
         ]);
 
         DocumentCheck::create([
