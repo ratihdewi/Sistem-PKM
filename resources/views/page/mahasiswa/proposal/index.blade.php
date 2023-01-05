@@ -54,8 +54,8 @@
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
                                         <td>{{ \App\Enums\DocumentStatus::getDescription($document->status_proposal) }}</td>
-                                        <td style="vertical-align: middle;">
-                                            <a class="btn btn-datatable btn-icon btn-transparent-dark me-2"
+                                        <td style="padding: 0">
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark"
                                                 href="{{ route('proposal.edit', $document->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
                                             <form id="delete-proposal"

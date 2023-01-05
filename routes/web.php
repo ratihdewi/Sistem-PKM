@@ -15,7 +15,7 @@ use App\Http\Controllers\Dosen\ReviewProposalController;
 use App\Http\Controllers\Dosen\SubmitLaporanAkhirReviewController;
 use App\Http\Controllers\Dosen\SubmitLaporanKemajuanReviewController;
 use App\Http\Controllers\Dosen\SubmitProposalReviewController;
-use App\Http\Controllers\DownloadBuktiTransaksiController;
+use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\ExportBudgetController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Mahasiswa\LaporanAkhir\DeleteLaporanAkhirController;
@@ -48,7 +48,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout.post');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', HomePageController::class)->name('index');
-    Route::get('/download/{file}', DownloadBuktiTransaksiController::class)->name('download-bukti-transaksi');
+
+    Route::group(['prefix' => 'download'], function () {
+        Route::get('activity_document/{file}', [DownloadFileController::class, 'dokumen_kegiatan'])->name('download-activity-document');
+        Route::get('/bukti_transaksi/{file}', [DownloadFileController::class, 'bukti_transaksi'])->name('download-bukti-transaksi');
+    });
 
     Route::group(['prefix' => 'export'], function () {
         Route::get('laporan_kemajuan_budgets/{document_id}', [ExportBudgetController::class, 'laporan_kemajuan'])->name('kemajuan-budgets.export');

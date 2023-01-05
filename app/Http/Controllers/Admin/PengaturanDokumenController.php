@@ -25,6 +25,7 @@ class PengaturanDokumenController extends Controller
     public function submit(Request $request)
     {
         $validated = $request->validate([
+            'file_name' => 'required',
             'file_sk' => 'required|mimes:pdf'
         ]);
 

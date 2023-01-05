@@ -12,6 +12,14 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3 row">
+                                        <label for="file_name" class="col-sm-3 col-form-label">Nama File</label>
+                                        <div class="col-sm-9">
+                                            <input type="text"
+                                                class="form-control @error('file_name') is-invalid @enderror" id="file_name"
+                                                name="file_name" value="{{ old('file_name') }}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
                                         <label for="jenis_surat" class="col-sm-3 col-form-label">Jenis Surat
                                             Keputusan</label>
                                         <div class="col-sm-9">

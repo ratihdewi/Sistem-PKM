@@ -148,6 +148,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama File</th>
+                                            <th>Jenis Surat</th>
                                             <th>Periode Akademik</th>
                                             <th>Unduh</th>
                                         </tr>
@@ -155,6 +156,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nama File</th>
+                                            <th>Jenis Surat</th>
                                             <th>Periode Akademik</th>
                                             <th>Unduh</th>
                                         </tr>
@@ -162,9 +164,13 @@
                                     <tbody>
                                         @foreach ($dokumen as $item)
                                             <tr>
+                                                <td>{{ $item->file_name }}</td>
                                                 <td>{{ $item->jenis_surat->name }}</td>
                                                 <td>{{ "{$item->tahun_akademik->tahun}-{$item->tahun_akademik->term}" }}</td>
-                                                <td>-</td>
+                                                <td>
+                                                    <a href="{{ route('download-activity-document', $item->file_sk) }}"><i
+                                                            class="ml-2 fa fa-file-arrow-down fa-3x"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -275,76 +281,71 @@
                                 class="fa fa-caret-down"></i></button>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="card mb-4 mt-3">
-                                <div class="card-body">
-                                    <table id="datatablesSimple">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Tahun</th>
-                                                <th>Jenis</th>
-                                                <th>Skema</th>
-                                                <th>Jumlah Usulan</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Tahun</th>
-                                                <th>Jenis</th>
-                                                <th>Skema</th>
-                                                <th>Jumlah Usulan</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <div class="card mb-4 mt-3">
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tahun</th>
+                                        <th>Jenis</th>
+                                        <th>Skema</th>
+                                        <th>Jumlah Usulan</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tahun</th>
+                                        <th>Jenis</th>
+                                        <th>Skema</th>
+                                        <th>Jumlah Usulan</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>xxxxx</td>
+                                        <td>xxxxx</td>
+                                        <td>xxxxx</td>
+                                        <td>xxxxx</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col">
-                            <div class="card mb-4 mt-3">
-                                <div class="card-body">
-                                    <table id="datatablesSimple2">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Tahun</th>
-                                                <th>Prodi</th>
-                                                <th>Jumlah Usulan</th>
-                                                <th>Jumlah Mahasiswa</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Tahun</th>
-                                                <th>Prodi</th>
-                                                <th>Jumlah Usulan</th>
-                                                <th>Jumlah Mahasiswa</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    </div>
+
+                    <div class="card mb-4 mt-3">
+                        <div class="card-body">
+                            <table id="datatablesSimple2">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tahun</th>
+                                        <th>Prodi</th>
+                                        <th>Jumlah Usulan</th>
+                                        <th>Jumlah Mahasiswa</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tahun</th>
+                                        <th>Prodi</th>
+                                        <th>Jumlah Usulan</th>
+                                        <th>Jumlah Mahasiswa</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>xxxxx</td>
+                                        <td>xxxxx</td>
+                                        <td>xxxxx</td>
+                                        <td>xxxxx</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

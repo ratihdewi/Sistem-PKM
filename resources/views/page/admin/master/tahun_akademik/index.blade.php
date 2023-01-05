@@ -36,14 +36,16 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ "{$item->tahun}-{$item->term}" }}</td>
-                                        <td>
-                                            <a href="{{ route('tahun-akademik.edit', $item->id) }}"><i
+                                        <td style="padding: 0">
+                                            <a class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                href="{{ route('tahun-akademik.edit', $item->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
                                             <form action="{{ route('tahun-akademik.destroy', $item->id) }}" method="post"
                                                 class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit"><i class="ml-2 fa fa-trash"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                    type="submit"><i class="ml-2 fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>

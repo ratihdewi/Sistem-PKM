@@ -13,9 +13,10 @@ class DocumentOwner extends Model
 
     public function getDataMahasiswaAttribute()
     {
-        $users = User::whereIn('id', array_map('intval', json_decode($this->id_mahasiswa)))->get(['nomor_induk', 'name']);
+        $ids = json_decode($this->id_anggota);
+        array_unshift($ids, $this->id_ketua);
 
-        return $users;
+        return User::whereIn('id', array_map('intval', $ids))->get(['nomor_induk', 'name']);
     }
 
     public function getDataDosenAttribute()

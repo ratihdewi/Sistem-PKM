@@ -38,9 +38,6 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $reviewer->name }}</td>
                                                 <td style="padding: 0">
-                                                    {{-- <a href="#"
-                                                        class="btn btn-datatable btn-icon btn-transparent-dark"><i
-                                                            class="fa fa-pencil"></i></a> --}}
                                                     <form action="{{ route('pengaturan-reviewer.destroy', $reviewer->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('DELETE')
