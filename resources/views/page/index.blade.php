@@ -303,13 +303,15 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxx</td>
-                                    </tr>
+                                    @foreach ($skema_pkm as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->created_at->format('Y') }}</td>
+                                            <td>{{ $item->jenis_pkm->name }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->jumlah_usulan }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -337,13 +339,15 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxxx</td>
-                                    </tr>
+                                    @foreach ($prodi as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->created_at->format('Y') }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->jumlah_usulan }}</td>
+                                            <td>{{ $item->jumlah_peserta }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
