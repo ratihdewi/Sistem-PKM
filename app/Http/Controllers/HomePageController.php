@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class HomePageController extends Controller
 {
@@ -14,6 +16,14 @@ class HomePageController extends Controller
      */
     public function __invoke()
     {
-        return view('page.index');
+        if (Gate::allows('mahasiswa')) {
+            return view('page.index');
+        } else if (Gate::allows('dosen')) {
+            $dokumen = ActivityDocument::orderBy('id', 'asc')->get();
+
+            return view('page.index', compact('dokumen'));
+        } else {
+            return view('page.index');
+        }
     }
 }

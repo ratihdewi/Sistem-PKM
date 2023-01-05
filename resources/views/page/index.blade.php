@@ -160,18 +160,13 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {{-- 1 --}}
-                                        <tr>
-                                            <td>A</td>
-                                            <td>2020-1</td>
-                                            <td>-</td>
-                                        </tr>
-                                        {{-- 2 --}}
-                                        <tr>
-                                            <td>B</td>
-                                            <td>2020-2</td>
-                                            <td>-</td>
-                                        </tr>
+                                        @foreach ($dokumen as $item)
+                                            <tr>
+                                                <td>{{ $item->jenis_surat->name }}</td>
+                                                <td>{{ "{$item->tahun_akademik->tahun}-{$item->tahun_akademik->term}" }}</td>
+                                                <td>-</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -273,6 +268,85 @@
                 </div>
             @else
                 <div class="container-fluid px-4" style="margin-top: 5%">
+                    <h3 class="mb-3" style="color: #5D7DCF">Rekap Proposal</h3>
+
+                    <div>
+                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tahap Pelaksanaan<i
+                                class="fa fa-caret-down"></i></button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="card mb-4 mt-3">
+                                <div class="card-body">
+                                    <table id="datatablesSimple">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tahun</th>
+                                                <th>Jenis</th>
+                                                <th>Skema</th>
+                                                <th>Jumlah Usulan</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tahun</th>
+                                                <th>Jenis</th>
+                                                <th>Skema</th>
+                                                <th>Jumlah Usulan</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>xxxxx</td>
+                                                <td>xxxxx</td>
+                                                <td>xxxxx</td>
+                                                <td>xxxxx</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card mb-4 mt-3">
+                                <div class="card-body">
+                                    <table id="datatablesSimple2">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tahun</th>
+                                                <th>Prodi</th>
+                                                <th>Jumlah Usulan</th>
+                                                <th>Jumlah Mahasiswa</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tahun</th>
+                                                <th>Prodi</th>
+                                                <th>Jumlah Usulan</th>
+                                                <th>Jumlah Mahasiswa</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>xxxxx</td>
+                                                <td>xxxxx</td>
+                                                <td>xxxxx</td>
+                                                <td>xxxxx</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endcan
         </main>
