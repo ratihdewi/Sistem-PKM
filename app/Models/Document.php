@@ -9,6 +9,7 @@ class Document extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $appends = ['peran'];
 
     public function skema_pkm()
     {
@@ -47,5 +48,17 @@ class Document extends Model
     public function getBerkasAttribute($value)
     {
         return json_decode($value);
+    }
+
+    public function getPeranAttribute(): string
+    {
+        if (auth()->user()->id == $this->document_owners->id_ketua) {
+            return 'Ketua';
+        }
+        if (in_array(auth()->user()->id, json_decode($this->document_owners->id_anggota))) {
+            return 'Anggota';
+        }
+
+        return '';
     }
 }

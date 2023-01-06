@@ -50,7 +50,7 @@
                                             <a href="{{ route('proposal.show', $document->id) }}"
                                                 class="text-decoration-none">{{ $document->judul_proposal }}</a>
                                         </td>
-                                        <td>Ketua/Anggota</td>
+                                        <td>{{ $document->peran }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
                                         <td>{{ \App\Enums\DocumentStatus::getDescription($document->status_proposal) }}</td>
