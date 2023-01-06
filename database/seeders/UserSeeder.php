@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
         $results = $results['data'];
 
         $results = array_filter($results, function ($item) {
-            return !empty($item['positions']) && in_array(str_contains($item['positions'][0]['position'], 'Dosen'), array_column($item['positions'], 'position'));
+            return (($item['username'] !== null && $item['name'] !== null && $item['nip'] !== null) && !empty($item['positions'])) && in_array(str_contains($item['positions'][0]['position'], 'Dosen'), array_column($item['positions'], 'position'));
         });
 
         $results = array_values($results);
