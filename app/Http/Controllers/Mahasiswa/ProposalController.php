@@ -18,7 +18,7 @@ class ProposalController extends Controller
 {
     public function index()
     {
-        $documents = Document::whereHas('document_owners', function ($q) {
+        $documents = Document::with('skema_pkm')->whereHas('document_owners', function ($q) {
             $q->where('id_ketua', (string) auth()->user()->id)->orWhereJsonContains('id_anggota', (string) auth()->user()->id);
         })->get();
 

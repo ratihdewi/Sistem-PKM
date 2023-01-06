@@ -9,7 +9,6 @@ class ActivityDocument extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $with = ['jenis_surat', 'tahun_akademik'];
 
     public function jenis_surat()
     {

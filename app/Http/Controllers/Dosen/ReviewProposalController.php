@@ -11,7 +11,7 @@ class ReviewProposalController extends Controller
 {
     public function index()
     {
-        $documents = Document::whereHas('document_owners', function ($q) {
+        $documents = Document::with(['skema_pkm', 'document_owners'])->whereHas('document_owners', function ($q) {
             $q->where('id_dosen', (string) auth()->user()->id);
         })->get();
 

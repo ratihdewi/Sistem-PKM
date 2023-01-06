@@ -21,11 +21,11 @@ class HomePageController extends Controller
         if (Gate::allows('mahasiswa')) {
             return view('page.index');
         } else if (Gate::allows('dosen')) {
-            $dokumen = ActivityDocument::orderBy('id', 'asc')->get();
+            $dokumen = ActivityDocument::with(['jenis_surat', 'tahun_akademik'])->orderBy('id', 'asc')->get();
 
             return view('page.index', compact('dokumen'));
         } else {
-            $skema_pkm = SkemaPKM::orderBy('id', 'asc')->get();
+            $skema_pkm = SkemaPKM::with(['jenis_pkm', 'documents'])->orderBy('id', 'asc')->get();
             $prodi = Prodi::orderBy('id', 'asc')->get();
 
             return view('page.index', compact('skema_pkm', 'prodi'));

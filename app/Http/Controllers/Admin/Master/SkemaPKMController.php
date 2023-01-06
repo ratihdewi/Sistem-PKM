@@ -11,7 +11,7 @@ class SkemaPKMController extends Controller
 {
     public function index()
     {
-        $skema_pkm = SkemaPKM::orderBy('id', 'asc')->get();
+        $skema_pkm = SkemaPKM::with('jenis_pkm')->orderBy('id', 'asc')->get();
 
         return view('page.admin.master.skema_pkm.index', compact('skema_pkm'));
     }
