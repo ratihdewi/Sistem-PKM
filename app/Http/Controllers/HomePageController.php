@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityDocument;
-use App\Models\Document;
-use App\Models\DocumentOwner;
 use App\Models\Master\Prodi;
 use App\Models\Master\SkemaPKM;
 use Illuminate\Http\Request;

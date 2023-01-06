@@ -9,6 +9,7 @@ class Document extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with = ['skema_pkm', 'document_owners'];
 
     public function skema_pkm()
     {

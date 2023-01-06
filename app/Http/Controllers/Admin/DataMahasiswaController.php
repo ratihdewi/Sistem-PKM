@@ -10,7 +10,7 @@ class DataMahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswa = User::userRoleId(3)->active()->get();
+        $mahasiswa = User::with('prodi')->userRoleId(3)->active()->get();
 
         return view('page.admin.data_mahasiswa.index', compact('mahasiswa'));
     }

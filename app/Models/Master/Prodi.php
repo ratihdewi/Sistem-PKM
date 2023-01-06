@@ -14,16 +14,11 @@ class Prodi extends Model
     protected $guarded = ['id'];
     protected $appends = ['jumlah_usulan', 'jumlah_peserta'];
 
-    public function users()
-    {
-        return $this->hasMany('App\Models\Users', 'prodi_id');
-    }
-
     public function getJumlahUsulanAttribute()
     {
         $documents = DocumentOwner::all();
         $documents = $documents->filter(function ($item) {
-            return $item->prodi_mahasiswa->contains($this->name);
+            return $item->data_mahasiswa->contains('prodi_id', $this->id);
         })->values();
 
         return $documents->count();
@@ -45,6 +40,6 @@ class Prodi extends Model
 
         $ids = array_values(array_unique($ids));
 
-        return User::whereIn('id', $ids)->whereHas('prodi', fn ($q) => $q->where('name', $this->name))->count();
+        return User::whereIn('id', $ids)->where('prodi_id', $this->id)->count();
     }
 }

@@ -16,7 +16,7 @@ class DocumentOwner extends Model
         $ids = json_decode($this->id_anggota);
         array_unshift($ids, $this->id_ketua);
 
-        return User::whereIn('id', array_map('intval', $ids))->get(['nomor_induk', 'name']);
+        return User::whereIn('id', array_map('intval', $ids))->get();
     }
 
     public function getDataDosenAttribute()
@@ -24,13 +24,13 @@ class DocumentOwner extends Model
         return User::where('id', $this->id_dosen)->first();
     }
 
-    public function getProdiMahasiswaAttribute()
-    {
-        $ids = json_decode($this->id_anggota);
-        array_unshift($ids, $this->id_ketua);
+    // public function getProdiMahasiswaAttribute()
+    // {
+    //     $ids = json_decode($this->id_anggota);
+    //     array_unshift($ids, $this->id_ketua);
 
-        $users = User::with('prodi')->whereIn('id', array_map('intval', $ids))->get()->pluck('prodi.name');
+    //     $users = User::with('prodi')->whereIn('id', array_map('intval', $ids))->get()->pluck('prodi.name');
 
-        return $users;
-    }
+    //     return $users;
+    // }
 }
