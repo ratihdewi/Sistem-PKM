@@ -28,17 +28,17 @@ class UserSeeder extends Seeder
             'position' => 'Admin'
         ]);
 
-        // User::create([
-        //     'username' => 'dosen',
-        //     'name' => 'Dosen',
-        //     'nomor_induk' => '',
-        //     'email' => 'dosen@gmail.com',
-        //     'password' => Hash::make('12345'),
-        //     'role_id' => 2,
-        //     'position' => 'Dosen'
-        // ]);
+        User::create([
+            'username' => 'dosen',
+            'name' => 'Dosen',
+            'nomor_induk' => '',
+            'email' => 'dosen@gmail.com',
+            'password' => Hash::make('12345'),
+            'role_id' => 2,
+            'position' => 'Dosen'
+        ]);
 
-        $this->temp_dosen_seeder();
+        // $this->temp_dosen_seeder();
 
         $soap = new SoapApiService();
         $client = $soap->execute();
@@ -60,31 +60,31 @@ class UserSeeder extends Seeder
         }
     }
 
-    private function temp_dosen_seeder()
-    {
-        $masayu = new MasayuApiService();
-        $client = $masayu->execute();
+    // private function temp_dosen_seeder()
+    // {
+    //     $masayu = new MasayuApiService();
+    //     $client = $masayu->execute();
 
-        $responses = $client->get('api/Lecturer');
-        $results = json_decode($responses->getBody()->getContents(), true);
-        $results = $results['data'];
+    //     $responses = $client->get('api/Lecturer');
+    //     $results = json_decode($responses->getBody()->getContents(), true);
+    //     $results = $results['data'];
 
-        $results = array_filter($results, function ($item) {
-            return (($item['username'] !== null && $item['name'] !== null && $item['nip'] !== null) && !empty($item['positions'])) && in_array(str_contains($item['positions'][0]['position'], 'Dosen'), array_column($item['positions'], 'position'));
-        });
+    //     $results = array_filter($results, function ($item) {
+    //         return (($item['username'] !== null && $item['name'] !== null && $item['nip'] !== null) && !empty($item['positions'])) && in_array(str_contains($item['positions'][0]['position'], 'Dosen'), array_column($item['positions'], 'position'));
+    //     });
 
-        $results = array_values($results);
+    //     $results = array_values($results);
 
-        foreach ($results as $data) {
-            User::create([
-                'username' => $data['username'],
-                'name' => $data['name'],
-                'nomor_induk' => $data['nip'],
-                'email' => $data['email'],
-                'password' => Hash::make('12345'),
-                'role_id' => 2,
-                'position' => $data['positions'][0]['position'],
-            ]);
-        }
-    }
+    //     foreach ($results as $data) {
+    //         User::create([
+    //             'username' => $data['username'],
+    //             'name' => $data['name'],
+    //             'nomor_induk' => $data['nip'],
+    //             'email' => $data['email'],
+    //             'password' => Hash::make('12345'),
+    //             'role_id' => 2,
+    //             'position' => $data['positions'][0]['position'],
+    //         ]);
+    //     }
+    // }
 }
