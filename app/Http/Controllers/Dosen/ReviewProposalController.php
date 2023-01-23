@@ -6,14 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ReviewProposalController extends Controller
 {
     public function index()
     {
-        $documents = Document::with(['skema_pkm', 'document_owners'])->whereHas('document_owners', function ($q) {
-            $q->where('id_dosen', (string) auth()->user()->id);
-        })->get();
+        $documents = Document::query();
+
+        if (Gate::allows('is_reviewer')) {
+            $all_documents = $documents->with(['skema_pkm', 'document_owners'])->get();
+
+            $self_documents = $all_documents->filter(function ($item) {
+                return $item->document_owners->id_dosen == (string) auth()->user()->id;
+            });
+            $other_documents = $all_documents->filter(function ($item) {
+                return $item->document_owners->id_dosen != (string) auth()->user()->id;
+            });
+
+            $documents = $self_documents->merge($other_documents);
+        } else {
+            $documents = $documents->with(['skema_pkm', 'document_owners'])->whereHas('document_owners', function ($q) {
+                $q->where('id_dosen', (string) auth()->user()->id);
+            })->get();
+        }
 
         return view('page.dosen.review.index', compact('documents'));
     }

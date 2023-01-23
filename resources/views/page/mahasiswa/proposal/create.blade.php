@@ -169,6 +169,7 @@
                     type: 'GET',
                     url: url,
                     success: function(data) {
+                        console.log(data);
                         $('#skema_pkm').empty()
                         $('#skema_pkm').append(
                             `<option id="select_skema_pkm" selected disabled>Skema PKM</option>`
