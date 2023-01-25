@@ -59,7 +59,6 @@
                                         </td>
                                         <td>Didanai/Ditolak</td>
                                         <td style="padding: 0">
-                                            {{-- <p>{{ $document['data_reviewer'] }}</p> --}}
                                             <a href="#" data-id="{{ $document['id'] }}"
                                                 data-reviewers="{{ $document['data_reviewer'] }}" data-bs-toggle="modal"
                                                 data-bs-target="#reviewer_info"><i class="fa fa-info-circle"></i></a>
@@ -91,7 +90,12 @@
                     .data('reviewers').replace(/(&quot\;)/g, "\"")));
                 console.log(reviewers);
 
-                modal.find('.modal-body #modalDatatable').html(`                
+                modal.find('.modal-body #reviewerTable').html(`
+                    <table id="modalDatatable">
+                    </table>
+                `);
+
+                modal.find('.modal-body #modalDatatable').empty().append(`
                     <thead>
                         <tr>
                             <th>No</th>

@@ -11,8 +11,6 @@
                         <h5>Daftar Reviewer</h5>
                     </div>
                     <div class="card-body" id="reviewerTable">
-                        <table id="modalDatatable">
-                        </table>
                     </div>
                 </div>
 
