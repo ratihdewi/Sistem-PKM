@@ -51,7 +51,7 @@
                         </div>
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"></div>
-                            Pengaturan Konten
+                            Pengumuman
                         </a>
                     @endcan
                     @can('dosen')

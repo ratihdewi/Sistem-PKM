@@ -15,33 +15,12 @@ class JenisPKMController extends Controller
         return view('page.admin.master.jenis_pkm.index', compact('jenis_pkm'));
     }
 
-    public function create()
+    public function change_status(Request $request)
     {
-        //
-    }
+        $jenis_pkm = JenisPKM::find((int) $request->item_id);
+        $jenis_pkm->is_active = (int) $request->status;
+        $jenis_pkm->save();
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        return response()->json(['success' => 'Status changed successfully']);
     }
 }

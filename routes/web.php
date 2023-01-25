@@ -74,6 +74,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('jenis-surat', JenisSuratController::class)->only(['index']);
         Route::resource('jenis-pkm', JenisPKMController::class)->only(['index']);
         Route::resource('skema-pkm', SkemaPKMController::class)->except(['show']);
+
+        Route::post('jenis-pkm/change-status', [JenisPKMController::class, 'change_status'])->name('jenis-pkm.change-status');
     });
 
     Route::group(['middleware' => 'role:Dosen'], function () {
