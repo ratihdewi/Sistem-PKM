@@ -18,10 +18,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tahun</th>
-                                    <th>Skema</th>
+                                    <th>Skema PKM</th>
                                     <th>Judul Pengajuan</th>
                                     <th>Nama Ketua</th>
-                                    <th>NIM</th>
+                                    <th>NIM Ketua</th>
                                     <th>Status Review</th>
                                     <th>Hasil Evaluasi</th>
                                     <th>Keterangan</th>
@@ -32,10 +32,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tahun</th>
-                                    <th>Skema</th>
+                                    <th>Skema PKM</th>
                                     <th>Judul Pengajuan</th>
                                     <th>Nama Ketua</th>
-                                    <th>NIM</th>
+                                    <th>NIM Ketua</th>
                                     <th>Status Review</th>
                                     <th>Hasil Evaluasi</th>
                                     <th>Keterangan</th>
@@ -43,18 +43,29 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2022</td>
-                                    <td>PKM-XX</td>
-                                    <td>ABCDEFGH</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Didanai/Ditolak</td>
-                                    <td></td>
-                                </tr>
+                                @foreach ($documents as $document)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $document['tahun'] }}</td>
+                                        <td>{{ $document['skema_pkm'] }}</td>
+                                        <td>{{ $document['judul_pengajuan'] }}</td>
+                                        <td>{{ $document['nama_ketua'] }}</td>
+                                        <td>{{ $document['nim_ketua'] }}</td>
+                                        <td>
+                                            <a href="#"><i class="fa fa-info-circle"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="#"><i class="fa fa-info-circle"></i></a>
+                                        </td>
+                                        <td>Didanai/Ditolak</td>
+                                        <td style="padding: 0">
+                                            {{-- <p>{{ $document['data_reviewer'] }}</p> --}}
+                                            <a href="#" data-id="{{ $document['id'] }}"
+                                                data-reviewers="{{ $document['data_reviewer'] }}" data-bs-toggle="modal"
+                                                data-bs-target="#reviewer_info"><i class="fa fa-info-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -62,4 +73,79 @@
             </div>
         </main>
     </div>
+
+    @include('page.admin.daftar_usulan.reviewer_info')
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).ready(function() {
+            var currentAnggota = 1;
+
+            $('#reviewer_info').on('show.bs.modal', function(event) {
+                let data = $(event.relatedTarget);
+                let modal = $(this);
+
+                let document_id = data.data('id');
+                let reviewers = (!data.data('reviewers')?.length ? data.data('reviewers') : JSON.parse(data
+                    .data('reviewers').replace(/(&quot\;)/g, "\"")));
+                console.log(reviewers);
+
+                modal.find('.modal-body #modalDatatable').html(`                
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Reviewer</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Reviewer</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        ${reviewers.map(function(item, index) {           
+                            let reviewer_id = `<input id="reviewer_id" type="hidden" name="reviewer_id" value="${item.id}">`;
+                            let delete_button = `<button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-solid fa-trash"></i></button>`;         
+                            let form = `<form id="delete_reviewer" method="post" action="{{ route('daftar-usulan.delete-reviewer') }}">@method('DELETE') @csrf <input id="document_id" type="hidden" name="document_id" value="${document_id}"> ${reviewer_id} ${delete_button}</form>`;  
+
+                            return `<tr><td>${index + 1}</td><td>${item.name}</td><td>${form}</td></tr>`
+                        })}
+                    </tbody>                
+                `);
+                modal.find('.modal-body #document_id').val(document_id);
+
+                const modalDatatable = document.getElementById("modalDatatable");
+                let dataTable = new simpleDatatables.DataTable(modalDatatable);
+            });
+
+            $('#add_anggota').on('click', function() {
+                currentAnggota++;
+
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('daftar-usulan.reviewers') }}",
+                    success: function(data) {
+                        console.log(data);
+                        $('div[id=reviewer]').append(`
+                            <div class="mb-3 row reviewer">
+                                <label for="anggota_` + currentAnggota +
+                            `" class="col-sm-3 col-form-label">Anggota ${currentAnggota.toString()}</label>
+                                <div class="col-sm-7">                                    
+                                    <select class="form-select" name="anggota[]">
+                                        ${data.map(function(item) {
+                                            return `<option value="${item.id}">${item.name}</option>`
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        `);
+                    },
+                });
+            });
+        })
+    </script>
+@endpush

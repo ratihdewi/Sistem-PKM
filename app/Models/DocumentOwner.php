@@ -9,7 +9,7 @@ class DocumentOwner extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $appends = ['data_mahasiswa', 'data_dosen'];
+    protected $appends = ['data_mahasiswa', 'data_dosen', 'data_reviewer'];
 
     public function getDataMahasiswaAttribute()
     {
@@ -22,5 +22,10 @@ class DocumentOwner extends Model
     public function getDataDosenAttribute()
     {
         return User::where('id', $this->id_dosen)->first();
+    }
+
+    public function getDataReviewerAttribute()
+    {
+        return User::whereIn('id', array_map('intval', json_decode($this->id_reviewer)))->get();
     }
 }

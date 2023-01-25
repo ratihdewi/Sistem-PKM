@@ -29,6 +29,10 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
+                                            {{-- {{ $item->is_active }} --}}
+
+                                            {{-- {{ $item->is_active == 1 ? 'Active' : 'Inactive' }} --}}
+
                                             <div class="custom-control custom-switch">
                                                 <input data-id="{{ $item->id }}" type="checkbox"
                                                     class="switching-status custom-control-input" id="{{ $item->name }}"

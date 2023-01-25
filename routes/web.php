@@ -60,7 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'role:Admin'], function () {
-        Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
+        Route::group(['prefix' => 'daftar-usulan'], function () {
+            Route::get('', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
+            Route::get('reviewers', [DaftarUsulanController::class, 'reviewers'])->name('daftar-usulan.reviewers');
+            Route::post('add-reviewer', [DaftarUsulanController::class, 'add_reviewer'])->name('daftar-usulan.add-reviewer');
+            Route::delete('delete-reviewer', [DaftarUsulanController::class, 'delete_reviewer'])->name('daftar-usulan.delete-reviewer');
+        });
 
         Route::group(['prefix' => 'pengaturan-dokumen'], function () {
             Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');

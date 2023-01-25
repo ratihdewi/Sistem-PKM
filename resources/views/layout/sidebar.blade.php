@@ -13,10 +13,10 @@
                             <div class="sb-nav-link-icon"></div>
                             Daftar Usulan
                         </a>
-                        <a class="nav-link" href="{{ route('daftar-usulan.index') }}">
+                        {{-- <a class="nav-link" href="{{ route('daftar-usulan.index') }}">
                             <div class="sb-nav-link-icon"></div>
                             Daftar Usulan Didanai
-                        </a>
+                        </a> --}}
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseDataPendukung" aria-expanded="false"
                             aria-controls="collapseDataPendukung">
