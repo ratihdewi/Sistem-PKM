@@ -15,7 +15,9 @@ class ReviewProposalController extends Controller
         $documents = Document::query();
 
         if (Gate::allows('is_reviewer')) {
-            $all_documents = $documents->with(['skema_pkm', 'document_owners'])->get();
+            $all_documents = $documents->with('skema_pkm')->whereHas('document_owners', function ($q) {
+                $q->where('id_dosen', (string) auth()->user()->id)->orWhereJsonContains('id_reviewer', (string) auth()->user()->id);
+            })->get();
 
             $self_documents = $all_documents->filter(function ($item) {
                 return $item->document_owners->id_dosen == (string) auth()->user()->id;

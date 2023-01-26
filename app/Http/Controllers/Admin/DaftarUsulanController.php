@@ -34,7 +34,7 @@ class DaftarUsulanController extends Controller
 
     public function reviewers()
     {
-        return User::userRoleId(2)->active()->get();
+        return User::userRoleId(2)->active()->reviewer()->get();
     }
 
     public function add_reviewer(Request $request)
