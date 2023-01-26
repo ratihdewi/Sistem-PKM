@@ -32,11 +32,6 @@ class DaftarUsulanController extends Controller
         return view('page.admin.daftar_usulan.index', compact('documents', 'reviewers'));
     }
 
-    public function reviewers()
-    {
-        return User::userRoleId(2)->active()->reviewer()->get();
-    }
-
     public function add_reviewer(Request $request)
     {
         $document_owners = DocumentOwner::where('document_id', (int) $request->document_id)->first();
@@ -58,6 +53,13 @@ class DaftarUsulanController extends Controller
         $document_owners = DocumentOwner::where('document_id', (int) $request->document_id)->first();
         $id_reviewer = json_decode($document_owners->id_reviewer);
 
+        $proposal_comments = json_decode($document_owners->document->proposal_comments);
+        $checkReviewerApproval = array_search($request->reviewer_name, array_column($proposal_comments, 'reviewer'));
+
+        if ($checkReviewerApproval !== false) {
+            return back();
+        }
+
         if (in_array($request->reviewer_id, $id_reviewer)) {
             if (($key = array_search($request->reviewer_id, $id_reviewer)) !== false) {
                 unset($id_reviewer[$key]);
@@ -68,5 +70,15 @@ class DaftarUsulanController extends Controller
         $document_owners->save();
 
         return redirect(route('daftar-usulan.index'));
+    }
+
+    public function reviewers()
+    {
+        return User::userRoleId(2)->active()->reviewer()->get();
+    }
+
+    public function document($document_id)
+    {
+        return Document::where('id', (int) $document_id)->first();
     }
 }

@@ -62,9 +62,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:Admin'], function () {
         Route::group(['prefix' => 'daftar-usulan'], function () {
             Route::get('', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
-            Route::get('reviewers', [DaftarUsulanController::class, 'reviewers'])->name('daftar-usulan.reviewers');
             Route::post('add-reviewer', [DaftarUsulanController::class, 'add_reviewer'])->name('daftar-usulan.add-reviewer');
             Route::delete('delete-reviewer', [DaftarUsulanController::class, 'delete_reviewer'])->name('daftar-usulan.delete-reviewer');
+            Route::get('reviewers', [DaftarUsulanController::class, 'reviewers'])->name('daftar-usulan.reviewers'); //AJAX
+            Route::get('document/{document_id}', [DaftarUsulanController::class, 'document'])->name('daftar-usulan.document'); //AJAX
         });
 
         Route::group(['prefix' => 'pengaturan-dokumen'], function () {
@@ -80,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('jenis-pkm', JenisPKMController::class)->only(['index']);
         Route::resource('skema-pkm', SkemaPKMController::class)->except(['show']);
 
-        Route::post('jenis-pkm/change-status', [JenisPKMController::class, 'change_status'])->name('jenis-pkm.change-status');
+        Route::post('jenis-pkm/change-status', [JenisPKMController::class, 'change_status'])->name('jenis-pkm.change-status'); //AJAX
     });
 
     Route::group(['middleware' => 'role:Dosen'], function () {
@@ -94,8 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'role:Mahasiswa'], function () {
-        Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema');
-        Route::get('/proposal/mahasiswa', [ProposalController::class, 'mahasiswa'])->name('mahasiswa');
+        Route::get('/proposal/skema-pkm/{parent_id}', [ProposalController::class, 'skema_pkm'])->name('skema'); //AJAX
+        Route::get('/proposal/mahasiswa', [ProposalController::class, 'mahasiswa'])->name('mahasiswa'); //AJAX
 
         Route::resources([
             '/proposal' => ProposalController::class,

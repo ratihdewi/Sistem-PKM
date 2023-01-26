@@ -95,35 +95,52 @@
                     </table>
                 `);
 
-                modal.find('.modal-body #modalDatatable').empty().append(`
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Reviewer</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Reviewer</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        ${reviewers.map(function(item, index) {           
-                            let reviewer_id = `<input id="reviewer_id" type="hidden" name="reviewer_id" value="${item.id}">`;
-                            let delete_button = `<button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fa-solid fa-trash"></i></button>`;         
-                            let form = `<form id="delete_reviewer" method="post" action="{{ route('daftar-usulan.delete-reviewer') }}">@method('DELETE') @csrf <input id="document_id" type="hidden" name="document_id" value="${document_id}"> ${reviewer_id} ${delete_button}</form>`;  
+                let url = "{{ route('daftar-usulan.document', ':document_id') }}";
+                url = url.replace(':document_id', document_id);
 
-                            return `<tr><td>${index + 1}</td><td>${item.name}</td><td>${form}</td></tr>`
-                        })}
-                    </tbody>                
-                `);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function(data) {
+                        let result = JSON.parse(data.proposal_comments)
+                        console.log(result);
+
+                        modal.find('.modal-body #modalDatatable').empty().append(`
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Reviewer</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Reviewer</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                ${reviewers.map(function(item, index) {  
+                                    const checkName = (obj) => obj.reviewer == item.name;
+                                    const resultCheck = result.some(checkName);
+                                    
+                                    let disabledStyle = resultCheck ? 'style="opacity: 0.5; cursor: default; pointer-events: none"' : '';
+                                    let reviewer_id = `<input id="reviewer_id" type="hidden" name="reviewer_id" value="${item.id}">`;
+                                    let reviewer_name = `<input id="reviewer_name" type="hidden" name="reviewer_name" value="${item.name}">`;
+                                    let delete_button = `<button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark" ${disabledStyle}><i class="fa-solid fa-trash"></i></button>`;         
+                                    let form = `<form id="delete_reviewer" method="post" action="{{ route('daftar-usulan.delete-reviewer') }}">@method('DELETE') @csrf <input id="document_id" type="hidden" name="document_id" value="${document_id}"> ${reviewer_id} ${reviewer_name} ${delete_button}</form>`;
+
+                                    return `<tr><td>${index + 1}</td><td>${item.name}</td><td>${form}</td></tr>`
+                                })}
+                            </tbody>                
+                        `);
+
+                        const modalDatatable = document.getElementById("modalDatatable");
+                        let dataTable = new simpleDatatables.DataTable(modalDatatable);
+                    },
+                });
                 modal.find('.modal-body #document_id').val(document_id);
-
-                const modalDatatable = document.getElementById("modalDatatable");
-                let dataTable = new simpleDatatables.DataTable(modalDatatable);
             });
 
             $('#add_anggota').on('click', function() {

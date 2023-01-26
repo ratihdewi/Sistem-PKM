@@ -11,6 +11,11 @@ class DocumentOwner extends Model
     protected $guarded = ['id'];
     protected $appends = ['data_mahasiswa', 'data_dosen', 'data_reviewer'];
 
+    public function document()
+    {
+        return $this->belongsTo('App\Models\Document', 'document_id');
+    }
+
     public function getDataMahasiswaAttribute()
     {
         $ids = json_decode($this->id_anggota);
