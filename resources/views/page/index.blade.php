@@ -282,74 +282,86 @@
                     </div>
 
                     <div class="card mb-4 mt-3">
+                        <div class="card-header">
+                            <h5>Rekap Berdasarkan Skema PKM</h5>
+                        </div>
                         <div class="card-body">
-                            <table id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tahun</th>
-                                        <th>Jenis</th>
-                                        <th>Skema</th>
-                                        <th>Jumlah Usulan</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tahun</th>
-                                        <th>Jenis</th>
-                                        <th>Skema</th>
-                                        <th>Jumlah Usulan</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    @foreach ($skema_pkm as $item)
+                            <div class="row mt-2" id="rekap_skema_pkm_highchart"></div>
+                            <div class="row mt-2">
+                                <table id="datatablesSimple">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->created_at->format('Y') }}</td>
-                                            <td>{{ $item->jenis_pkm->name }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->jumlah_usulan }}</td>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Jenis</th>
+                                            <th>Skema</th>
+                                            <th>Jumlah Usulan</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Jenis</th>
+                                            <th>Skema</th>
+                                            <th>Jumlah Usulan</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach ($skema_pkm as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->created_at->format('Y') }}</td>
+                                                <td>{{ $item->jenis_pkm->name }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->jumlah_usulan }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card mb-4 mt-3">
+                        <div class="card-header">
+                            <h5>Rekap Berdasarkan Prodi</h5>
+                        </div>
                         <div class="card-body">
-                            <table id="datatablesSimple2">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tahun</th>
-                                        <th>Prodi</th>
-                                        <th>Jumlah Usulan</th>
-                                        <th>Jumlah Mahasiswa</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tahun</th>
-                                        <th>Prodi</th>
-                                        <th>Jumlah Usulan</th>
-                                        <th>Jumlah Mahasiswa</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    @foreach ($prodi as $item)
+                            <div class="row mt-2" id="rekap_prodi_highchart"></div>
+                            <div class="row mt-2">
+                                <table id="datatablesSimple2">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->created_at->format('Y') }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->jumlah_usulan }}</td>
-                                            <td>{{ $item->jumlah_peserta }}</td>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Prodi</th>
+                                            <th>Jumlah Usulan</th>
+                                            <th>Jumlah Mahasiswa</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Prodi</th>
+                                            <th>Jumlah Usulan</th>
+                                            <th>Jumlah Mahasiswa</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach ($prodi as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->created_at->format('Y') }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->jumlah_usulan }}</td>
+                                                <td>{{ $item->jumlah_peserta }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -357,3 +369,97 @@
         </main>
     </div>
 @endsection
+
+@push('extra_js')
+    @can('admin')
+        <script type="text/javascript">
+            var skema_pkm = <?php echo json_encode($skema_pkm); ?>;
+            var skema_pkm_name = skema_pkm.map(function(item) {
+                return item.name;
+            });
+            var jumlah_usulan = skema_pkm.map(function(item) {
+                return item.jumlah_usulan;
+            });
+
+            Highcharts.chart('rekap_skema_pkm_highchart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Rekap Berdasarkan Skema PKM'
+                },
+                xAxis: {
+                    categories: skema_pkm_name
+                },
+                yAxis: {
+                    title: {
+                        text: 'Jumlah'
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
+                },
+                series: [{
+                    name: 'Usulan',
+                    data: jumlah_usulan
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        }
+                    }]
+                }
+            });
+
+            var prodi = <?php echo json_encode($prodi); ?>;
+            var prodi_name = prodi.map(function(item) {
+                return item.name;
+            });
+            var jumlah_usulan = prodi.map(function(item) {
+                return item.jumlah_usulan;
+            });
+            var jumlah_peserta = prodi.map(function(item) {
+                return item.jumlah_peserta;
+            });
+
+            Highcharts.chart('rekap_prodi_highchart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Rekap Berdasarkan Prodi'
+                },
+                xAxis: {
+                    categories: prodi_name
+                },
+                yAxis: {
+                    title: {
+                        text: 'Jumlah'
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
+                },
+                series: [{
+                    name: 'Usulan',
+                    data: jumlah_usulan
+                }, {
+                    name: 'Peserta',
+                    data: jumlah_peserta
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        }
+                    }]
+                }
+            });
+        </script>
+    @endcan
+@endpush
