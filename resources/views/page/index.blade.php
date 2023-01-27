@@ -276,18 +276,13 @@
                 <div class="container-fluid px-4" style="margin-top: 5%">
                     <h3 class="mb-3" style="color: #5D7DCF">Rekap Proposal</h3>
 
-                    <div>
-                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tahap Pelaksanaan<i
-                                class="fa fa-caret-down"></i></button>
-                    </div>
-
                     <div class="card mb-4 mt-3">
                         {{-- <div class="card-header">
                             <h5>Rekap Berdasarkan Skema PKM</h5>
                         </div> --}}
                         <div class="card-body">
-                            <div class="row mt-2" id="rekap_skema_pkm_highchart"></div>
-                            <div class="row mt-2">
+                            <div class="row" id="rekap_skema_pkm_highchart"></div>
+                            <div class="row mt-3">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
@@ -328,8 +323,8 @@
                             <h5>Rekap Berdasarkan Prodi</h5>
                         </div> --}}
                         <div class="card-body">
-                            <div class="row mt-2" id="rekap_prodi_highchart"></div>
-                            <div class="row mt-2">
+                            <div class="row" id="rekap_prodi_highchart"></div>
+                            <div class="row mt-3">
                                 <table id="datatablesSimple2">
                                     <thead>
                                         <tr>

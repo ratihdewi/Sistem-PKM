@@ -6,11 +6,6 @@
             <div class="container-fluid px-4" style="margin-top: 5%">
                 <h3 class="mb-3" style="color: #5D7DCF">Rekap Proposal</h3>
 
-                <div>
-                    <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Sort By<i
-                            class="fa fa-caret-down"></i></button>
-                </div>
-
                 <div class="card mb-4 mt-3">
                     <div class="card-body">
                         <table id="datatablesSimple">
