@@ -282,9 +282,9 @@
                     </div>
 
                     <div class="card mb-4 mt-3">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <h5>Rekap Berdasarkan Skema PKM</h5>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
                             <div class="row mt-2" id="rekap_skema_pkm_highchart"></div>
                             <div class="row mt-2">
@@ -324,9 +324,9 @@
                     </div>
 
                     <div class="card mb-4 mt-3">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <h5>Rekap Berdasarkan Prodi</h5>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
                             <div class="row mt-2" id="rekap_prodi_highchart"></div>
                             <div class="row mt-2">
@@ -374,11 +374,21 @@
     @can('admin')
         <script type="text/javascript">
             var skema_pkm = <?php echo json_encode($skema_pkm); ?>;
-            var skema_pkm_name = skema_pkm.map(function(item) {
-                return item.name;
-            });
-            var jumlah_usulan = skema_pkm.map(function(item) {
-                return item.jumlah_usulan;
+            let jenis_pkm = function(skema_pkm, value) {
+                var jenis_pkm = skema_pkm.filter(function(item) {
+                    return item.jenis_pkm.name === value;
+                });
+
+                return {
+                    name: value,
+                    y: jenis_pkm.length,
+                    drilldown: value.toLowerCase(),
+                };
+            };
+            let skema_pkm_data = (value) => skema_pkm.filter(function(item) {
+                return item.jenis_pkm.name === value;
+            }).map(function(item) {
+                return [item.name, item.jumlah_usulan];
             });
 
             Highcharts.chart('rekap_skema_pkm_highchart', {
@@ -389,12 +399,15 @@
                     text: 'Rekap Berdasarkan Skema PKM'
                 },
                 xAxis: {
-                    categories: skema_pkm_name
+                    type: 'category'
                 },
                 yAxis: {
                     title: {
                         text: 'Jumlah'
                     }
+                },
+                legend: {
+                    enabled: false
                 },
                 plotOptions: {
                     series: {
@@ -402,9 +415,29 @@
                     }
                 },
                 series: [{
-                    name: 'Usulan',
-                    data: jumlah_usulan
+                    name: 'Skema',
+                    colorByPoint: true,
+                    data: [
+                        jenis_pkm(skema_pkm, 'PKM 8 Bidang'),
+                        jenis_pkm(skema_pkm, 'PKM Artikel Ilmiah'),
+                        jenis_pkm(skema_pkm, 'PKM Gagasan Futuristik Tertulis')
+                    ]
                 }],
+                drilldown: {
+                    series: [{
+                        name: 'Usulan',
+                        id: "PKM 8 Bidang".toLowerCase(),
+                        data: skema_pkm_data('PKM 8 Bidang')
+                    }, {
+                        name: 'Usulan',
+                        id: "PKM Artikel Ilmiah".toLowerCase(),
+                        data: skema_pkm_data('PKM Artikel Ilmiah')
+                    }, {
+                        name: 'Usulan',
+                        id: "PKM Gagasan Futuristik Tertulis".toLowerCase(),
+                        data: skema_pkm_data('PKM Gagasan Futuristik Tertulis')
+                    }]
+                },
                 responsive: {
                     rules: [{
                         condition: {
@@ -415,13 +448,13 @@
             });
 
             var prodi = <?php echo json_encode($prodi); ?>;
-            var prodi_name = prodi.map(function(item) {
+            let prodi_name = prodi.map(function(item) {
                 return item.name;
             });
-            var jumlah_usulan = prodi.map(function(item) {
+            let jumlah_usulan = prodi.map(function(item) {
                 return item.jumlah_usulan;
             });
-            var jumlah_peserta = prodi.map(function(item) {
+            let jumlah_peserta = prodi.map(function(item) {
                 return item.jumlah_peserta;
             });
 

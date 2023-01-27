@@ -60,6 +60,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Highcharts -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <script src="{{ asset('assets/js/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
