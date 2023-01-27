@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Master\SkemaPKMController;
 use App\Http\Controllers\Admin\Master\TahunAkademikController;
 use App\Http\Controllers\Admin\PengaturanDokumenController;
 use App\Http\Controllers\Admin\PengaturanReviewerController;
+use App\Http\Controllers\Admin\PengumumanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dosen\ReviewProposalController;
 use App\Http\Controllers\Dosen\SubmitLaporanAkhirReviewController;
@@ -68,6 +69,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('document/{document_id}', [DaftarUsulanController::class, 'document'])->name('daftar-usulan.document'); //AJAX
         });
 
+        Route::group(['prefix' => 'pengumuman'], function () {
+            Route::get('create', [PengumumanController::class, 'create'])->name('pengumuman.create');
+            Route::post('submit', [PengumumanController::class, 'submit'])->name('pengumuman.submit');
+        });
         Route::group(['prefix' => 'pengaturan-dokumen'], function () {
             Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');
             Route::post('submit', [PengaturanDokumenController::class, 'submit'])->name('pengaturan-dokumen.submit');
