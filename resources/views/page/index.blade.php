@@ -49,88 +49,19 @@
                                 <h6>Informasi dan Pengumuman</h6>
                             </div>
                             <div class="card-body">
-                                <div class="timeline timeline-xs">
-                                    <!-- Timeline Item 1-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">1 min</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
+                                <div class="timeline  timeline-xs">
+                                    @foreach ($pengumuman as $item)
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                <div class="timeline-item-marker-text">{{ $item->created_at->diffForHumans() }}
+                                                </div>
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                {!! $item->text !!}
+                                            </div>
                                         </div>
-                                        <div class="timeline-item-content">
-                                            New order placed!
-                                            <a class="fw-bold text-dark" href="#!">Order #2912</a>
-                                            has been successfully placed. <span class="badge bg-primary">New</span>
-                                        </div>
-                                    </div>
-                                    <!-- Timeline Item 2-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">58 min</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">
-                                            Your
-                                            <a class="fw-bold text-dark" href="#!">weekly report</a>
-                                            has been generated and is ready to view.
-                                        </div>
-                                    </div>
-
-                                    {{-- <!-- Timeline Item 3-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">2 hrs</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">
-                                            New user
-                                            <a class="fw-bold text-dark" href="#!">Valerie Luna</a>
-                                            has registered
-                                        </div>
-                                    </div>
-                                    <!-- Timeline Item 4-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">1 day</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">Server activity monitor alert</div>
-                                    </div>
-                                    <!-- Timeline Item 5-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">1 day</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">
-                                            New order placed!
-                                            <a class="fw-bold text-dark" href="#!">Order #2911</a>
-                                            has been successfully placed.
-                                        </div>
-                                    </div>
-                                    <!-- Timeline Item 6-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">1 day</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">
-                                            Details for
-                                            <a class="fw-bold text-dark" href="#!">Marketing and Planning Meeting</a>
-                                            have been updated.
-                                        </div>
-                                    </div>
-                                    <!-- Timeline Item 7-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">2 days</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">
-                                            New order placed!
-                                            <a class="fw-bold text-dark" href="#!">Order #2910</a>
-                                            has been successfully placed.
-                                        </div>
-                                    </div> --}}
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -186,87 +117,18 @@
                             </div>
                             <div class="card-body">
                                 <div class="timeline timeline-xs">
-                                    <!-- Timeline Item 1-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">1 min</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
+                                    @foreach ($pengumuman as $item)
+                                        <div class="timeline-item">
+                                            <div class="timeline-item-marker">
+                                                <div class="timeline-item-marker-text">{{ $item->created_at->diffForHumans() }}
+                                                </div>
+                                                <div class="timeline-item-marker-indicator bg-primary"></div>
+                                            </div>
+                                            <div class="timeline-item-content">
+                                                {!! $item->text !!}
+                                            </div>
                                         </div>
-                                        <div class="timeline-item-content">
-                                            New order placed!
-                                            <a class="fw-bold text-dark" href="#!">Order #2912</a>
-                                            has been successfully placed. <span class="badge bg-primary">New</span>
-                                        </div>
-                                    </div>
-                                    <!-- Timeline Item 2-->
-                                    <div class="timeline-item">
-                                        <div class="timeline-item-marker">
-                                            <div class="timeline-item-marker-text">58 min</div>
-                                            <div class="timeline-item-marker-indicator bg-primary"></div>
-                                        </div>
-                                        <div class="timeline-item-content">
-                                            Your
-                                            <a class="fw-bold text-dark" href="#!">weekly report</a>
-                                            has been generated and is ready to view.
-                                        </div>
-                                    </div>
-
-                                    {{-- <!-- Timeline Item 3-->
-                                <div class="timeline-item">
-                                    <div class="timeline-item-marker">
-                                        <div class="timeline-item-marker-text">2 hrs</div>
-                                        <div class="timeline-item-marker-indicator bg-primary"></div>
-                                    </div>
-                                    <div class="timeline-item-content">
-                                        New user
-                                        <a class="fw-bold text-dark" href="#!">Valerie Luna</a>
-                                        has registered
-                                    </div>
-                                </div>
-                                <!-- Timeline Item 4-->
-                                <div class="timeline-item">
-                                    <div class="timeline-item-marker">
-                                        <div class="timeline-item-marker-text">1 day</div>
-                                        <div class="timeline-item-marker-indicator bg-primary"></div>
-                                    </div>
-                                    <div class="timeline-item-content">Server activity monitor alert</div>
-                                </div>
-                                <!-- Timeline Item 5-->
-                                <div class="timeline-item">
-                                    <div class="timeline-item-marker">
-                                        <div class="timeline-item-marker-text">1 day</div>
-                                        <div class="timeline-item-marker-indicator bg-primary"></div>
-                                    </div>
-                                    <div class="timeline-item-content">
-                                        New order placed!
-                                        <a class="fw-bold text-dark" href="#!">Order #2911</a>
-                                        has been successfully placed.
-                                    </div>
-                                </div>
-                                <!-- Timeline Item 6-->
-                                <div class="timeline-item">
-                                    <div class="timeline-item-marker">
-                                        <div class="timeline-item-marker-text">1 day</div>
-                                        <div class="timeline-item-marker-indicator bg-primary"></div>
-                                    </div>
-                                    <div class="timeline-item-content">
-                                        Details for
-                                        <a class="fw-bold text-dark" href="#!">Marketing and Planning Meeting</a>
-                                        have been updated.
-                                    </div>
-                                </div>
-                                <!-- Timeline Item 7-->
-                                <div class="timeline-item">
-                                    <div class="timeline-item-marker">
-                                        <div class="timeline-item-marker-text">2 days</div>
-                                        <div class="timeline-item-marker-indicator bg-primary"></div>
-                                    </div>
-                                    <div class="timeline-item-content">
-                                        New order placed!
-                                        <a class="fw-bold text-dark" href="#!">Order #2910</a>
-                                        has been successfully placed.
-                                    </div>
-                                </div> --}}
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsActiveColumnToUsersTable extends Migration
+class AddSkemaPkmIdColumnToActivityDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddIsActiveColumnToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('is_active')->after('is_reviewer')->default(1);
+        Schema::table('activity_documents', function (Blueprint $table) {
+            $table->integer('skema_pkm_id')->after('tahun_akademik_id')->unsigned()->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddIsActiveColumnToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_active');
+        Schema::table('activity_documents', function (Blueprint $table) {
+            $table->dropColumn('skema_pkm_id');
         });
     }
 }

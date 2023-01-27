@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityDocument;
+use App\Models\Announcement;
 use App\Models\Document;
 use App\Models\Master\Prodi;
 use App\Models\Master\SkemaPKM;
@@ -21,12 +22,14 @@ class HomePageController extends Controller
     {
         if (Gate::allows('mahasiswa')) {
             $peran = $this->checkFileRole();
+            $pengumuman = Announcement::orderBy('created_at', 'desc')->get();
 
-            return view('page.index', compact('peran'));
+            return view('page.index', compact('peran', 'pengumuman'));
         } else if (Gate::allows('dosen')) {
-            $dokumen = ActivityDocument::with(['jenis_surat', 'tahun_akademik'])->orderBy('id', 'asc')->get();
+            $dokumen = ActivityDocument::with(['jenis_surat', 'tahun_akademik'])->whereJsonContains('id_reviewer', (string) auth()->user()->id)->orderBy('id', 'asc')->get();
+            $pengumuman = Announcement::orderBy('created_at', 'desc')->get();
 
-            return view('page.index', compact('dokumen'));
+            return view('page.index', compact('dokumen', 'pengumuman'));
         } else {
             $skema_pkm = SkemaPKM::with(['jenis_pkm', 'documents'])->orderBy('id', 'asc')->get();
             $prodi = Prodi::orderBy('id', 'asc')->get();
