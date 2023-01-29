@@ -30,6 +30,11 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="login-div">
+                @if (session()->has('error'))
+                    <div class="alert alert-danger text-center mx-auto w-75" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="form-container">
                     <form action="{{ route('login.post') }}" method="post">
                         @csrf
