@@ -20,14 +20,14 @@
                                 <label class="form-label">Deskripsi Item</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="deskripsi_item" name="deskripsi_item"
-                                        autocomplete="off">
+                                        autocomplete="off" required='required'>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Jumlah</label>
                                 <div class="form-group">
                                     <input type="number" class="form-control" id="jumlah" name="jumlah"
-                                        autocomplete="off">
+                                        autocomplete="off" required='required'>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                         <span class="input-group-text">Rp</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" id="harga_satuan"
-                                            name="harga_satuan" autocomplete="off">
+                                            name="harga_satuan" autocomplete="off" required='required'>
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
@@ -82,14 +82,14 @@
                                 <label class="form-label">Deskripsi Item</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="deskripsi_item"
-                                        name="deskripsi_item" autocomplete="off">
+                                        name="deskripsi_item" autocomplete="off" required='required'>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label">Jumlah</label>
                                 <div class="form-group">
                                     <input type="number" class="form-control" id="jumlah" name="jumlah"
-                                        autocomplete="off">
+                                        autocomplete="off" required='required'>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                         <span class="input-group-text">Rp</span>
                                         <input type="text" class="form-control"
                                             aria-label="Amount (to the nearest dollar)" id="harga_satuan"
-                                            name="harga_satuan" autocomplete="off">
+                                            name="harga_satuan" autocomplete="off" required='required'>
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
