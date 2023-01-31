@@ -55,7 +55,7 @@ class SubmitLaporanKemajuanReviewController extends Controller
         $document->fill(['status_laporan_kemajuan' => $status_laporan_kemajuan, 'laporan_kemajuan_comments' => json_encode($comments)]);
         $document->save();
 
-        return redirect(route('review.index'));
+        return redirect(route('review.index'))->with('success', 'Laporan kemajuan berhasil ditinjau');
     }
 
     private function upload($name, UploadedFile $file, $folder)

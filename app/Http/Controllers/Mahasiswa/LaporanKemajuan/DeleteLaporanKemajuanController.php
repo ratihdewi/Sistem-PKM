@@ -41,6 +41,6 @@ class DeleteLaporanKemajuanController extends Controller
         $document->fill(['berkas' => json_encode($file), 'status_laporan_kemajuan' => DocumentStatus::NotSubmitted, 'laporan_kemajuan_comments' => null]);
         $document->save();
 
-        return redirect(route('laporan.index'));
+        return redirect(route('laporan.index'))->with('success', 'Laporan kemajuan berhasil dihapus');
     }
 }

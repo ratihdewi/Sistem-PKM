@@ -67,7 +67,7 @@ class SubmitProposalReviewController extends Controller
             'format_pendukung' => ($request->has('format_pendukung')) ? 0 : 1,
         ]);
 
-        return redirect(route('review.index'));
+        return redirect(route('review.index'))->with('success', 'Proposal berhasil ditinjau');
     }
 
     private function upload($name, UploadedFile $file, $folder)

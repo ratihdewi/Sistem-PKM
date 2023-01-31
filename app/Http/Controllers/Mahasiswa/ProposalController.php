@@ -86,7 +86,7 @@ class ProposalController extends Controller
             'document_id' => $document->id
         ]);
 
-        return redirect(route('proposal.index'));
+        return redirect(route('proposal.index'))->with('success', 'Proposal berhasil diajukan');
     }
 
     public function show(Document $document)
@@ -122,11 +122,6 @@ class ProposalController extends Controller
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
             'proposal' => 'nullable|mimes:pdf',
-            'anggota_1' => 'required',
-            'anggota_2' => 'nullable',
-            'anggota_3' => 'nullable',
-            'anggota_4' => 'nullable',
-            'dosen_pendamping' => 'required'
         ]);
 
         $proposal_name = null;
@@ -152,12 +147,24 @@ class ProposalController extends Controller
         $document->fill($validated);
         $document->save();
 
+        $id_mahasiswa = $request->anggota_id;
+
+        if ($id_mahasiswa !== null) {
+            $id_mahasiswa = array_unique($id_mahasiswa) ?? [];
+
+            if (in_array((string) auth()->user()->id, $id_mahasiswa)) {
+                if (($key = array_search((string)auth()->user()->id, $id_mahasiswa)) !== false) {
+                    unset($id_mahasiswa[$key]);
+                }
+            }
+        }
+
         DocumentOwner::where('document_id', $document->id)->update([
-            'id_dosen' => $request->dosen_pendamping,
-            'id_mahasiswa' => json_encode([$request->anggota_1_id, $request->anggota_2_id, $request->anggota_3_id, $request->anggota_4_id] ?? [])
+            'id_dosen' => $request->dosen_pendamping ?? $document->document_owners->id_dosen,
+            'id_anggota' => $id_mahasiswa !== null ? json_encode(array_values($id_mahasiswa)) : $document->document_owners->id_anggota
         ]);
 
-        return redirect(route('proposal.index'));
+        return redirect(route('proposal.index'))->with('success', 'Proposal berhasil diubah');
     }
 
     public function destroy(Document $document)
@@ -207,7 +214,7 @@ class ProposalController extends Controller
         unlink(public_path("documents/proposal/{$document->berkas->proposal->file_proposal}"));
         $document->delete();
 
-        return redirect(route('proposal.index'));
+        return redirect(route('proposal.index'))->with('success', 'Proposal berhasil dihapus');
     }
 
     public function skema_pkm($parent_id)

@@ -4,6 +4,14 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 5%">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="width: 35%; margin-left: auto; margin-right: 0;">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+                @endif
+
                 <div>
                     <a href="{{ route('proposal.create') }}">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Ajukan Proposal
@@ -53,7 +61,8 @@
                                         <td>{{ $document->peran }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_pt, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($document->pendanaan_dikti, 0, ',', '.') }}</td>
-                                        <td>{{ \App\Enums\DocumentStatus::getDescription($document->status_proposal) }}</td>
+                                        <td>{{ \App\Enums\DocumentStatus::getDescription($document->status_proposal) }}
+                                        </td>
                                         <td style="padding: 0">
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark"
                                                 href="{{ route('proposal.edit', $document->id) }}"><i

@@ -55,7 +55,7 @@ class SubmitLaporanAkhirReviewController extends Controller
         $document->fill(['status_laporan_akhir' => $status_laporan_akhir, 'laporan_akhir_comments' => json_encode($comments)]);
         $document->save();
 
-        return redirect(route('review.index'));
+        return redirect(route('review.index'))->with('success', 'Laporan akhir berhasil ditinjau');
     }
 
     private function upload($name, UploadedFile $file, $folder)

@@ -4,6 +4,14 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 5%">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="width: 35%; margin-left: auto; margin-right: 0;">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+                @endif
+
                 <div class="card mb-4 mt-3">
                     <div class="card-body">
                         <table id="datatablesSimple">

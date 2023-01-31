@@ -37,6 +37,6 @@ class DeleteLaporanAkhirController extends Controller
         $document->fill(['berkas' => json_encode($file), 'status_laporan_akhir' => DocumentStatus::NotSubmitted, 'laporan_akhir_comments' => null]);
         $document->save();
 
-        return redirect(route('laporan.index'));
+        return redirect(route('laporan.index'))->with('success', 'Laporan akhir berhasil dihapus');
     }
 }

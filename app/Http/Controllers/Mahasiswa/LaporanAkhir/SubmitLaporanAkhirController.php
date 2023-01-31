@@ -66,12 +66,23 @@ class SubmitLaporanAkhirController extends Controller
         $document->fill($validated);
         $document->save();
 
-        return redirect(route('laporan.index'));
+        return redirect(route('laporan.index'))->with('success', $this->message($request->key));
     }
 
     private function upload($name, UploadedFile $file, $folder)
     {
         $destination_path = $folder;
         $file->move($destination_path, $name);
+    }
+
+    private function message($key): string
+    {
+        if ($key === 'submit') {
+            return 'Laporan akhir berhasil diajukan';
+        } elseif ($key === 'edit') {
+            return 'Laporan akhir berhasil diubah';
+        }
+
+        return '';
     }
 }
