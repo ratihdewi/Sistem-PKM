@@ -4,13 +4,20 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 5%">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="width: 35%; margin-left: auto; margin-right: 0;">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+                @endif
+
                 <h3 class="mb-3" style="color: #5D7DCF">Tahun Akademik</h3>
 
                 <div>
                     <a href="{{ route('tahun-akademik.create') }}">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah Tahun
-                            Akademik
-                            <i class="fa fa-plus"></i></button>
+                            Akademik <i class="fa fa-plus"></i></button>
                     </a>
                 </div>
 

@@ -4,12 +4,20 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4" style="margin-top: 5%">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="width: 35%; margin-left: auto; margin-right: 0;">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+                @endif
+
                 <h3 class="mb-3" style="color: #5D7DCF">Skema PKM</h3>
 
                 <div>
                     <a href="{{ route('skema-pkm.create') }}">
-                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah Skema PKM
-                            <i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah Skema
+                            PKM <i class="fa fa-plus"></i></button>
                     </a>
                 </div>
 

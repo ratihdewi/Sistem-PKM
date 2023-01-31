@@ -41,7 +41,7 @@ class PengaturanDokumenController extends Controller
         $validated['id_reviewer'] = json_encode($request->reviewer ?? []);
         ActivityDocument::create($validated);
 
-        return redirect(route('index'));
+        return redirect(route('index'))->with('success', 'Dokumen berhasil ditambahkan');
     }
 
     private function upload($name, UploadedFile $file, $folder)

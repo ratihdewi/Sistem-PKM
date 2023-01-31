@@ -29,7 +29,7 @@ class TahunAkademikController extends Controller
 
         TahunAkademik::create($validated);
 
-        return redirect(route('tahun-akademik.index'));
+        return redirect(route('tahun-akademik.index'))->with('success', 'Tahun akademik berhasil ditambahkan');
     }
 
     public function show($id)
@@ -52,13 +52,13 @@ class TahunAkademikController extends Controller
         $tahun_akademik->fill($validated);
         $tahun_akademik->save();
 
-        return redirect(route('tahun-akademik.index'));
+        return redirect(route('tahun-akademik.index'))->with('success', 'Tahun akademik berhasil diubah');
     }
 
     public function destroy(TahunAkademik $tahun_akademik)
     {
         $tahun_akademik->delete();
 
-        return redirect(route('tahun-akademik.index'));
+        return redirect(route('tahun-akademik.index'))->with('success', 'Tahun akademik berhasil dihapus');
     }
 }

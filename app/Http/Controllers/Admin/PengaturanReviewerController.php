@@ -26,13 +26,13 @@ class PengaturanReviewerController extends Controller
 
         User::where('id', (int) $request->dosen)->update(['is_reviewer' => 1]);
 
-        return redirect(route('pengaturan-reviewer.index'));
+        return redirect(route('pengaturan-reviewer.index'))->with('success', 'Reviewer berhasil ditambahkan');
     }
 
     public function delete($id)
     {
         User::where('id', $id)->update(['is_reviewer' => 0]);
 
-        return redirect(route('pengaturan-reviewer.index'));
+        return redirect(route('pengaturan-reviewer.index'))->with('success', 'Reviewer berhasil dihapus');
     }
 }

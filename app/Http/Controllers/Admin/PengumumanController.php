@@ -23,6 +23,6 @@ class PengumumanController extends Controller
         $validated['text'] = $request->announcement;
         Announcement::create($validated);
 
-        return redirect(route('index'));
+        return redirect(route('index'))->with('success', 'Pengumuman berhasil ditambahkan');
     }
 }

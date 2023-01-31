@@ -35,7 +35,7 @@ class SkemaPKMController extends Controller
 
         SkemaPKM::create($validated);
 
-        return redirect(route('skema-pkm.index'));
+        return redirect(route('skema-pkm.index'))->with('success', 'Skema PKM berhasil ditambahkan');
     }
 
     public function show(SkemaPKM $skema_pkm)
@@ -63,13 +63,13 @@ class SkemaPKMController extends Controller
         $skema_pkm->fill($validated);
         $skema_pkm->save();
 
-        return redirect(route('skema-pkm.index'));
+        return redirect(route('skema-pkm.index'))->with('success', 'Skema PKM berhasil diubah');
     }
 
     public function destroy(SkemaPKM $skema_pkm)
     {
         $skema_pkm->delete();
 
-        return redirect(route('skema-pkm.index'));
+        return redirect(route('skema-pkm.index'))->with('success', 'Skema PKM berhasil dihapus');
     }
 }

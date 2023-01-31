@@ -45,7 +45,7 @@ class DaftarUsulanController extends Controller
         $document_owners->id_reviewer = json_encode(array_values($id_reviewer) ?? []);
         $document_owners->save();
 
-        return redirect(route('daftar-usulan.index'));
+        return redirect(route('daftar-usulan.index'))->with('success', 'Berhasil menambahkan reviewer');
     }
 
     public function delete_reviewer(Request $request)
@@ -69,7 +69,7 @@ class DaftarUsulanController extends Controller
         $document_owners->id_reviewer = json_encode(array_values($id_reviewer) ?? []);
         $document_owners->save();
 
-        return redirect(route('daftar-usulan.index'));
+        return redirect(route('daftar-usulan.index'))->with('success', 'Berhasil menghapus reviewer');
     }
 
     public function reviewers()
