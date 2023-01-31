@@ -77,9 +77,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');
             Route::post('submit', [PengaturanDokumenController::class, 'submit'])->name('pengaturan-dokumen.submit');
         });
+        Route::group(['prefix' => 'pengaturan-reviewer'], function () {
+            Route::get('', [PengaturanReviewerController::class, 'index'])->name('pengaturan-reviewer.index');
+            Route::post('submit', [PengaturanReviewerController::class, 'submit'])->name('pengaturan-reviewer.submit');
+            Route::delete('delete/{id}', [PengaturanReviewerController::class, 'delete'])->name('pengaturan-reviewer.delete');
+        });
         Route::resource('data-mahasiswa', DataMahasiswaController::class)->only(['index']);
         Route::resource('data-dosen-pendamping', DataDosenPendampingController::class)->only(['index']);
-        Route::resource('pengaturan-reviewer', PengaturanReviewerController::class)->except(['show', 'edit', 'update']);
         Route::resource('prodi', ProdiController::class)->only(['index']);
         Route::resource('tahun-akademik', TahunAkademikController::class)->except(['show']);
         Route::resource('jenis-surat', JenisSuratController::class)->only(['index']);

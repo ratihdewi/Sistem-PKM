@@ -1,5 +1,15 @@
 @extends('layout.main')
 
+@if (count($errors) > 0)
+    @push('script_before_start')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#reviewer_create').modal('show');
+            });
+        </script>
+    @endpush
+@endif
+
 @section('container')
     <div id="layoutSidenav_content">
         <main>
@@ -7,7 +17,7 @@
                 <h3 class="mb-3" style="color: #5D7DCF">Pengaturan Reviewer</h3>
 
                 <div>
-                    <a href="{{ route('pengaturan-reviewer.create') }}">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#reviewer_create">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah User
                             <i class="fa fa-plus"></i></button>
                     </a>
@@ -38,7 +48,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $reviewer->name }}</td>
                                                 <td style="padding: 0">
-                                                    <form action="{{ route('pengaturan-reviewer.destroy', $reviewer->id) }}"
+                                                    <form action="{{ route('pengaturan-reviewer.delete', $reviewer->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('DELETE')
                                                         @csrf
@@ -58,4 +68,6 @@
             </div>
         </main>
     </div>
+
+    @include('page.admin.pengaturan_reviewer.create', ['data_dosen' => $data_dosen])
 @endsection

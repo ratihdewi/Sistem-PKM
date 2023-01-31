@@ -10,19 +10,15 @@ class PengaturanReviewerController extends Controller
 {
     public function index()
     {
-        $reviewers = User::userRoleId(2)->reviewer()->get();
+        $dosen = User::query()->userRoleId(2);
 
-        return view('page.admin.pengaturan_reviewer.index', compact('reviewers'));
+        $data_dosen = $dosen->get();
+        $reviewers = $dosen->reviewer()->get();
+
+        return view('page.admin.pengaturan_reviewer.index', compact('reviewers', 'data_dosen'));
     }
 
-    public function create()
-    {
-        $data_dosen = User::userRoleId(2)->get();
-
-        return view('page.admin.pengaturan_reviewer.create', compact('data_dosen'));
-    }
-
-    public function store(Request $request)
+    public function submit(Request $request)
     {
         $request->validate([
             'dosen' => 'required',
@@ -33,22 +29,7 @@ class PengaturanReviewerController extends Controller
         return redirect(route('pengaturan-reviewer.index'));
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
+    public function delete($id)
     {
         User::where('id', $id)->update(['is_reviewer' => 0]);
 
