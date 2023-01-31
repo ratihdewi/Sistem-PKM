@@ -15,8 +15,8 @@
         <main>
             <div class="container-fluid px-4" style="margin-top: 5%">
                 @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert"
-                        style="width: 35%; margin-left: auto; margin-right: 0;">
+                    <div class="alert alert-success alert-dismissible fade show my-n3" role="alert"
+                        style="width: 40%; margin-left: auto; margin-right: 0;">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
                     </div>
