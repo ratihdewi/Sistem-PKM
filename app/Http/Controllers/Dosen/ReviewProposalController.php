@@ -49,7 +49,14 @@ class ReviewProposalController extends Controller
             ];
         });
 
-        return view('page.dosen.review.proposal', compact('document', 'comments'));
+        $data_ketua = $document->document_owners->data_mahasiswa->first(function ($item) use ($document) {
+            return $item->id == (int) $document->document_owners->id_ketua;
+        });
+        $data_anggota = $document->document_owners->data_mahasiswa->filter(function ($item) use ($document) {
+            return in_array($item->id, array_map('intval',  json_decode($document->document_owners->id_anggota)));
+        });
+
+        return view('page.dosen.review.proposal', compact('document', 'comments', 'data_ketua', 'data_anggota'));
     }
 
     public function laporan_kemajuan(Document $document)

@@ -30,14 +30,15 @@
                             <div class="mb-3 row">
                                 <label for="nama_ketua" class="col-sm-4 col-form-label">Nama Ketua</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="-" readonly>
+                                    <input type="text" class="form-control" value="{{ $data_ketua->name }}" readonly>
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <label for="anggota" class="col-sm-4 col-form-label">Anggota</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="-" readonly>
+                                    <input type="text" class="form-control"
+                                        value="{{ $data_anggota->implode('name', ', ') }}" readonly>
                                 </div>
                             </div>
 
