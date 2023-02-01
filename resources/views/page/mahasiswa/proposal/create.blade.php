@@ -52,7 +52,7 @@
                                                 <input type="text"
                                                     class="form-control @error('anggota_1') is-invalid @enderror"
                                                     id="anggota_1" name="anggota[]" placeholder="NIM"
-                                                    onchange="checkName(1)">
+                                                    onkeyup="checkName(1)">
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="hidden" id="anggota_1_id" name="anggota_id[]">
@@ -203,7 +203,7 @@
                         `" class="col-sm-2 col-form-label">Anggota ${currentAnggota.toString()}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control @error('anggota_` + currentAnggota + `') is-invalid @enderror" id="anggota_` +
-                        currentAnggota + `" name="anggota[]" placeholder="NIM" onchange="checkName(${currentAnggota})"}}>
+                        currentAnggota + `" name="anggota[]" placeholder="NIM" onkeyup="checkName(${currentAnggota})"}}>
                             </div>
                             <div class="col-sm-6">
                                 <input type="hidden" id="anggota_` + currentAnggota + `_id" name="anggota_id[]">

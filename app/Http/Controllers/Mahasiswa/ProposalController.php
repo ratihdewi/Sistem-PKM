@@ -75,6 +75,12 @@ class ProposalController extends Controller
             }
         }
 
+        foreach ($id_mahasiswa as $key => $id) {
+            if ($id === null) {
+                unset($id_mahasiswa[$key]);
+            }
+        }
+
         DocumentOwner::create([
             'document_id' => $document->id,
             'id_dosen' => $request->dosen_pendamping,
@@ -159,9 +165,15 @@ class ProposalController extends Controller
             }
         }
 
+        foreach ($id_mahasiswa as $key => $id) {
+            if ($id === null) {
+                unset($id_mahasiswa[$key]);
+            }
+        }
+
         DocumentOwner::where('document_id', $document->id)->update([
             'id_dosen' => $request->dosen_pendamping ?? $document->document_owners->id_dosen,
-            'id_anggota' => $id_mahasiswa !== null ? json_encode(array_values($id_mahasiswa)) : $document->document_owners->id_anggota
+            'id_anggota' => count($id_mahasiswa) !== 0 ? json_encode(array_values($id_mahasiswa)) : $document->document_owners->id_anggota
         ]);
 
         return redirect(route('proposal.index'))->with('success', 'Proposal berhasil diubah');

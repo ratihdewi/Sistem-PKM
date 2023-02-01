@@ -59,11 +59,11 @@
                                             <div class="col-sm-3">
                                                 <input type="text"
                                                     class="form-control @error('anggota_1') is-invalid @enderror"
-                                                    id="anggota_1" name="anggota_1" placeholder="NIM"
-                                                    onchange="checkName(1)">
+                                                    id="anggota_1" name="anggota[]" placeholder="NIM"
+                                                    onkeyup="checkName(1)">
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="hidden" id="anggota_1_id" name="anggota_1_id" value="">
+                                                <input type="hidden" id="anggota_1_id" name="anggota_id[]">
                                                 <input type="text" readonly class="form-control-plaintext"
                                                     id="anggota_1_name" value="Nama Terisi Otomatis">
                                             </div>
@@ -203,22 +203,21 @@
                 currentAnggota++;
 
                 if (currentAnggota <= 4) {
-                    $('div[id=mahasiswa]').append(`     
-                        <div class="mb-3 row mahasiswa">                    
+                    $('div[id=mahasiswa]').append(`
+                        <div class="mb-3 row mahasiswa">
                             <label for="anggota_` + currentAnggota +
                         `" class="col-sm-2 col-form-label">Anggota ${currentAnggota.toString()}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control @error('anggota_` + currentAnggota + `') is-invalid @enderror" id="anggota_` +
-                        currentAnggota + `" name="anggota_` + currentAnggota + `" placeholder="NIM" onchange="checkName(${currentAnggota})">
+                        currentAnggota + `" name="anggota[]" placeholder="NIM" onkeyup="checkName(${currentAnggota})"}}>
                             </div>
                             <div class="col-sm-6">
-                                <input type="hidden" id="anggota_` + currentAnggota + `_id" name="anggota_` +
-                        currentAnggota + `_id" value="">
+                                <input type="hidden" id="anggota_` + currentAnggota + `_id" name="anggota_id[]">
                                 <input type="text" readonly class="form-control-plaintext" id="anggota_` +
                         currentAnggota + `_name" value="Nama Terisi Otomatis">
-                            </div>           
-                        </div>          
-                     `);
+                            </div>
+                        </div>
+                    `);
                 }
 
                 if (currentAnggota == 4) {
