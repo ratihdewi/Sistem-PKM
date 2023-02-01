@@ -41,6 +41,10 @@ class DaftarUsulanController extends Controller
             array_push($id_reviewer, $data);
         }
 
+        if (($key = array_search($document_owners->id_dosen, $id_reviewer)) !== false) {
+            unset($id_reviewer[$key]);
+        }
+
         $id_reviewer = array_unique($id_reviewer);
         $document_owners->id_reviewer = json_encode(array_values($id_reviewer) ?? []);
         $document_owners->save();
