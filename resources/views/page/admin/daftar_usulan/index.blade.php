@@ -170,6 +170,25 @@
                     },
                 });
             });
+
+            $(document).on('submit', '[id^=delete_reviewer]', function(ev) {
+                var form = this;
+                ev.preventDefault();
+                swal({
+                        title: "Hapus Reviewer?",
+                        text: "Data akan terhapus secara permanen!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            return form.submit();
+                        } else {
+                            return false;
+                        }
+                    });
+            })
         })
     </script>
 @endpush

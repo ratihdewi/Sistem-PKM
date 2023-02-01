@@ -56,7 +56,8 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $reviewer->name }}</td>
                                                 <td style="padding: 0">
-                                                    <form action="{{ route('pengaturan-reviewer.delete', $reviewer->id) }}"
+                                                    <form id="delete-reviewer"
+                                                        action="{{ route('pengaturan-reviewer.delete', $reviewer->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('DELETE')
                                                         @csrf
@@ -79,3 +80,26 @@
 
     @include('page.admin.pengaturan_reviewer.create', ['data_dosen' => $data_dosen])
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).on('submit', '[id^=delete-reviewer]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Hapus Reviewer?",
+                    text: "Data akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
+    </script>
+@endpush

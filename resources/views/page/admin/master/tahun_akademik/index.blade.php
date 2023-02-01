@@ -47,7 +47,8 @@
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark"
                                                 href="{{ route('tahun-akademik.edit', $item->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('tahun-akademik.destroy', $item->id) }}" method="post"
+                                            <form id="delete-tahun-akademik"
+                                                action="{{ route('tahun-akademik.destroy', $item->id) }}" method="post"
                                                 class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
@@ -65,3 +66,26 @@
         </main>
     </div>
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).on('submit', '[id^=delete-tahun-akademik]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Hapus Tahun Akademik?",
+                    text: "Data akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
+    </script>
+@endpush

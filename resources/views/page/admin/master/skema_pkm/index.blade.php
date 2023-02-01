@@ -50,8 +50,8 @@
                                             <a class="btn btn-datatable btn-icon btn-transparent-dark"
                                                 href="{{ route('skema-pkm.edit', $item->id) }}"><i
                                                     class="fa fa-pencil"></i></a>
-                                            <form action="{{ route('skema-pkm.destroy', $item->id) }}" method="post"
-                                                class="d-inline-block">
+                                            <form id="delete-skema-pkm" action="{{ route('skema-pkm.destroy', $item->id) }}"
+                                                method="post" class="d-inline-block">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-datatable btn-icon btn-transparent-dark"
@@ -68,3 +68,26 @@
         </main>
     </div>
 @endsection
+
+@push('extra_js')
+    <script>
+        $(document).on('submit', '[id^=delete-skema-pkm]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Hapus Skema PKM?",
+                    text: "Data akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
+    </script>
+@endpush
