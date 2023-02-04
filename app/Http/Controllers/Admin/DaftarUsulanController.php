@@ -21,6 +21,9 @@ class DaftarUsulanController extends Controller
                 'tahun' => $item->created_at->format('Y'),
                 'skema_pkm' => $item->skema_pkm->name,
                 'judul_pengajuan' => $item->judul_proposal,
+                'status_proposal' => $item->status_proposal,
+                'status_laporan_kemajuan' => $item->status_laporan_kemajuan,
+                'status_laporan_akhir' => $item->status_laporan_akhir,
                 'nama_ketua' => $ketua->name,
                 'nim_ketua' => $ketua->nomor_induk,
                 'data_reviewer' => $item->document_owners->data_reviewer

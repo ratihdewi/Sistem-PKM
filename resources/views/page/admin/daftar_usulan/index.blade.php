@@ -55,7 +55,12 @@
                                         <td>{{ $document['nama_ketua'] }}</td>
                                         <td>{{ $document['nim_ketua'] }}</td>
                                         <td>
-                                            <a href="#"><i class="fa fa-info-circle"></i></a>
+                                            <a href="#"
+                                                data-proposal="{{ \App\Enums\DocumentStatus::getDescription($document['status_proposal']) }}"
+                                                data-laporan_kemajuan="{{ \App\Enums\DocumentStatus::getDescription($document['status_laporan_kemajuan']) }}"
+                                                data-laporan_akhir="{{ \App\Enums\DocumentStatus::getDescription($document['status_laporan_akhir']) }}"
+                                                data-bs-toggle="modal" data-bs-target="#status"><i
+                                                    class="fa fa-info-circle"></i></a>
                                         </td>
                                         <td>
                                             <a href="#"><i class="fa fa-info-circle"></i></a>
@@ -76,6 +81,7 @@
         </main>
     </div>
 
+    @include('page.admin.daftar_usulan.status')
     @include('page.admin.daftar_usulan.reviewer_info')
 @endsection
 
@@ -83,6 +89,19 @@
     <script>
         $(document).ready(function() {
             var currentAnggota = 1;
+
+            $('#status').on('show.bs.modal', function(event) {
+                let data = $(event.relatedTarget);
+                let modal = $(this);
+
+                let status_proposal = data.data('proposal');
+                let status_laporan_kemajuan = data.data('laporan_kemajuan');
+                let status_laporan_akhir = data.data('laporan_akhir');
+
+                modal.find('.modal-body #proposal').val(status_proposal);
+                modal.find('.modal-body #laporan_kemajuan').val(status_laporan_kemajuan);
+                modal.find('.modal-body #laporan_akhir').val(status_laporan_akhir);
+            });
 
             $('#reviewer_info').on('show.bs.modal', function(event) {
                 let data = $(event.relatedTarget);
