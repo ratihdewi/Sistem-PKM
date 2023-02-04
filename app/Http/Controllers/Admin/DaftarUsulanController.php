@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\DocumentOwner;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DaftarUsulanController extends Controller
@@ -30,9 +31,54 @@ class DaftarUsulanController extends Controller
             ];
         });
 
-        $reviewers = $this->reviewers();
+        return view('page.admin.daftar_usulan.index', compact('documents'));
+    }
 
-        return view('page.admin.daftar_usulan.index', compact('documents', 'reviewers'));
+    public function review(Document $document)
+    {
+        $proposal_comments = collect(json_decode($document->proposal_comments));
+        $proposal_comments->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        $laporan_kemajuan_comments = collect(json_decode($document->laporan_kemajuan_comments));
+        $laporan_kemajuan_comments->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        $laporan_akhir_comments = collect(json_decode($document->laporan_akhir_comments));
+        $laporan_akhir_comments->transform(function ($item) {
+            return [
+                'waktu' => Carbon::createFromTimestamp($item->waktu)->format('d/m/Y H:i'),
+                'status' => $item->status,
+                'reviewer' => $item->reviewer,
+                'komentar' => $item->komentar,
+                'file_evaluasi' => $item->file_evaluasi
+            ];
+        });
+
+        return view('page.admin.daftar_usulan.review', compact('proposal_comments', 'laporan_kemajuan_comments', 'laporan_akhir_comments'));
+    }
+
+    public function reviewer(Document $document)
+    {
+        $data_reviewer = $this->reviewers();
+        $reviewers = $document->document_owners->data_reviewer;
+        $proposal_comments = json_decode($document->document_owners->document->proposal_comments);
+
+        return view('page.admin.daftar_usulan.reviewer', compact('document', 'data_reviewer', 'reviewers', 'proposal_comments'));
     }
 
     public function add_reviewer(Request $request)
@@ -41,18 +87,16 @@ class DaftarUsulanController extends Controller
         $id_reviewer = json_decode($document_owners->id_reviewer);
 
         foreach ($request->anggota as $data) {
-            array_push($id_reviewer, $data);
-        }
-
-        if (($key = array_search($document_owners->id_dosen, $id_reviewer)) !== false) {
-            unset($id_reviewer[$key]);
+            if ($data !== $document_owners->id_dosen) {
+                array_push($id_reviewer, $data);
+            }
         }
 
         $id_reviewer = array_unique($id_reviewer);
         $document_owners->id_reviewer = json_encode(array_values($id_reviewer) ?? []);
         $document_owners->save();
 
-        return redirect(route('daftar-usulan.index'))->with('success', 'Berhasil menambahkan reviewer');
+        return back()->with('success', 'Berhasil menambahkan reviewer');
     }
 
     public function delete_reviewer(Request $request)
@@ -76,16 +120,11 @@ class DaftarUsulanController extends Controller
         $document_owners->id_reviewer = json_encode(array_values($id_reviewer) ?? []);
         $document_owners->save();
 
-        return redirect(route('daftar-usulan.index'))->with('success', 'Berhasil menghapus reviewer');
+        return back()->with('success', 'Berhasil menghapus reviewer');
     }
 
     public function reviewers()
     {
         return User::userRoleId(2)->active()->reviewer()->get();
-    }
-
-    public function document($document_id)
-    {
-        return Document::where('id', (int) $document_id)->first();
     }
 }

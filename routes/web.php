@@ -63,10 +63,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:Admin'], function () {
         Route::group(['prefix' => 'daftar-usulan'], function () {
             Route::get('', [DaftarUsulanController::class, 'index'])->name('daftar-usulan.index');
+            Route::get('review/{document}', [DaftarUsulanController::class, 'review'])->name('daftar-usulan.review');
+            Route::get('reviewer/{document}', [DaftarUsulanController::class, 'reviewer'])->name('daftar-usulan.reviewer');
             Route::post('add-reviewer', [DaftarUsulanController::class, 'add_reviewer'])->name('daftar-usulan.add-reviewer');
             Route::delete('delete-reviewer', [DaftarUsulanController::class, 'delete_reviewer'])->name('daftar-usulan.delete-reviewer');
             Route::get('reviewers', [DaftarUsulanController::class, 'reviewers'])->name('daftar-usulan.reviewers'); //AJAX
-            Route::get('document/{document_id}', [DaftarUsulanController::class, 'document'])->name('daftar-usulan.document'); //AJAX
         });
 
         Route::group(['prefix' => 'pengumuman'], function () {
