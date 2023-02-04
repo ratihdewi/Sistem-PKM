@@ -6,7 +6,7 @@
             <div class="container-fluid px-4" style="margin-top: 5%">
                 <div class="row">
                     <div class="col">
-                        <div class="card mb-3">
+                        <div class="card mb-4">
                             <div class="card-header">
                                 <h5>Proposal</h5>
                             </div>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="card mb-3">
+                        <div class="card mb-4">
                             <div class="card-header">
                                 <h5>Laporan Kemajuan</h5>
                             </div>
@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="card mb-3">
+                        <div class="card mb-4">
                             <div class="card-header">
                                 <h5>Laporan Akhir</h5>
                             </div>
@@ -155,6 +155,20 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <a href="{{ route('daftar-usulan.index') }}">
+                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Back</button>
+                    </a>
+                </div>
+
+                {{-- <div class="mt-4 mb-5 text-center">
+                    <form action="{{ route('logout.post') }}" method="post">
+                        @csrf
+                        <button type="submit" class="btn" style="background-color: #5D7DCF; color: #fff">Sign
+                            Out</button>
+                    </form>
+                </div> --}}
             </div>
         </main>
     </div>

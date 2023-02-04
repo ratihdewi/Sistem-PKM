@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <form id="add_reviewer" method="post" action="{{ route('daftar-usulan.add-reviewer') }}">
                             @csrf
-                            <input id="document_id" type="hidden" name="document_id">
+                            <input id="document_id" type="hidden" name="document_id" value="{{ $document_id }}">
 
                             <div id="reviewer">
                                 <div class="row reviewer mb-2">

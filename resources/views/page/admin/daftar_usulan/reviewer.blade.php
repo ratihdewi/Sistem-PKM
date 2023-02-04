@@ -13,8 +13,7 @@
                 @endif
 
                 <div>
-                    <a href="#" data-document-id="{{ $document->id }}" data-bs-toggle="modal"
-                        data-bs-target="#add-reviewer">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#add-reviewer">
                         <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah Reviewer
                             <i class="fa fa-plus"></i></button>
                     </a>
@@ -69,26 +68,23 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <a href="{{ route('daftar-usulan.index') }}">
+                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Back</button>
+                    </a>
+                </div>
             </div>
         </main>
     </div>
 
-    @include('page.admin.daftar_usulan.add_reviewer')
+    @include('page.admin.daftar_usulan.add_reviewer', ['document_id' => $document->id])
 @endsection
 
 @push('extra_js')
     <script>
         $(document).ready(function() {
             var currentAnggota = 1;
-
-            $('#add-reviewer').on('show.bs.modal', function(event) {
-                let data = $(event.relatedTarget);
-                let modal = $(this);
-
-                let document_id = data.data('document-id');
-
-                modal.find('.modal-body #document_id').val(document_id);
-            });
 
             $('#add_anggota').on('click', function() {
                 currentAnggota++;
