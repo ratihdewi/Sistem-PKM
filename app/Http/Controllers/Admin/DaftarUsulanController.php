@@ -76,7 +76,7 @@ class DaftarUsulanController extends Controller
     {
         $data_reviewer = $this->reviewers();
         $reviewers = $document->document_owners->data_reviewer;
-        $proposal_comments = json_decode($document->document_owners->document->proposal_comments);
+        $proposal_comments = json_decode($document->document_owners->document->proposal_comments) ?? [];
 
         return view('page.admin.daftar_usulan.reviewer', compact('document', 'data_reviewer', 'reviewers', 'proposal_comments'));
     }
@@ -104,7 +104,7 @@ class DaftarUsulanController extends Controller
         $document_owners = DocumentOwner::where('document_id', (int) $request->document_id)->first();
         $id_reviewer = json_decode($document_owners->id_reviewer);
 
-        $proposal_comments = json_decode($document_owners->document->proposal_comments);
+        $proposal_comments = json_decode($document_owners->document->proposal_comments) ?? [];
         $checkReviewerApproval = array_search($request->reviewer_name, array_column($proposal_comments, 'reviewer'));
 
         if ($checkReviewerApproval !== false) {
