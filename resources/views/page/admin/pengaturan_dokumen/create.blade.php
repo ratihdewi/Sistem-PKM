@@ -46,6 +46,19 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="mb-3 row">
+                                        <label for="skema_pkm" class="col-sm-3 col-form-label">Skema PKM</label>
+                                        <div class="col-sm-9">
+                                            <select id="skema_pkm" class="form-select js-example-basic-single"
+                                                aria-label="Default select example" name="skema_pkm">
+                                                <option value="">-</option>
+
+                                                @foreach ($skema_pkm as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div id="reviewer">
                                         <div class="row reviewer">
                                             <label for="reviewer" class="col-sm-3 col-form-label">Dosen Pendamping PKM dan

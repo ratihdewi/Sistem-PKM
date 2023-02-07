@@ -73,7 +73,8 @@
                                                             <br>
                                                             <span style="margin: 0 0 0 50px;"><i
                                                                     class="fa-solid fa-file"></i>
-                                                                {{ $comment['file_evaluasi'] }}
+                                                                <a
+                                                                    href="{{ route('download-hasil-evaluasi', ['path' => 'laporan_kemajuan', 'file' => $comment['file_evaluasi']]) }}">{{ $comment['file_evaluasi'] }}</a></span>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -236,7 +237,8 @@
                                                             <br>
                                                             <span style="margin: 0 0 0 50px;"><i
                                                                     class="fa-solid fa-file"></i>
-                                                                {{ $comment['file_evaluasi'] }}
+                                                                <a
+                                                                    href="{{ route('download-hasil-evaluasi', ['path' => 'laporan_akhir', 'file' => $comment['file_evaluasi']]) }}">{{ $comment['file_evaluasi'] }}</a></span>
                                                         @endif
                                                     </div>
                                                 </div>

@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/index', HomePageController::class)->name('index');
 
     Route::group(['prefix' => 'download'], function () {
+        Route::get('hasil_evaluasi/{path}/{file}', [DownloadFileController::class, 'hasil_evaluasi'])->name('download-hasil-evaluasi');
         Route::get('activity_document/{file}', [DownloadFileController::class, 'dokumen_kegiatan'])->name('download-activity-document');
         Route::get('/bukti_transaksi/{file}', [DownloadFileController::class, 'bukti_transaksi'])->name('download-bukti-transaksi');
     });

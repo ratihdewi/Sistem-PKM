@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityDocument;
 use App\Models\Master\JenisSurat;
+use App\Models\Master\SkemaPKM;
 use App\Models\Master\TahunAkademik;
 use App\Models\User;
 use Carbon\Carbon;
@@ -18,8 +19,9 @@ class PengaturanDokumenController extends Controller
         $jenis_surat = JenisSurat::orderBy('id', 'asc')->get();
         $tahun_akademik = TahunAkademik::orderBy('tahun', 'asc')->get();
         $data_dosen = User::userRoleId(2)->get();
+        $skema_pkm = SkemaPKM::orderBy('id', 'asc')->get();
 
-        return view('page.admin.pengaturan_dokumen.create', compact('jenis_surat', 'tahun_akademik', 'data_dosen'));
+        return view('page.admin.pengaturan_dokumen.create', compact('jenis_surat', 'tahun_akademik', 'data_dosen', 'skema_pkm'));
     }
 
     public function submit(Request $request)
@@ -39,6 +41,11 @@ class PengaturanDokumenController extends Controller
         $validated['jenis_surat_id'] = (int) $request->jenis_surat;
         $validated['tahun_akademik_id'] = (int) $request->periode_akademik;
         $validated['id_reviewer'] = json_encode($request->reviewer ?? []);
+
+        if ($request->skema_pkm !== null) {
+            $validated['skema_pkm_id'] = (int) $request->skema_pkm;
+        }
+
         ActivityDocument::create($validated);
 
         return redirect(route('index'))->with('success', 'Dokumen berhasil ditambahkan');
