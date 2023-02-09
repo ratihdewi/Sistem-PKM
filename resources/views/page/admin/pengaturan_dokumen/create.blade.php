@@ -23,7 +23,7 @@
                                         <label for="jenis_surat" class="col-sm-3 col-form-label">Jenis Surat
                                             Keputusan</label>
                                         <div class="col-sm-9">
-                                            <select id="jenis_surat" class="form-select js-example-basic-single"
+                                            <select id="jenis_surat" class="form-select single-select"
                                                 aria-label="Default select example" name="jenis_surat">
 
                                                 @foreach ($jenis_surat as $item)
@@ -36,7 +36,7 @@
                                         <label for="periode_akademik" class="col-sm-3 col-form-label">Periode
                                             Akademik</label>
                                         <div class="col-sm-9">
-                                            <select id="periode_akademik" class="form-select js-example-basic-single"
+                                            <select id="periode_akademik" class="form-select single-select"
                                                 aria-label="Default select example" name="periode_akademik">
 
                                                 @foreach ($tahun_akademik as $item)
@@ -49,7 +49,7 @@
                                     <div class="mb-3 row">
                                         <label for="skema_pkm" class="col-sm-3 col-form-label">Skema PKM</label>
                                         <div class="col-sm-9">
-                                            <select id="skema_pkm" class="form-select js-example-basic-single"
+                                            <select id="skema_pkm" class="form-select single-select"
                                                 aria-label="Default select example" name="skema_pkm">
                                                 <option value="">-</option>
 
@@ -64,8 +64,8 @@
                                             <label for="reviewer" class="col-sm-3 col-form-label">Dosen Pendamping PKM dan
                                                 Reviewer</label>
                                             <div class="col-sm-9">
-                                                <select id="reviewer" class="form-select js-example-basic-multiple"
-                                                    name="reviewer[]" multiple="multiple">
+                                                <select id="reviewer" class="form-select dosen-select" name="reviewer[]"
+                                                    multiple="multiple">
 
                                                     @foreach ($data_dosen as $item)
                                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -101,8 +101,10 @@
 @push('extra_js')
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-            $('.js-example-basic-multiple').select2();
+            $('.single-select').select2();
+            $('.dosen-select').select2({
+                placeholder: 'Pilih Dosen'
+            });
         });
     </script>
 @endpush

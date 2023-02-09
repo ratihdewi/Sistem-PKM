@@ -84,8 +84,9 @@
 @push('extra_js')
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-multiple').select2({
+            $('.dosen-select').select2({
                 dropdownParent: $('#reviewer_create'),
+                placeholder: 'Pilih Dosen',
                 width: '100%'
             });
 

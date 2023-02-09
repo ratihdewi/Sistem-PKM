@@ -11,8 +11,7 @@
                     <div class="mb-3 row">
                         <label for="dosen" class="col-sm-3 col-form-label">Nama Dosen</label>
                         <div class="col-sm-9">
-                            <select id="dosen" class="form-select js-example-basic-multiple" name="dosen[]"
-                                multiple="multiple">
+                            <select id="dosen" class="form-select dosen-select" name="dosen[]" multiple="multiple">
 
                                 @foreach ($data_dosen as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
