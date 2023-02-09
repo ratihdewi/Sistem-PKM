@@ -11,9 +11,8 @@
                     <div class="mb-3 row">
                         <label for="dosen" class="col-sm-3 col-form-label">Nama Dosen</label>
                         <div class="col-sm-9">
-                            <select class="form-select @error('dosen') is-invalid @enderror"
-                                aria-label="Default select example" name="dosen">
-                                <option selected disabled>Pilih Dosen</option>
+                            <select id="dosen" class="form-select js-example-basic-multiple" name="dosen[]"
+                                multiple="multiple">
 
                                 @foreach ($data_dosen as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>

@@ -71,19 +71,22 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('reviewers', [DaftarUsulanController::class, 'reviewers'])->name('daftar-usulan.reviewers'); //AJAX
         });
 
-        Route::group(['prefix' => 'pengumuman'], function () {
-            Route::get('create', [PengumumanController::class, 'create'])->name('pengumuman.create');
-            Route::post('submit', [PengumumanController::class, 'submit'])->name('pengumuman.submit');
-        });
-        Route::group(['prefix' => 'pengaturan-dokumen'], function () {
-            Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');
-            Route::post('submit', [PengaturanDokumenController::class, 'submit'])->name('pengaturan-dokumen.submit');
-        });
         Route::group(['prefix' => 'pengaturan-reviewer'], function () {
             Route::get('', [PengaturanReviewerController::class, 'index'])->name('pengaturan-reviewer.index');
             Route::post('submit', [PengaturanReviewerController::class, 'submit'])->name('pengaturan-reviewer.submit');
             Route::delete('delete/{id}', [PengaturanReviewerController::class, 'delete'])->name('pengaturan-reviewer.delete');
         });
+        Route::group(['prefix' => 'pengaturan-dokumen'], function () {
+            Route::get('', [PengaturanDokumenController::class, 'index'])->name('pengaturan-dokumen.index');
+            Route::get('create', [PengaturanDokumenController::class, 'create'])->name('pengaturan-dokumen.create');
+            Route::post('submit', [PengaturanDokumenController::class, 'submit'])->name('pengaturan-dokumen.submit');
+            Route::delete('delete/{id}', [PengaturanDokumenController::class, 'delete'])->name('pengaturan-dokumen.delete');
+        });
+        Route::group(['prefix' => 'pengumuman'], function () {
+            Route::get('create', [PengumumanController::class, 'create'])->name('pengumuman.create');
+            Route::post('submit', [PengumumanController::class, 'submit'])->name('pengumuman.submit');
+        });
+
         Route::resource('data-mahasiswa', DataMahasiswaController::class)->only(['index']);
         Route::resource('data-dosen-pendamping', DataDosenPendampingController::class)->only(['index']);
         Route::resource('prodi', ProdiController::class)->only(['index']);

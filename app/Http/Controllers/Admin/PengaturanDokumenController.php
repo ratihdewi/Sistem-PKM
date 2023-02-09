@@ -14,6 +14,13 @@ use Illuminate\Http\UploadedFile;
 
 class PengaturanDokumenController extends Controller
 {
+    public function index()
+    {
+        $documents = ActivityDocument::with(['jenis_surat', 'tahun_akademik'])->orderBy('id', 'asc')->get();
+
+        return view('page.admin.pengaturan_dokumen.index', compact('documents'));
+    }
+
     public function create()
     {
         $jenis_surat = JenisSurat::orderBy('id', 'asc')->get();
@@ -48,7 +55,15 @@ class PengaturanDokumenController extends Controller
 
         ActivityDocument::create($validated);
 
-        return redirect(route('index'))->with('success', 'Dokumen berhasil ditambahkan');
+        return redirect(route('pengaturan-dokumen.index'))->with('success', 'Dokumen berhasil ditambahkan');
+    }
+
+    public function delete($id)
+    {
+        $document = ActivityDocument::find($id);
+        $document->delete();
+
+        return redirect(route('pengaturan-dokumen.index'))->with('success', 'Dokumen berhasil dihapus');
     }
 
     private function upload($name, UploadedFile $file, $folder)

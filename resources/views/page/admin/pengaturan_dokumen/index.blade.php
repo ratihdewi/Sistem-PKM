@@ -1,15 +1,5 @@
 @extends('layout.main')
 
-@if (count($errors) > 0)
-    @push('script_before_start')
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#reviewer_create').modal('show');
-            });
-        </script>
-    @endpush
-@endif
-
 @section('container')
     <div id="layoutSidenav_content">
         <main>
@@ -22,11 +12,11 @@
                     </div>
                 @endif
 
-                <h3 class="mb-3" style="color: #5D7DCF">Pengaturan Reviewer</h3>
+                <h3 class="mb-3" style="color: #5D7DCF">Pengaturan Dokumen</h3>
 
                 <div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#reviewer_create">
-                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah User
+                    <a href="{{ route('pengaturan-dokumen.create') }}">
+                        <button type="button" class="btn" style="background-color: #5D7DCF; color: #fff">Tambah Dokumen
                             <i class="fa fa-plus"></i></button>
                     </a>
                 </div>
@@ -39,25 +29,32 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Dosen</th>
+                                            <th>Nama File</th>
+                                            <th>Jenis Surat</th>
+                                            <th>Periode Akademik</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Dosen</th>
+                                            <th>Nama File</th>
+                                            <th>Jenis Surat</th>
+                                            <th>Periode Akademik</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($reviewers as $reviewer)
+                                        @foreach ($documents as $document)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $reviewer->name }}</td>
+                                                <td>{{ $document->file_name }}</td>
+                                                <td>{{ $document->jenis_surat->name }}</td>
+                                                <td>{{ $document->tahun_akademik->tahun . '-' . $document->tahun_akademik->term }}
+                                                </td>
                                                 <td style="padding: 0">
-                                                    <form id="delete-reviewer"
-                                                        action="{{ route('pengaturan-reviewer.delete', $reviewer->id) }}"
+                                                    <form id="delete-document"
+                                                        action="{{ route('pengaturan-dokumen.delete', $document->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('DELETE')
                                                         @csrf
@@ -77,36 +74,27 @@
             </div>
         </main>
     </div>
-
-    @include('page.admin.pengaturan_reviewer.create', ['data_dosen' => $data_dosen])
 @endsection
 
 @push('extra_js')
     <script>
-        $(document).ready(function() {
-            $('.js-example-basic-multiple').select2({
-                dropdownParent: $('#reviewer_create'),
-                width: '100%'
-            });
-
-            $(document).on('submit', '[id^=delete-reviewer]', function(ev) {
-                var form = this;
-                ev.preventDefault();
-                swal({
-                        title: "Hapus Reviewer?",
-                        text: "Data akan terhapus secara permanen!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            return form.submit();
-                        } else {
-                            return false;
-                        }
-                    });
-            })
-        });
+        $(document).on('submit', '[id^=delete-document]', function(ev) {
+            var form = this;
+            ev.preventDefault();
+            swal({
+                    title: "Hapus Dokumen?",
+                    text: "Data akan terhapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return form.submit();
+                    } else {
+                        return false;
+                    }
+                });
+        })
     </script>
 @endpush

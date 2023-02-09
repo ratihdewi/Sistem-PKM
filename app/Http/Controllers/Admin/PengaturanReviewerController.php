@@ -24,7 +24,7 @@ class PengaturanReviewerController extends Controller
             'dosen' => 'required',
         ]);
 
-        User::where('id', (int) $request->dosen)->update(['is_reviewer' => 1]);
+        User::whereIn('id', array_map('intval', $request->dosen))->update(['is_reviewer' => 1]);
 
         return redirect(route('pengaturan-reviewer.index'))->with('success', 'Reviewer berhasil ditambahkan');
     }
