@@ -38,6 +38,7 @@ class UserSeeder extends Seeder
             'position' => 'Dosen'
         ]);
 
+        // $this->dosen_seeder();
         // $this->temp_dosen_seeder();
 
         $soap = new SoapApiService();
@@ -59,6 +60,35 @@ class UserSeeder extends Seeder
             ]);
         }
     }
+
+    // private function dosen_seeder()
+    // {
+    //     $masayu = new MasayuApiService();
+    //     $client = $masayu->execute();
+
+    //     $responses = $client->get('api/Lecturer');
+    //     $results = json_decode($responses->getBody()->getContents(), true);
+    //     $results = $results['data'];
+
+    //     $results = array_filter($results, function ($item) {
+    //         return (($item['username'] !== null && $item['name'] !== null && $item['nip'] !== null) && $item['position'] !== null);
+    //     });
+
+    //     $results = array_unique($results, SORT_REGULAR);
+    //     $results = array_values($results);
+
+    //     foreach ($results as $data) {
+    //         User::create([
+    //             'username' => $data['username'],
+    //             'name' => $data['name'],
+    //             'nomor_induk' => $data['nip'],
+    //             'email' => $data['email'],
+    //             'password' => Hash::make('12345'),
+    //             'role_id' => 2,
+    //             'position' => $data['position'],
+    //         ]);
+    //     }
+    // }
 
     // private function temp_dosen_seeder()
     // {
