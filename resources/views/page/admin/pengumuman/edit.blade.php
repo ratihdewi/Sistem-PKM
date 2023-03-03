@@ -27,7 +27,7 @@
                                     <div class="mb-3 row">
                                         <label for="announcement" class="col-sm-2 col-form-label">Teks</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="announcement" name="announcement">{{$data->text}}</textarea>
+                                            <textarea class="form-control" id="announcement" name="text">{{$data->text}}</textarea>
                                         </div>
                                     </div>
 
