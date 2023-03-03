@@ -49,7 +49,7 @@
                                 <a class="nav-link" href="{{ route('skema-pkm.index') }}">Skema PKM</a>
                             </nav>
                         </div>
-                        <a class="nav-link" href="{{ route('pengumuman.create') }}">
+                        <a class="nav-link" href="{{ route('pengumuman.index') }}">
                             <div class="sb-nav-link-icon"></div>
                             Pengumuman
                         </a>

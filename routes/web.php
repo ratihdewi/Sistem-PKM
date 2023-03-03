@@ -85,6 +85,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'pengumuman'], function () {
             Route::get('create', [PengumumanController::class, 'create'])->name('pengumuman.create');
             Route::post('submit', [PengumumanController::class, 'submit'])->name('pengumuman.submit');
+            Route::get('',  [PengumumanController::class, 'index'])->name('pengumuman.index');
+            Route::get('edit/{id}', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
+            Route::PUT('/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
+            Route::DELETE('delete/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
         });
 
         Route::resource('data-mahasiswa', DataMahasiswaController::class)->only(['index']);
