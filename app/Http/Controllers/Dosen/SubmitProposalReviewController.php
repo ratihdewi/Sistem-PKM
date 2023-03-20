@@ -24,7 +24,8 @@ class SubmitProposalReviewController extends Controller
         $request->validate([
             'hasil_review' => 'required',
             'komentar' => 'required',
-            'hasil_evaluasi' => ['mimes:pdf', Rule::when(($request->hasil_review == 'revision'), ['required'])]
+            // 'hasil_evaluasi' => ['mimes:pdf', Rule::when(($request->hasil_review == 'revision'), ['required'])]
+            'hasil_evaluasi' => 'mimes:pdf'
         ]);
 
         $file_hasil_evaluasi = null;

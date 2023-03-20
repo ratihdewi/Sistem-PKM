@@ -93,11 +93,11 @@
                                         <div class="col-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-text">Rp</span>
-                                                <input type="text"
+                                                <input  id="rupiah" type="text"
                                                     class="form-control @error('pendanaan_dikti') is-invalid @enderror"
                                                     aria-label="Amount (to the nearest dollar)" name="pendanaan_dikti"
                                                     value="{{ old('pendanaan_dikti', $document->pendanaan_dikti) }}">
-                                                <span class="input-group-text">.00</span>
+                                                <!-- <span class="input-group-text">.00</span> -->
                                             </div>
                                         </div>
                                     </div>
@@ -107,11 +107,11 @@
                                         <div class="col-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-text">Rp</span>
-                                                <input type="text"
+                                                <input id="rupiah2" type="text"
                                                     class="form-control @error('pendanaan_pt') is-invalid @enderror"
                                                     aria-label="Amount (to the nearest dollar)" name="pendanaan_pt"
                                                     value="{{ old('pendanaan_pt', $document->pendanaan_pt) }}">
-                                                <span class="input-group-text">.00</span>
+                                                <!-- <span class="input-group-text">.00</span> -->
                                             </div>
                                         </div>
                                     </div>
@@ -144,6 +144,61 @@
             </div>
         </main>
     </div>
+    <script type="text/javascript">
+		
+		var rupiah = document.getElementById('rupiah');
+		rupiah.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+			rupiah.value = formatRupiah(this.value, '');
+		});
+ 
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+		}
+        </script>
+
+<script type="text/javascript">
+		
+		var rupiah2 = document.getElementById('rupiah2');
+		rupiah2.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+			rupiah2.value = formatRupiah2(this.value, '');
+		});
+ 
+		/* Fungsi formatRupiah */
+		function formatRupiah2(angka2, prefix2){
+			var number_string2 = angka2.replace(/[^,\d]/g, '').toString(),
+			split2   		= number_string2.split(','),
+			sisa2     		= split2[0].length % 3,
+			rupiah2     		= split2[0].substr(0, sisa2),
+			ribuan2     		= split2[0].substr(sisa2).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan2){
+				separator2 = sisa2 ? '.' : '';
+				rupiah2 += separator2 + ribuan2.join('.');
+			}
+ 
+			rupiah2 = split2[1] != undefined ? rupiah2 + ',' + split2[1] : rupiah2;
+			return prefix2 == undefined ? rupiah2 : (rupiah2 ? '' + rupiah2 : '');
+		}
+        </script>
 @endsection
 
 @push('extra_js')

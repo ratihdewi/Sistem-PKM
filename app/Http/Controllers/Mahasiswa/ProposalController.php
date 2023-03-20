@@ -18,10 +18,11 @@ class ProposalController extends Controller
 {
     public function index()
     {
+        
         $documents = Document::with('skema_pkm')->whereHas('document_owners', function ($q) {
             $q->where('id_ketua', (string) auth()->user()->id)->orWhereJsonContains('id_anggota', (string) auth()->user()->id);
         })->get();
-
+        //dd($documents);
         return view('page.mahasiswa.proposal.index', compact('documents'));
     }
 
@@ -35,16 +36,23 @@ class ProposalController extends Controller
 
     public function store(Request $request)
     {
+        
+        //dd($request);
         $validated = $request->validate([
             'skema_pkm' => 'required',
             'judul_proposal' => 'required',
             'pendanaan_dikti' => 'required',
             'pendanaan_pt' => 'required',
             'luaran_proposal' => 'required',
-            'proposal' => 'required|mimes:pdf',
+            'proposal' => 'required|mimes:pdf|max:5000',
             'anggota' => 'required',
             'dosen_pendamping' => 'required'
         ]);
+        $pendanaan_dikti=str_replace(".", "", $request->pendanaan_dikti);
+        $validated['pendanaan_dikti'] =$pendanaan_dikti;
+
+        $pendanaan_pt=str_replace(".", "", $request->pendanaan_pt);
+        $validated['pendanaan_pt'] =$pendanaan_pt;
 
         $proposal_name = null;
         $file = [];
@@ -129,6 +137,12 @@ class ProposalController extends Controller
             'luaran_proposal' => 'required',
             'proposal' => 'nullable|mimes:pdf',
         ]);
+
+        $pendanaan_dikti=str_replace(".", "", $request->pendanaan_dikti);
+        $validated['pendanaan_dikti'] =$pendanaan_dikti;
+
+        $pendanaan_pt=str_replace(".", "", $request->pendanaan_pt);
+        $validated['pendanaan_pt'] =$pendanaan_pt;
 
         $proposal_name = null;
         $file = (array) $document->berkas;
@@ -228,6 +242,7 @@ class ProposalController extends Controller
 
         return redirect(route('proposal.index'))->with('success', 'Proposal berhasil dihapus');
     }
+
 
     public function skema_pkm($parent_id)
     {

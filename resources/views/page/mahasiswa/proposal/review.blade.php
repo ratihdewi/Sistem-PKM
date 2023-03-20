@@ -17,8 +17,8 @@
                             </div>
                             <div class="card-body">
                                 <embed id="file_proposal" name="file_proposal"
-                                    src="{{ asset("documents/proposal/{$document->berkas->proposal->file_proposal}") }}"
-                                    type="application/pdf" width="100%" height="100%" readonly="">
+                                    src="{{ asset("documents/proposal/".$document->berkas->proposal->file_proposal) }}"
+                                    type="application/pdf" width="100%" height="100%">
                                 </embed>
                             </div>
                         </div>
